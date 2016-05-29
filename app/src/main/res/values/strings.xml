@@ -1,0 +1,65 @@
+<resources>
+
+    <string name="tag">AllinAllLog</string>
+    <string name="error_title"> Server Error </string>
+    <string name="no_connection_error_msg"> Could not complete your request due to network connectivity problem. Please try again later.</string>
+
+
+    <string name="app_name">AllinAll</string>
+    <string name="number">Number</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Signup</string>
+    <string name="sign_in">login</string>
+
+
+    <string name="are_you_sp"><u>Are you service provider?</u></string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="signup_login"><![CDATA[Sign up & login]]></string>
+    <string name="verify_otp">Verify</string>
+
+    <string name="contact_us">Contact Us</string>
+    <string name="email_address">E: info@allinall.com</string>
+    <string name="scheme">Scheme</string>
+    <string name="balance">Balance</string>
+
+
+    <string name="user_login_success">User logged in successfully</string>
+    <string name="provider_login_success">Service provider logged in successfully</string>
+    <string name="otp_sendsms_success">Message was sent successfully</string>
+    <string name="user_signup_success">User is registered successfully</string>
+    <string name="provider_signup_success">Service provider is registered successfully</string>
+    <string name="provider_list_bookings_success">Service provider bookings successfully viewed</string>
+    <string name="user_list_history_success">User history successfully viewed</string>
+    <string name="user_list_history_fail">No user history exist</string>
+    <string name="service_get_services_success">Services successfully viewed</string>
+    <string name="provider_get_wallet_success">Wallet data displayed successfully</string>
+    <string name="user_get_mail_success">User email retrieved successfully</string>
+
+
+    <string name="service_offered">Service Offered</string>
+    <string name="signup">Sign Up</string>
+    <string name="date_time"><![CDATA[Date & Time]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookings">Bookings</string>
+    <string name="wallet">Wallet</string>
+    <string name="services">Services</string>
+    <string name="support">Support</string>
+    <string name="history">My History</string>
+    <string name="no_bookings">No Bookings Exist</string>
+    <string name="no_history">No History Exist</string>
+    <string name="cancel">Cancel</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="new_account">Not having an account yet? <u>CLICK HERE</u></string>
+    <string name="provider_sign_up">Sign up as Service Provider</string>
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="phone">Phone</string>
+    <string name="send_otp">send OTP</string>
+    <string name="verification">VERIFICATION</string>
+    <string name="enter_otp">enter OTP here</string>
+    <string name="resend">Didn\'t receive OTP yet? RESEND</string>
+</resources>
