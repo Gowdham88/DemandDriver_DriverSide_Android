@@ -39,7 +39,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements Validator.Va
     @InjectView(R.id.verify_otp_resend_textview)
     TextView resendTextview;
 
-    private String mobile;
+    private String mobile, code;
     private Validator otpValidator;
     private AllinAllController allinAllController;
 
@@ -53,7 +53,11 @@ public class VerifyOTPActivity extends AppCompatActivity implements Validator.Va
         otpValidator = new Validator(this);
         otpValidator.setValidationListener(this);
 
-        mobile = getIntent().getStringExtra("mobile");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mobile = extras.getString("mobile");
+            code = extras.getString("code");
+        }
 
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +68,7 @@ public class VerifyOTPActivity extends AppCompatActivity implements Validator.Va
         resendTextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                allinAllController.sendSms(mobile);
+                allinAllController.sendSms(code + mobile);
             }
         });
     }
@@ -74,12 +78,11 @@ public class VerifyOTPActivity extends AppCompatActivity implements Validator.Va
         if (otpEditText.getText().toString().equalsIgnoreCase(RESTClient.OTP)) {
             if (LoginActivity.SIGNUP_TYPE.equalsIgnoreCase("user")) {
                 Intent userSignUpIntent = new Intent(this, UserSignupActivity.class);
+                userSignUpIntent.putExtras(getIntent().getExtras());
                 startActivity(userSignUpIntent);
                 finish();
             } else {
-                Intent providerSignUpIntent = new Intent(this, ServiceProviderSignupActivity.class);
-                startActivity(providerSignUpIntent);
-                finish();
+                allinAllController.getServicesOffered();
             }
         } else
             Toast.makeText(this, "This OTP is not right", Toast.LENGTH_LONG).show();
@@ -92,7 +95,13 @@ public class VerifyOTPActivity extends AppCompatActivity implements Validator.Va
 
     @Override
     public void sendServiceResult(String serviceResult) {
-        Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+        if (serviceResult.equalsIgnoreCase(getString(R.string.service_offered_success))) {
+            Intent providerSignUpIntent = new Intent(this, ServiceProviderSignupActivity.class);
+            providerSignUpIntent.putExtras(getIntent().getExtras());
+            startActivity(providerSignUpIntent);
+            finish();
+        } else
+            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
     }
 
     @Override

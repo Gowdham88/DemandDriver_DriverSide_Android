@@ -1,13 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".fragments.UserServicesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkGray"
+        android:gravity="center"
+        android:padding="@dimen/edit_text_padding"
+        android:text="@string/services"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/abc_text_size_headline_material" />
+
+    <ListView
+        android:id="@+id/fragment_services_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="@dimen/medium_margin"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/small_margin"
+        tools:listitem="@layout/list_item_service" />
 
-</FrameLayout>
+</LinearLayout>

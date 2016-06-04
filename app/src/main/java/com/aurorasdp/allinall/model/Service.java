@@ -6,6 +6,7 @@ package com.aurorasdp.allinall.model;
 public class Service {
     private String serviceId;
     private String serviceName;
+    private int imageResource;
 
     public String getServiceId() {
         return serviceId;
@@ -21,6 +22,14 @@ public class Service {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
     }
 
     @Override

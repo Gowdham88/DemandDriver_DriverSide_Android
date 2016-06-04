@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -33,13 +34,18 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
     private SwipeRefreshLayout swipeContainer;
     private AllinAllController allinAllController;
     private UserHistoryListAdapter adapter;
+    private ListView listView;
 
 
     public UserHistoryFragment() {
         // Required empty public constructor
-        allinAllController = new AllinAllController(getContext(), this);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        allinAllController = new AllinAllController(getContext(), this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +53,9 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_history, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
-        ListView listView = (ListView) view.findViewById(R.id.fragment_user_history_listview);
-        adapter = new UserHistoryListAdapter(getContext(), R.layout.list_item_user_booking);
-        listView.setAdapter(adapter);
+        listView = (ListView) view.findViewById(R.id.fragment_user_history_listview);
+        allinAllController.listUserHistory(RESTClient.ID, "Loading History ....");
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,9 +85,14 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
 
     @Override
     public void sendServiceResult(String serviceResult) {
-        adapter.clear();
-        adapter.addAll(RESTClient.USER_BOOKINGS);
-        swipeContainer.setRefreshing(false);
+        if (adapter == null) {
+            adapter = new UserHistoryListAdapter(getContext(), R.layout.list_item_user_history);
+            listView.setAdapter(adapter);
+        } else {
+            adapter.clear();
+            adapter.addAll(RESTClient.USER_BOOKINGS_HISTORY);
+            swipeContainer.setRefreshing(false);
+        }
     }
 
     @Override
@@ -101,10 +112,10 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
 
 
         public UserHistoryListAdapter(Context context, int resource) {
-            super(context, resource, RESTClient.USER_BOOKINGS);
+            super(context, resource, RESTClient.USER_BOOKINGS_HISTORY);
             this.context = context;
             this.resource = resource;
-            this.userBookings = RESTClient.USER_BOOKINGS;
+            this.userBookings = RESTClient.USER_BOOKINGS_HISTORY;
         }
 
         @Override

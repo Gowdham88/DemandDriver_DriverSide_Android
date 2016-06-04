@@ -2,6 +2,7 @@ package com.aurorasdp.allinall.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -40,12 +41,20 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
     @NotEmpty
     EditText nameEditText;
 
-    @InjectView(R.id.provider_signup_age_spinner)
-    Spinner ageSpinner;
+    @InjectView(R.id.provider_signup_phone_edittext)
+    EditText phoneEditText;
 
-    @InjectView(R.id.provider_signup_mobile_edittext)
+    @InjectView(R.id.provider_signup_address_edittext)
     @NotEmpty
-    EditText mobileEditText;
+    EditText addressEditText;
+
+    @InjectView(R.id.provider_signup_email_edittext)
+    @NotEmpty
+    EditText emailEditText;
+
+    @InjectView(R.id.provider_signup_password_edittext)
+    @NotEmpty
+    EditText passwordEditText;
 
     @InjectView(R.id.provider_signup_service_spinner)
     Spinner serviceOfferedSpinner;
@@ -54,7 +63,7 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
     @Checked(message = "Must accept terms and conditions")
     CheckBox termsCheckBox;
 
-    @InjectView(R.id.provider_signup_signup_button)
+    @InjectView(R.id.provider_signup_button)
     Button signUpButton;
 
     @InjectView(R.id.provider_signup_add_picture_linearlayout)
@@ -68,6 +77,7 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
 
     public static final int GET_FROM_GALLERY = 0;
     private String encodedProfileImage, profileImageExt;
+    private String code, mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +88,14 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         providerSignupValidator.setValidationListener(this);
 
         allinAllController = new AllinAllController(this, this);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mobile = extras.getString("mobile");
+            code = extras.getString("code");
+        }
+
+        phoneEditText.setText(code + mobile);
+        serviceOfferedSpinner.setAdapter(new ArrayAdapter<Service>(this, android.R.layout.simple_spinner_dropdown_item, RESTClient.SERVICES_OFFERED));
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,15 +111,6 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
                 startActivityForResult(getIntent, GET_FROM_GALLERY);
             }
         });
-        serviceOfferedSpinner.setAdapter(new ArrayAdapter<Service>(this, android.R.layout.simple_spinner_dropdown_item, RESTClient.SERVICES));
-        List age = new ArrayList<Integer>();
-        age.add("Age");
-        for (int i = 16; i <= 100; i++) {
-            age.add(Integer.toString(i));
-        }
-        ArrayAdapter<Integer> spinnerArrayAdapter = new ArrayAdapter<Integer>(
-                this, android.R.layout.simple_spinner_dropdown_item, age);
-        ageSpinner.setAdapter(spinnerArrayAdapter);
     }
 
     @Override
@@ -112,20 +121,22 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            Cursor cursor = getContentResolver().query(selectedImage, new String[]
-                    {android.provider.MediaStore.Images.ImageColumns.DATA}, null, null, null);
-            cursor.moveToFirst();
-            imageFilePath = cursor.getString(0);
+            if (selectedImage != null) {
+                Cursor cursor = getContentResolver().query(selectedImage, new String[]
+                        {android.provider.MediaStore.Images.ImageColumns.DATA}, null, null, null);
+                cursor.moveToFirst();
+                imageFilePath = cursor.getString(0);
 
-            if (imageFilePath != null) {
-                profileImageExt = imageFilePath.substring(imageFilePath.lastIndexOf(".") + 1);
-                bitmap = Bitmap.createScaledBitmap(Util.getCorrectlyOrientedImage(this, selectedImage), 500, 500, false);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageBytes = baos.toByteArray();
-                encodedProfileImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                profileImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                profileImageView.setImageDrawable(Util.createRoundedBitmapDrawable(bitmap, getResources()));
+                if (imageFilePath != null) {
+                    profileImageExt = imageFilePath.substring(imageFilePath.lastIndexOf(".") + 1);
+                    bitmap = Bitmap.createScaledBitmap(Util.getCorrectlyOrientedImage(this, selectedImage), 500, 500, false);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    encodedProfileImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    profileImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    profileImageView.setImageDrawable(Util.createRoundedBitmapDrawable(bitmap, getResources()));
+                }
             }
         }
     }
@@ -133,9 +144,15 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
     @Override
     public void sendServiceResult(String serviceResult) {
         if (serviceResult.equalsIgnoreCase(getString(R.string.provider_signup_success))) {
+            SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+            editor.putBoolean("firstLaunch", false);
+            editor.putString("providerId", RESTClient.ID);
+            editor.apply();
             Intent providerIntent = new Intent(this, ServiceProviderActivity.class);
+            providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(providerIntent);
-        }
+        } else
+            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -149,13 +166,14 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         if (error != null)
             Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         else {
-            allinAllController.providerSignUp(nameEditText.getText().toString(), ageSpinner.getSelectedItem().toString(), mobileEditText.getText().toString(), RESTClient.SERVICES.get(serviceOfferedSpinner.getSelectedItemPosition()).getServiceId(), encodedProfileImage, profileImageExt);
+            allinAllController.providerSignUp(nameEditText.getText().toString(), emailEditText.getText().toString(), code,
+                    mobile, addressEditText.getText().toString(), ((Service) (serviceOfferedSpinner.getSelectedItem())).getServiceId(), passwordEditText.getText().toString(), encodedProfileImage, profileImageExt);
         }
     }
 
     private String validateSpinnerData() {
-        if (ageSpinner.getSelectedItemPosition() <= 0)
-            return "Must Select Age";
+        if (serviceOfferedSpinner.getSelectedItemPosition() <= 0)
+            return "Must Select Service Offered";
         return null;
     }
 

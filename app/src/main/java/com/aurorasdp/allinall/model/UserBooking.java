@@ -12,6 +12,7 @@ public class UserBooking {
     private String dateTime;
     private String address;
     private String service;
+    private String status;
     private byte[] decodedPic;
 
     public String getBookingId() {
@@ -58,8 +59,18 @@ public class UserBooking {
         return service;
     }
 
+    ;
+
     public void setService(String service) {
         this.service = service;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public byte[] getDecodedPic() {

@@ -3,7 +3,7 @@
     <string name="tag">AllinAllLog</string>
     <string name="error_title"> Server Error </string>
     <string name="no_connection_error_msg"> Could not complete your request due to network connectivity problem. Please try again later.</string>
-
+    <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
 
     <string name="app_name">AllinAll</string>
     <string name="number">Number</string>
@@ -17,13 +17,12 @@
     <string name="age">Age</string>
     <string name="mobile">Mobile</string>
     <string name="email">Email</string>
-    <string name="signup_login"><![CDATA[Sign up & login]]></string>
     <string name="verify_otp">Verify</string>
 
     <string name="contact_us">Contact Us</string>
     <string name="email_address">E: info@allinall.com</string>
     <string name="scheme">Scheme</string>
-    <string name="balance">Balance</string>
+    <string name="subscription">Subscription</string>
 
 
     <string name="user_login_success">User logged in successfully</string>
@@ -32,12 +31,15 @@
     <string name="user_signup_success">User is registered successfully</string>
     <string name="provider_signup_success">Service provider is registered successfully</string>
     <string name="provider_list_bookings_success">Service provider bookings successfully viewed</string>
+    <string name="provider_list_bookings_fail">No service provider bookings exist</string>
     <string name="user_list_history_success">User history successfully viewed</string>
     <string name="user_list_history_fail">No user history exist</string>
     <string name="service_get_services_success">Services successfully viewed</string>
     <string name="provider_get_wallet_success">Wallet data displayed successfully</string>
     <string name="user_get_mail_success">User email retrieved successfully</string>
-
+    <string name="user_ongoing_appo_success">User bookings successfully viewed</string>
+    <string name="user_ongoing_appo_fail">No user bookings exist</string>
+    <string name="service_offered_success">Services labels successfully viewed</string>
 
     <string name="service_offered">Service Offered</string>
     <string name="signup">Sign Up</string>
@@ -62,4 +64,12 @@
     <string name="verification">VERIFICATION</string>
     <string name="enter_otp">enter OTP here</string>
     <string name="resend">Didn\'t receive OTP yet? RESEND</string>
+    <string name="address">Address</string>
+    <string name="ongoing_app">Ongoing \nAppointments</string>
+    <string name="call_text">For any support, Call us at</string>
+    <string name="mail_text">Email us at</string>
+    <string name="website_text">Website</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_up_provider">SERVICE PROVIDER SIGN UP</string>
+
 </resources>

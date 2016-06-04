@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.adapters.ViewPagerAdapter;
+import com.aurorasdp.allinall.fragments.OngoingAppointmentsFragment;
 import com.aurorasdp.allinall.fragments.ProviderBookingsFragment;
 import com.aurorasdp.allinall.fragments.ProviderWalletFragment;
 import com.aurorasdp.allinall.fragments.UserHistoryFragment;
@@ -36,21 +37,13 @@ public class UserActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setOffscreenPageLimit(0);
+        viewPager.setOffscreenPageLimit(4);
         adapter.addFragment(new UserServicesFragment(), getString(R.string.services));
         adapter.addFragment(new UserSupportFragment(), getString(R.string.support));
+        adapter.addFragment(new OngoingAppointmentsFragment(), getString(R.string.ongoing_app));
         adapter.addFragment(new UserHistoryFragment(), getString(R.string.history));
         viewPager.setAdapter(adapter);
 
     }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(loginIntent);
-    }
-
 
 }

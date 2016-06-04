@@ -33,6 +33,7 @@
             android:background="@color/lightGray"
             android:hint="@string/enter_otp"
             android:inputType="number"
+            android:maxLength="4"
             android:padding="@dimen/medium_margin" />
 
         <Button

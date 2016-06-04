@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -33,13 +34,17 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
     private SwipeRefreshLayout swipeContainer;
     private AllinAllController allinAllController;
     private ProviderBookingsListAdapter adapter;
-
+    private ListView listView;
 
     public ProviderBookingsFragment() {
         // Required empty public constructor
-        allinAllController = new AllinAllController(getContext(), this);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        allinAllController = new AllinAllController(getContext(), this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +52,8 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_provider_bookings, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
-        ListView listView = (ListView) view.findViewById(R.id.fragment_provider_book_listview);
-        adapter = new ProviderBookingsListAdapter(getContext(), R.layout.list_item_provider_booking);
-        listView.setAdapter(adapter);
+        listView = (ListView) view.findViewById(R.id.fragment_provider_book_listview);
+        allinAllController.listProviderBookings(RESTClient.ID, "Loading Bookings ...");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,9 +83,14 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
 
     @Override
     public void sendServiceResult(String serviceResult) {
-        adapter.clear();
-        adapter.addAll(RESTClient.PROVIDER_BOOKINGS);
-        swipeContainer.setRefreshing(false);
+        if (adapter == null) {
+            adapter = new ProviderBookingsListAdapter(getContext(), R.layout.list_item_provider_booking);
+            listView.setAdapter(adapter);
+        } else {
+            adapter.clear();
+            adapter.addAll(RESTClient.PROVIDER_BOOKINGS);
+            swipeContainer.setRefreshing(false);
+        }
     }
 
     @Override
