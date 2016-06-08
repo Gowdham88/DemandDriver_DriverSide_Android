@@ -57,7 +57,7 @@ public class SendOTPActivity extends AppCompatActivity implements Validator.Vali
         otpValidator.setValidationListener(this);
 
         // country code
-        String codes[] = {"0091"};
+        String codes[] = {"0091", "0020", "00966"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, codes);
         countryCodeSpinner.setAdapter(adapter);
 
