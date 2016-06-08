@@ -15,6 +15,7 @@ import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.helper.acra.GMailSender;
 import com.aurorasdp.allinall.model.ProviderBooking;
 import com.aurorasdp.allinall.model.Service;
+import com.aurorasdp.allinall.model.ServiceProvider;
 import com.aurorasdp.allinall.model.UserBooking;
 
 import org.json.JSONArray;
@@ -42,6 +43,7 @@ public class RESTClient {
     public static String BALANCE;
     public static String SCHEME;
     public static String EMAIL;
+    public static ArrayList<ServiceProvider> PROVIDERS;
     String parameters;
     // end static fields
 
@@ -124,7 +126,12 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_success))) {
                                     if (!response.isNull("bookings")) {
                                         final JSONArray bookingJSON = response.getJSONArray("bookings");
-                                        PROVIDER_BOOKINGS = jsonArrayToBookingsArray(bookingJSON);
+                                        if (PROVIDER_BOOKINGS == null)
+                                            PROVIDER_BOOKINGS = jsonArrayToBookingsArray(bookingJSON);
+                                        else {
+                                            PROVIDER_BOOKINGS.clear();
+                                            PROVIDER_BOOKINGS.addAll(jsonArrayToBookingsArray(bookingJSON));
+                                        }
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_fail))) {
                                     PROVIDER_BOOKINGS = new ArrayList<ProviderBooking>();
@@ -139,7 +146,12 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.user_list_history_success))) {
                                     if (!response.isNull("history")) {
                                         final JSONArray historyJSON = response.getJSONArray("history");
-                                        USER_BOOKINGS_HISTORY = jsonArrayToHistoryArray(historyJSON);
+                                        if (USER_BOOKINGS_HISTORY == null)
+                                            USER_BOOKINGS_HISTORY = jsonArrayToHistoryArray(historyJSON);
+                                        else {
+                                            USER_BOOKINGS_HISTORY.clear();
+                                            USER_BOOKINGS_HISTORY.addAll(jsonArrayToHistoryArray(historyJSON));
+                                        }
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.user_list_history_fail))) {
                                     USER_BOOKINGS_HISTORY = new ArrayList<UserBooking>();
@@ -152,10 +164,21 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.user_ongoing_appo_success))) {
                                     if (!response.isNull("bookings")) {
                                         final JSONArray bookingsJSON = response.getJSONArray("bookings");
-                                        ONGOING_BOOKINGS = jsonArrayToOngoingArray(bookingsJSON);
+                                        if (ONGOING_BOOKINGS == null)
+                                            ONGOING_BOOKINGS = jsonArrayToOngoingArray(bookingsJSON);
+                                        else {
+                                            ONGOING_BOOKINGS.clear();
+                                            ONGOING_BOOKINGS.addAll(jsonArrayToOngoingArray(bookingsJSON));
+                                        }
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.user_ongoing_appo_fail))) {
                                     ONGOING_BOOKINGS = new ArrayList<UserBooking>();
+                                }// /service/getAvailableServiceProvidersList
+                                else if (message.equalsIgnoreCase(context.getString(R.string.service_get_providers_success))) {
+                                    if (!response.isNull("service_providers")) {
+                                        final JSONArray providersJSON = response.getJSONArray("service_providers");
+                                        PROVIDERS = jsonArrayToProvidersArray(providersJSON);
+                                    }
                                 }
                                 sendServiceResult(message);
                             } catch (JSONException e) {
@@ -205,16 +228,38 @@ public class RESTClient {
         }
     }
 
+    private ArrayList<ServiceProvider> jsonArrayToProvidersArray(JSONArray providersJSON) {
+        ArrayList<ServiceProvider> providers = new ArrayList<ServiceProvider>();
+        for (int i = 0; i < providersJSON.length(); i++) {
+            ServiceProvider provider = new ServiceProvider();
+            try {
+                provider.setServiceProviderId(((JSONObject) providersJSON.get(i)).getString("service_provider_id"));
+                provider.setServiceProviderName(((JSONObject) providersJSON.get(i)).getString("service_provider_name"));
+                provider.setLongitude(((JSONObject) providersJSON.get(i)).getString("longitude"));
+                provider.setLatitude(((JSONObject) providersJSON.get(i)).getString("latitude"));
+                provider.setAddress(((JSONObject) providersJSON.get(i)).getString("address"));
+                provider.setBookingsCount(((JSONObject) providersJSON.get(i)).getString("bookings_count"));
+                provider.setAppUsageCount(((JSONObject) providersJSON.get(i)).getString("application_usage_count"));
+                providers.add(provider);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return providers;
+    }
+
     private ArrayList<UserBooking> jsonArrayToHistoryArray(JSONArray historyJSON) {
         ArrayList<UserBooking> bookings = new ArrayList<UserBooking>();
         for (int i = 0; i < historyJSON.length(); i++) {
             UserBooking booking = new UserBooking();
             try {
                 booking.setBookingId(((JSONObject) historyJSON.get(i)).getString("appointment_id"));
+                booking.setBookingCode(((JSONObject) historyJSON.get(i)).getString("appointment_code"));
                 booking.setProviderName(((JSONObject) historyJSON.get(i)).getString("service_provider_name"));
                 booking.setDateTime(((JSONObject) historyJSON.get(i)).getString("appointment_date"), ((JSONObject) historyJSON.get(i)).getString("appointment_time"));
                 booking.setService(((JSONObject) historyJSON.get(i)).getString("service_label"));
                 booking.setAddress(((JSONObject) historyJSON.get(i)).getString("address"));
+                booking.setReview(((JSONObject) historyJSON.get(i)).getString("review"));
                 booking.setDecodedPic(Base64.decode(((JSONObject) historyJSON.get(i)).getString("service_provider_pic"), Base64.DEFAULT));
                 bookings.add(booking);
             } catch (JSONException e) {
@@ -256,6 +301,8 @@ public class RESTClient {
                 booking.setUserName(((JSONObject) bookingJSON.get(i)).getString("user_name"));
                 booking.setDateTime(((JSONObject) bookingJSON.get(i)).getString("appointment_date"), ((JSONObject) bookingJSON.get(i)).getString("appointment_time"));
                 booking.setService(((JSONObject) bookingJSON.get(i)).getString("service_name"));
+                booking.setUserAddress(((JSONObject) bookingJSON.get(i)).getString("user_address"));
+                booking.setUserPhone(((JSONObject) bookingJSON.get(i)).getString("user_country_code"), ((JSONObject) bookingJSON.get(i)).getString("user_phone"));
                 booking.setDecodedPic(Base64.decode(((JSONObject) bookingJSON.get(i)).getString("user_pic"), Base64.DEFAULT));
                 bookings.add(booking);
             } catch (JSONException e) {
@@ -273,21 +320,22 @@ public class RESTClient {
                 String serviceId = ((JSONObject) serviceJSON.get(i)).getString("service_id");
                 service.setServiceId(serviceId);
                 service.setServiceName(((JSONObject) serviceJSON.get(i)).getString("service_name"));
+                service.setServiceLabel(((JSONObject) serviceJSON.get(i)).getString("service_label"));
                 switch (serviceId) {
                     case "1":
-                        service.setImageResource(R.drawable.call_driver);
+                        service.setImageResource(R.drawable.services_call_driver);
                         break;
                     case "2":
-                        service.setImageResource(R.drawable.mechanic);
+                        service.setImageResource(R.drawable.services_mechanic);
                         break;
                     case "3":
-                        service.setImageResource(R.drawable.plumber);
+                        service.setImageResource(R.drawable.services_plumber);
                         break;
                     case "4":
-                        service.setImageResource(R.drawable.electrician);
+                        service.setImageResource(R.drawable.services_electrician);
                         break;
                     case "5":
-                        service.setImageResource(R.drawable.carpenter);
+                        service.setImageResource(R.drawable.services_carpenter);
                         break;
                 }
                 services.add(service);

@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_service_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:background="@color/white"
+    android:layout_margin="@dimen/normal_margin"
+    android:weightSum="6"
     android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/list_item_service_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/medium_margin"
-        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/list_item_service_name_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/medium_margin"
-        android:layout_toLeftOf="@+id/list_item_service_imageview" />
+        android:gravity="center"
+        android:text="asaaaaaaaaaaaaaaaaa"/>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/list_item_service_imageview"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/normal_margin"
+        android:src="@drawable/ic_launcher" />
+
+</LinearLayout>

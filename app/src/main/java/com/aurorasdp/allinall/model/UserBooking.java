@@ -13,6 +13,7 @@ public class UserBooking {
     private String address;
     private String service;
     private String status;
+    private String review;
     private byte[] decodedPic;
 
     public String getBookingId() {
@@ -71,6 +72,14 @@ public class UserBooking {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public byte[] getDecodedPic() {

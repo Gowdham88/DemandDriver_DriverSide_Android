@@ -32,11 +32,11 @@ public class AllinAllController {
         Log.e(context.getString(R.string.tag), "Controller: Send SMS " + mobile);
         RESTClient restClient = new RESTClient(context);
         restClient.setServiceResponseInterface(restClientInterface);
-//        RESTClient.OTP = "1234";
+        RESTClient.OTP = "1234";
         restClient.sendServiceResult(context.getString(R.string.otp_sendsms_success));
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/OTP/sendsms",
-                new ArrayList<String>(Arrays.asList("phone")),
-                new ArrayList<String>(Arrays.asList(mobile)), "Sending SMS .....");
+//        restClient.callRESTService(Request.Method.POST, DEV_URL + "/OTP/sendsms",
+//                new ArrayList<String>(Arrays.asList("phone")),
+//                new ArrayList<String>(Arrays.asList(mobile)), "Sending SMS .....");
     }
 
     public void userSignUp(String name, String countryCode, String mobile, String email, String address, String password, String profileImage, String profileImageExt) {
@@ -157,4 +157,34 @@ public class AllinAllController {
                 new ArrayList<String>(Arrays.asList("user_id")),
                 new ArrayList<String>(Arrays.asList(userId)), message);
     }
+
+    public void completeBooking(String userId, String message) {
+        Log.e(context.getString(R.string.tag), "Controller: complete booking " + userId);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getUserBookings",
+                new ArrayList<String>(Arrays.asList("user_id")),
+                new ArrayList<String>(Arrays.asList(userId)), message);
+    }
+
+    public void getServiceProviderList(String serviceId) {
+        Log.e(context.getString(R.string.tag), "Controller: get service provider list " + serviceId);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/service/getAvailableServiceProvidersList",
+                new ArrayList<String>(Arrays.asList("service_id")),
+                new ArrayList<String>(Arrays.asList(serviceId)), "Loading Providers ...");
+    }
+
+    public void bookAppointment(String userId, String serviceProviderId, String date, String time, String serviceId,
+                                String longitude, String latitude, String carType, String hourly) {
+        Log.e(context.getString(R.string.tag), "Controller: Book Appointment " + userId + " " + serviceProviderId + " " + date + " " + time + " " +
+                serviceId + " " + longitude + " " + latitude + " " + carType + " " + hourly);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/bookAppointment",
+                new ArrayList<String>(Arrays.asList("user_id", "service_provider_id", "date", "time", "service_id", "user_longitude", "user_latitude", "car_type", "hourly_or_outstation")),
+                new ArrayList<String>(Arrays.asList(userId, serviceProviderId, date, time, serviceId, longitude, latitude, carType, hourly)), "Booking .... ");
+    }
+
 }

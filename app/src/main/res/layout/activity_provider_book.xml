@@ -48,10 +48,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
-                    android:scaleType="fitXY"
                     android:paddingLeft="@dimen/normal_margin"
                     android:paddingRight="@dimen/normal_margin"
-                    android:src="@android:drawable/ic_delete" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/name_ic" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,10 +106,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
-                    android:scaleType="fitXY"
                     android:paddingLeft="@dimen/normal_margin"
                     android:paddingRight="@dimen/normal_margin"
-                    android:src="@android:drawable/ic_delete" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/date_time_ic" />
             </LinearLayout>
 
             <LinearLayout
@@ -162,11 +162,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
-
-                    android:scaleType="fitXY"
                     android:paddingLeft="@dimen/normal_margin"
                     android:paddingRight="@dimen/normal_margin"
-                    android:src="@android:drawable/ic_delete" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/contact_ic" />
 
             </LinearLayout>
 
@@ -177,7 +176,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/provider_book_age_textview"
+                    android:id="@+id/provider_book_contact_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
@@ -187,7 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
-                    android:text="@string/age"
+                    android:text="@string/contact"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
@@ -219,12 +218,11 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-
-                    android:scaleType="fitXY"
+                    android:layout_weight="0.5"
                     android:paddingLeft="@dimen/normal_margin"
                     android:paddingRight="@dimen/normal_margin"
-                    android:layout_weight="0.5"
-                    android:src="@android:drawable/ic_delete" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/address_ic" />
 
             </LinearLayout>
 
@@ -235,6 +233,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/provider_book_address_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
@@ -245,7 +244,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
-                    android:text="Electrician"
+                    android:text="@string/address"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
@@ -262,10 +261,11 @@
         android:id="@+id/provider_book_cancel_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColorPrimary"
+        android:layout_alignParentBottom="true"
+        android:background="@color/redButton"
         android:text="@string/cancel"
         android:textAllCaps="false"
-        android:layout_alignParentBottom="true" />
+        android:textColor="@color/textColorPrimary" />
 
 
 </RelativeLayout>

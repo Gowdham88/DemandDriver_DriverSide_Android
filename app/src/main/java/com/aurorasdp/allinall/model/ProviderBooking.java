@@ -11,8 +11,9 @@ public class ProviderBooking {
     private String userName;
     private String service;
     private String dateTime;
+    private String userPhone;
+    private String userAddress;
     private byte[] decodedPic;
-    private String age;
 
     public String getBookingId() {
         return bookingId;
@@ -54,6 +55,25 @@ public class ProviderBooking {
         this.dateTime = Util.getDateTime(date, time);
     }
 
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String code, String phone) {
+        if (code.length() > 2)
+            this.userPhone = "+" + code.substring(2) + "-" + phone;
+        else
+            this.userPhone = code + "-" + phone;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
     public byte[] getDecodedPic() {
         return decodedPic;
     }
@@ -62,11 +82,4 @@ public class ProviderBooking {
         this.decodedPic = decodedPic;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 }

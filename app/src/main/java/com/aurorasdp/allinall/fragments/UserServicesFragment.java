@@ -2,19 +2,22 @@ package com.aurorasdp.allinall.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
+import com.aurorasdp.allinall.activities.BookServiceMapActivity;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
@@ -31,6 +34,7 @@ public class UserServicesFragment extends Fragment implements RESTClient.Service
     private AllinAllController allinAllController;
     private ListView servicesListView;
     ServicesListAdapter adapter;
+    private Service service;
 
     public UserServicesFragment() {
         // Required empty public constructor
@@ -49,6 +53,14 @@ public class UserServicesFragment extends Fragment implements RESTClient.Service
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_services, container, false);
         servicesListView = (ListView) view.findViewById(R.id.fragment_services_listview);
+        servicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                service = (Service) servicesListView.getAdapter().getItem(position);
+                if (service != null)
+                    allinAllController.getServiceProviderList(service.getServiceId());
+            }
+        });
         return view;
     }
 
@@ -57,7 +69,27 @@ public class UserServicesFragment extends Fragment implements RESTClient.Service
         if (serviceResult.equalsIgnoreCase(getString(R.string.service_get_services_success))) {
             adapter = new ServicesListAdapter(getContext(), R.layout.list_item_service);
             servicesListView.setAdapter(adapter);
+        } else if (serviceResult.equalsIgnoreCase(getString(R.string.service_get_providers_success))) {
+            Intent serviceDetailsIntent = new Intent(getContext(), BookServiceMapActivity.class);
+            Bundle serviceBundle = new Bundle();
+            serviceBundle.putString("serviceId", service.getServiceId());
+            serviceBundle.putString("serviceName", service.getServiceLabel());
+            serviceBundle.putInt("serviceImageId", service.getImageResource());
+            serviceDetailsIntent.putExtras(serviceBundle);
+            startActivity(serviceDetailsIntent);
         }
+       /* else if (serviceResult.equalsIgnoreCase(getString(R.string.service_get_providers_fail))) {
+            Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
+            Intent serviceDetailsIntent = new Intent(getContext(), BookServiceMapActivity.class);
+            Bundle serviceBundle = new Bundle();
+            serviceBundle.putString("serviceId", service.getServiceId());
+            serviceBundle.putString("serviceName", service.getServiceLabel());
+            serviceBundle.putInt("serviceImageId", service.getImageResource());
+            serviceDetailsIntent.putExtras(serviceBundle);
+            startActivity(serviceDetailsIntent);
+        }*/
+        else
+            Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
     }
 
     @Override

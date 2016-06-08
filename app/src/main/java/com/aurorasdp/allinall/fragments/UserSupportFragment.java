@@ -50,7 +50,7 @@ public class UserSupportFragment extends Fragment {
                 //set message, title, and icon
                 .setTitle("Sign out")
                 .setMessage("Do you want to sign out?")
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_launcher)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         SharedPreferences.Editor editor = allinallSharedPref.edit();

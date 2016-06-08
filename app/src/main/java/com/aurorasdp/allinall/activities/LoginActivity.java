@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                 //set message, title, and icon
                 .setTitle("Reset Password")
                 .setMessage("Do you really want to reset the  password and send the new password to your Email:\n " + RESTClient.EMAIL + "?\nYou can not get new password if your email is not correct")
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.ic_launcher)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String pass = Util.generateRandom();

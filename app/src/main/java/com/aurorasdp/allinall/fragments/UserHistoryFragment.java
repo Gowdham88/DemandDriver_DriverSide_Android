@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aurorasdp.allinall.R;
-import com.aurorasdp.allinall.activities.UserBookingActivity;
+import com.aurorasdp.allinall.activities.UserBookingHistoryActivity;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
@@ -60,7 +60,7 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserBooking userBooking = adapter.getItem(position);
-                Intent bookingIntent = new Intent(getContext(), UserBookingActivity.class);
+                Intent bookingIntent = new Intent(getContext(), UserBookingHistoryActivity.class);
                 Bundle bookingBundle = new Bundle();
                 bookingBundle.putInt("bookingIndex", position);
                 bookingIntent.putExtras(bookingBundle);

@@ -37,13 +37,14 @@
             android:id="@+id/send_otp_mobile_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/send_otp_country_code_spinner"
+            android:layout_alignTop="@+id/send_otp_country_code_spinner"
             android:layout_below="@+id/send_otp_mobile_textview"
             android:layout_toRightOf="@+id/send_otp_country_code_spinner"
-            android:layout_alignBottom="@+id/send_otp_country_code_spinner"
             android:background="@color/lightGray"
             android:hint="@string/phone"
-            android:maxLength="10"
             android:inputType="number"
+            android:maxLength="10"
             android:padding="@dimen/medium_margin" />
 
         <Button

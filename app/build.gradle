@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.aurorasdp.allinall"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -29,7 +29,9 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'ch.acra:acra:4.6.2'
+    compile 'com.google.android.gms:play-services:8.4.0'
 }
+
 
 
 
