@@ -1,5 +1,14 @@
 <resources>
 
+    <!--string name="google_app_id">263724583873</string-->
+    <!-- Pushbots Application ID  -->
+    <string name="pb_appid">574c490d4a9efa740a8b4567</string>
+    <!-- GCM Sender ID -->
+    <string name="pb_senderid">263724583873</string>
+    <!-- Pushbots Log Level  log Tag "PB2" -->
+    <string name="pb_logLevel">DEBUG</string>
+
+
     <string name="tag">AllinAllLog</string>
     <string name="error_title"> Server Error </string>
     <string name="no_connection_error_msg"> Could not complete your request due to network connectivity problem. Please try again later.</string>
@@ -90,6 +99,11 @@
     <string name="tariff_assurance_elec_mas_pl_carp">Background checked, trained and skilled technicians \n\n30 days service guaranteed</string>
     <string name="tariff_pricing_elec_mas_pl_carp">First hour RS. 149 \n\nSubsequent hours RS.89 \n\nMaterial cost excluded \n\nTime spent on procurement of material to be included in work hours \n\nRs.89 inspection charges if job not undertaken.</string>
 
+    <string name="set_date">Set Date</string>
+    <string name="set_time">Set Time</string>
+    <string name="set">Set</string>
+    <string name="book">Book</string>
+    <string name="confirm_password">Confirm Password</string>
 
     <string-array name="driver_type_array">
         <item>Hourly</item>
@@ -99,9 +113,229 @@
 
 
     <string-array name="car_type_array">
-        <item>Hourly</item>
-        <item>Outstation</item>
-        <item>Valet Parking</item>
+        <item>Select car type</item>
+        <item>A- STAR</item>
+        <item>A- STAR AUTOMATIC</item>
+        <item>ACCENT</item>
+        <item>ACCENT AUTOMATIC</item>
+        <item>ACCORD</item>
+        <item>ALTO</item>
+        <item>ALTO 800</item>
+        <item>ALTO K10</item>
+        <item>ALTO K10 AUTOMATIC</item>
+        <item>AMBASSADOR</item>
+        <item>AUDI</item>
+        <item>AUDI AUTOMATIC</item>
+        <item>BMW</item>
+        <item>BMW AUTOMATIC</item>
+        <item>BALENO</item>
+        <item>BENZ AUTOMATIC</item>
+        <item>BOLERO</item>
+        <item>CRV</item>
+        <item>CRV AUTOMATIC</item>
+        <item>CAMRY</item>
+        <item>CAMRY AUTOMATIC</item>
+        <item>CHEVROLET AVEO</item>
+        <item>CHEVROLET BEAT</item>
+        <item>CHEVROLET CAPTIVA</item>
+        <item>CHEVROLET CAPTIVA AUTOMATIC</item>
+        <item>CHEVROLET CRUZE</item>
+        <item>CHEVROLET CRUZE AUTOMATIC</item>
+        <item>CHEVROLET ENJOY</item>
+        <item>CHEVROLET OPTRA</item>
+        <item>CHEVROLET SAIL</item>
+        <item>CHEVROLET SAIL SEDAN</item>
+        <item>CHEVROLET SPARK</item>
+        <item>CHEVROLET TRAILBLAZER</item>
+        <item>CHEVROLET UVA</item>
+        <item>CIVIC</item>
+        <item>CIVIC AUTOMATIC</item>
+        <item>COROLA</item>
+        <item>COROLA AUTOMATIC</item>
+        <item>DAEWOOD CIELO</item>
+        <item>DUSTER</item>
+        <item>ELANTRA</item>
+        <item>ELANTRA AUTOMATIC</item>
+        <item>ENDEOVAR</item>
+        <item>ERTIGA</item>
+        <item>FERRARI</item>
+        <item>FIAT AVVENTURA</item>
+        <item>FIAT LINEA</item>
+        <item>FIAT PALIO</item>
+        <item>FIAT PUNTO</item>
+        <item>FIAT SIENNA</item>
+        <item>FIAT UNO</item>
+        <item>FORCE ONE SUV</item>
+        <item>FORD CLASSIC</item>
+        <item>FORD ECO SPORT</item>
+        <item>FORD ECO SPORT AUTOMATIC</item>
+        <item>FORD ESCORT</item>
+        <item>FORD FIESTA</item>
+        <item>FORD FIGO</item>
+        <item>FORD FIGO ASPIRE</item>
+        <item>FORD FUSION</item>
+        <item>FORD IKON</item>
+        <item>FORD MONDEO</item>
+        <item>FORTUNER</item>
+        <item>FORTUNER AUTOMATIC</item>
+        <item>GETZ</item>
+        <item>GRAND VITARA</item>
+        <item>HONDA AMAZE</item>
+        <item>HONDA AMAZE AUTOMATIC</item>
+        <item>HONDA BRIO</item>
+        <item>HONDA BRIO AUTOMATIC</item>
+        <item>HONDA CITY</item>
+        <item>HONDA CITY AUTOMATIC</item>
+        <item>HONDA JAZZ</item>
+        <item>HONDA JAZZ AUTOMATIC</item>
+        <item>HONDA MOBILIO</item>
+        <item>HUMMER</item>
+        <item>HYUNDAI CRETA</item>
+        <item>HYUNDAI EON</item>
+        <item>HYUNDAI EON SPORT</item>
+        <item>HYUNDAI SANTA FE</item>
+        <item>HYUNDAI SANTA FE AUTOMATIC</item>
+        <item>HYUNDAI TUCSON</item>
+        <item>HYUNDAI XCENT</item>
+        <item>HYUNDAI XCENT AUTOMATIC</item>
+        <item>HYUNDAI GRAND I10</item>
+        <item>I10</item>
+        <item>I10 AUTOMATIC</item>
+        <item>I10 AUTOMATIC</item>
+        <item>I10 GRAND</item>
+        <item>I20</item>
+        <item>I20 AUTOMATIC</item>
+        <item>INDICA</item>
+        <item>INDICA VISTA</item>
+        <item>INDIGO</item>
+        <item>INDIGO CS</item>
+        <item>INDIGO GLX</item>
+        <item>INDIGO MANZA</item>
+        <item>INDIGO MARINA</item>
+        <item>INNOVA</item>
+        <item>ISUZU MU7</item>
+        <item>JAGUAR</item>
+        <item>JAGUAR AUTOMATIC</item>
+        <item>JEEP</item>
+        <item>LAMBORGHINI</item>
+        <item>LANCER</item>
+        <item>LAND ROVER</item>
+        <item>LANDCRUSIER</item>
+        <item>LEXUS</item>
+        <item>LOGAN</item>
+        <item>LORRY</item>
+        <item>MAHINDRA E20</item>
+        <item>MAHINDRA QUANTO</item>
+        <item>MAHINDRA REXCENT</item>
+        <item>MAHINDRA VERITO</item>
+        <item>MARUTI 1000</item>
+        <item>MARUTI 800</item>
+        <item>MARUTI CELERIO</item>
+        <item>MARUTI CELERIO</item>
+        <item>MARUTI CELERIO AUTOMATIC</item>
+        <item>MARUTI CIAZ</item>
+        <item>MARUTI ECHO</item>
+        <item>MARUTI ESTEEM</item>
+        <item>MARUTI XCROSS</item>
+        <item>MATIZ</item>
+        <item>MERCEDES BENZ</item>
+        <item>MINI COOPER</item>
+        <item>NANO, NISSAN DATSUN GO</item>
+        <item>NISSAN MICRA</item>
+        <item>NISSAN MICRA AUTOMATIC</item>
+        <item>NISSAN SUNNY</item>
+        <item>NISSAN TERRANO</item>
+        <item>NISSAN TIANA AUTOMATIC</item>
+        <item>NISSAN XTRAIL</item>
+        <item>NISSAN XTRAIL AUTOMATIC</item>
+        <item>OMNI VAN</item>
+        <item>OPEL ASTRA</item>
+        <item>OPEL CORSA</item>
+        <item>OUT LAND</item>
+        <item>PAJERO</item>
+        <item>PALIO</item>
+        <item>PRADA</item>
+        <item>QUALIS</item>
+        <item>RANGE ROVER</item>
+        <item>REBOOKING</item>
+        <item>RENAULT DUSTER</item>
+        <item>RENAULT KOLEOS</item>
+        <item>RENAULT KWID</item>
+        <item>RENAULT LODGY</item>
+        <item>RENAULT PULSE</item>
+        <item>RENAULT SCALA</item>
+        <item>RITZ</item>
+        <item>RITZ AUTOMATIC</item>
+        <item>ROLLS ROYCE</item>
+        <item>SANTRO</item>
+        <item>SANTRO AUTOMATIC</item>
+        <item>SANTRO XING</item>
+        <item>SANTRO XING AUTOMATIC</item>
+        <item>SCORPIO</item>
+        <item>SKODA</item>
+        <item>SKODA CITIGO</item>
+        <item>SKODA LAURA</item>
+        <item>SKODA LAURA AUTOMATIC</item>
+        <item>SKODA OCTAVIA</item>
+        <item>SKODA OCTAVIA AUTOMATIC</item>
+        <item>SKODA RAPID</item>
+        <item>SKODA RAPID AUTOMATIC</item>
+        <item>SKODA SUPERB</item>
+        <item>SKODA SUPERB AUTOMATIC</item>
+        <item>SKODA YETI</item>
+        <item>SKODA YETI AUTOMATIC</item>
+        <item>SONATA</item>
+        <item>SONATA AUTOMATIC</item>
+        <item>SWIFT</item>
+        <item>SWIFT DZIRE</item>
+        <item>SWIFT DZIRE AUTOMATIC</item>
+        <item>SX 4</item>
+        <item>TATA ARIA</item>
+        <item>TATA BOLT</item>
+        <item>TATA DICOR</item>
+        <item>TATA MAGIC</item>
+        <item>TATA NANO</item>
+        <item>TATA SAFARI</item>
+        <item>TATA STORM</item>
+        <item>TATA SUMO</item>
+        <item>TATA VENTURE</item>
+        <item>TATA WINGER</item>
+        <item>TATA XENON</item>
+        <item>TATA ZETZ</item>
+        <item>TATA ZETZ AUTOMATIC</item>
+        <item>TAVERA</item>
+        <item>TEMPO TRAVELLAR</item>
+        <item>TERRACON</item>
+        <item>TOYOTA ALTIS</item>
+        <item>TOYOTA ALTIS AUTOMATIC</item>
+        <item>TOYOTA ETIOS</item>
+        <item>TOYOTA ETIOS LIVA</item>
+        <item>TOYOTA PRIUS</item>
+        <item>TOYOTA VOVLO</item>
+        <item>TOYOTA XLUSIVE</item>
+        <item>TOYOTA YARIS</item>
+        <item>VALET PARKING</item>
+        <item>VERNA</item>
+        <item>VERNA AUTOMATIC</item>
+        <item>VERNA FLUDIC</item>
+        <item>VERSA</item>
+        <item>VOLKSWAGEN BEETLE</item>
+        <item>VOLKSWAGEN JETTA</item>
+        <item>VOLKSWAGEN JETTA AUTOMATIC</item>
+        <item>VOLKSWAGEN PASSAT</item>
+        <item>VOLKSWAGEN PASSAT AUTOMATIC</item>
+        <item>VOLKSWAGEN POLO</item>
+        <item>VOLKSWAGEN POLO AUTOMATIC</item>
+        <item>VOLKSWAGEN VENTO</item>
+        <item>VOLKSWAGEN VENTO AUTOMATIC</item>
+        <item>WAGON R</item>
+        <item>WAGON R AUTOMATIC</item>
+        <item>XUV 500</item>
+        <item>XYLO</item>
+        <item>ZEN ESTILO</item>
+        <item>ZEN MARUTI</item>
+
+
     </string-array>
 
 

@@ -121,11 +121,23 @@
                     android:inputType="textPassword"
                     android:padding="@dimen/edit_text_padding" />
 
+                <EditText
+                    android:id="@+id/user_signup_confirm_password_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_signup_password_edittext"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:background="@color/lightGray"
+                    android:hint="@string/confirm_password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/edit_text_padding" />
+
                 <CheckBox
                     android:id="@+id/user_signup_terms_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_signup_password_edittext"
+                    android:layout_below="@+id/user_signup_confirm_password_edittext"
                     android:text="Accept terms and conditions"
                     android:textColor="@color/textColorPrimary" />
 

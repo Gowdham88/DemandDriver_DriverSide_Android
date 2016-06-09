@@ -1,31 +1,33 @@
 package com.aurorasdp.allinall.activities;
 
-import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
+import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
+import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.ServiceProvider;
+import com.aurorasdp.allinall.view.CustomDateTimePicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -41,23 +43,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class BookServiceMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class BookServiceMapActivity extends AppCompatActivity implements RESTClient.ServiceResponseInterface, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener,
         ResultCallback<LocationSettingsResult> {
@@ -81,10 +84,19 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
     @InjectView(R.id.service_details_tariff_linearlayout)
     LinearLayout tariffLayout;
 
-    String serviceId, serviceName;
+    @InjectView(R.id.service_details_book_now_textview)
+    TextView bookNowTextview;
+    @InjectView(R.id.service_details_book_later_textview)
+    TextView bookLaterTextview;
+    @InjectView(R.id.service_details_book_button)
+    Button bookButton;
+
+    private AllinAllController allinAllController;
+
+    CustomDateTimePicker bookLaterDateTimePicker;
+    String serviceId, serviceName, bookDate, bookTime, bookNow;
     int serviceImageId;
 
-    private GoogleMap mMap;
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
     protected LocationSettingsRequest mLocationSettingsRequest;
@@ -95,7 +107,8 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
     protected static final int SURROUNDING_DISTANCE = 30000000;
     protected static final String TAG = "GettingUserLocation";
     private Location userLocation;
-    HashMap<ServiceProvider, Float> sortedDistances;
+    //    HashMap<ServiceProvider, Float> sortedDistances;
+//    ArrayList<ServiceProvider> sortedProviders;
     SupportMapFragment mapFragment;
 
 
@@ -104,6 +117,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_service_map);
         ButterKnife.inject(this);
+        allinAllController = new AllinAllController(this, this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.book_appointment);
@@ -137,6 +151,96 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
         createLocationRequest();
         buildLocationSettingsRequest();
         checkLocationSettings();
+        bookNowTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!serviceId.equalsIgnoreCase("1") || carTypeSpinner.getSelectedItemPosition() > 0) {
+
+                    Date now = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
+
+                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+                    stf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+
+                    bookDate = sdf.format(now);
+                    bookTime = stf.format(now);
+                    bookNow = "1";
+                    showConfirmDialog();
+                } else
+                    Toast.makeText(getApplicationContext(), "Must select car type and options", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        bookLaterDateTimePicker = getCustomDateTimePicker(bookLaterTextview);
+        bookLaterDateTimePicker.set24HourFormat(true);
+        bookLaterDateTimePicker.setDate(Calendar.getInstance());
+        bookLaterTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookLaterDateTimePicker.showDialog();
+            }
+        });
+    }
+
+    private CustomDateTimePicker getCustomDateTimePicker(final TextView textView) {
+        CustomDateTimePicker custom = new CustomDateTimePicker(this, new CustomDateTimePicker.ICustomDateTimeListener() {
+
+            @Override
+            public void onSet(Dialog dialog, final Calendar calendarSelected,
+                              Date dateSelected, int year, String monthFullName,
+                              String monthShortName, int monthNumber, int date,
+                              String weekDayFullName, String weekDayShortName,
+                              int hour24, int hour12, int min, int sec,
+                              String AM_PM) {
+                textView.setText(calendarSelected
+                        .get(Calendar.DAY_OF_MONTH)
+                        + "/" + (monthNumber + 1) + "/" + year
+                        + ", " + hour12 + ":" + min
+                        + " " + AM_PM);
+                bookButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!serviceId.equalsIgnoreCase("1") || carTypeSpinner.getSelectedItemPosition() > 0) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
+                            bookDate = sdf.format(calendarSelected.getTime());
+                            bookTime = stf.format(calendarSelected.getTime());
+                            bookNow = "0";
+                            showConfirmDialog();
+                        } else
+                            Toast.makeText(getApplicationContext(), "Must select car type and options", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancel() {
+
+
+            }
+        });
+        return custom;
+    }
+
+    private void showConfirmDialog() {
+        new android.support.v7.app.AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("Booking")
+                .setMessage("Do you want to book service at " + Util.getDateTime(bookDate, bookTime) + " ?")
+                .setIcon(R.drawable.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        allinAllController.bookAppointment(RESTClient.ID, bookDate, bookTime, serviceId, userLocation.getLongitude() + "", userLocation.getLatitude() + "", serviceId.equalsIgnoreCase("1") ? carTypeSpinner.getSelectedItem().toString() : null, serviceId.equalsIgnoreCase("1") ? driverTypeSpinner.getSelectedItem().toString() : null, bookNow);
+                    }
+                })
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     protected void buildGoogleApiClient() {
@@ -201,7 +305,6 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         if (RESTClient.PROVIDERS != null) {
             ArrayList<ServiceProvider> surrounding = getSurroundingProviders();
@@ -247,21 +350,32 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
             if (distance <= SURROUNDING_DISTANCE)
                 providers.add(prov);
         }
-        sortDistances(distances);
+//        sortDistances(distances);
 
         return providers;
     }
 
-    private void sortDistances(HashMap<ServiceProvider, Float> distances) {
-        final int size = distances.size();
-        final List<HashMap.Entry<ServiceProvider, Float>> list = new ArrayList<HashMap.Entry<ServiceProvider, Float>>(size);
-        list.addAll(distances.entrySet());
-        final ValueComparator<Float> cmp = new ValueComparator<Float>();
-        Collections.sort(list, cmp);
-        sortedDistances = new HashMap<ServiceProvider, Float>(size);
-        for (int i = 0; i < size; i++) {
-            sortedDistances.put(list.get(i).getKey(), list.get(i).getValue());
-        }
+    /*  private void sortDistances(HashMap<ServiceProvider, Float> distances) {
+          final int size = distances.size();
+          final List<HashMap.Entry<ServiceProvider, Float>> list = new ArrayList<HashMap.Entry<ServiceProvider, Float>>(size);
+          list.addAll(distances.entrySet());
+          final ValueComparator<Float> cmp = new ValueComparator<Float>();
+          Collections.sort(list, cmp);
+          sortedProviders = new ArrayList<ServiceProvider>(size);
+          for (int i = 0; i < size; i++) {
+              sortedProviders.add(list.get(i).getKey());
+          }
+      }
+  */
+    @Override
+    public void sendServiceResult(String serviceResult) {
+        Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void requestFailed() {
+        Util.requestFailed(this);
+
     }
 
     private static final class ValueComparator<V extends Comparable<? super V>>
@@ -301,6 +415,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements OnMapRe
         if (userLocation == null) {
             userLocation = location;
             mapFragment.getMapAsync(this);
+            stopLocationUpdates();
             stopLocationUpdates();
         }
     }

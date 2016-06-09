@@ -43,7 +43,7 @@
                 android:entries="@array/driver_type_array" />
 
             <LinearLayout
-                android:layout_width="1dp"
+                android:layout_width=".5dp"
                 android:layout_height="match_parent"
                 android:background="@color/darkGray" />
 
@@ -69,7 +69,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:orientation="vertical"
-                android:weightSum="5">
+                android:weightSum="6">
 
                 <View
                     android:layout_width="match_parent"
@@ -93,6 +93,12 @@
                     android:layout_weight="2"
                     android:src="@drawable/driver" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -102,7 +108,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:orientation="vertical"
-                android:weightSum="5">
+                android:weightSum="6">
 
                 <View
                     android:layout_width="match_parent"
@@ -125,6 +131,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:src="@drawable/tariff" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -145,7 +156,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height=".5dp"
                     android:background="@color/darkGray" />
 
                 <TextView
@@ -158,4 +169,12 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/service_details_book_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redButton"
+        android:text="@string/book"
+        android:textColor="@color/white" />
 </LinearLayout>

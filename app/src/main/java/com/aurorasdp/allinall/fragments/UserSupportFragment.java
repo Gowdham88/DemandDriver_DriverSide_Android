@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +15,26 @@ import android.widget.Button;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.activities.LoginActivity;
+import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserSupportFragment extends Fragment {
+public class UserSupportFragment extends Fragment implements RESTClient.ServiceResponseInterface {
     private Button signoutButton;
     private SharedPreferences allinallSharedPref;
+    private AllinAllController allinAllController;
 
     public UserSupportFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        allinAllController = new AllinAllController(getContext(), this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +61,7 @@ public class UserSupportFragment extends Fragment {
                 .setIcon(R.drawable.ic_launcher)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        allinAllController.userSignOut(RESTClient.ID);
                         SharedPreferences.Editor editor = allinallSharedPref.edit();
                         editor.putBoolean("firstLaunch", true);
                         editor.remove("userId");
@@ -60,8 +69,14 @@ public class UserSupportFragment extends Fragment {
                         RESTClient.ID = null;
                         Intent loginIntent = new Intent(getContext(), LoginActivity.class);
                         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                         startActivity(loginIntent);
-                        getActivity().finish();
+
+                        getActivity()
+
+                                .
+
+                                        finish();
 
                     }
                 })
@@ -71,5 +86,15 @@ public class UserSupportFragment extends Fragment {
                         dialog.dismiss();
                     }
                 }).show();
+    }
+
+    @Override
+    public void sendServiceResult(String serviceResult) {
+
+    }
+
+    @Override
+    public void requestFailed() {
+
     }
 }

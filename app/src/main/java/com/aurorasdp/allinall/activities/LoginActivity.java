@@ -1,11 +1,14 @@
 package com.aurorasdp.allinall.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,9 +20,11 @@ import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
+import com.aurorasdp.allinall.receiver.PushNotificationReceiver;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.pushbots.push.Pushbots;
 
 import java.util.List;
 
@@ -54,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     private Validator loginValidator;
     private AllinAllController allinAllController;
     private SharedPreferences allinallSharedPreferences;
+    public static ProgressDialog loading;
     String phoneToResetPassword;
     public static String SIGNUP_TYPE;
 
@@ -64,6 +70,13 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         allinallSharedPreferences = this.getSharedPreferences(getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+        String regID = allinallSharedPreferences.getString("regID", "");
+        if (regID.equalsIgnoreCase("")) {
+            loading = ProgressDialog.show(this, "Registering ... ", "Please wait...");
+            Pushbots.sharedInstance().init(getApplicationContext());
+            if (Pushbots.sharedInstance() != null)
+                Pushbots.sharedInstance().setCustomHandler(PushNotificationReceiver.class);
+        }
         if (!allinallSharedPreferences.getBoolean("firstLaunch", true)) {
             if (!allinallSharedPreferences.getString("userId", "").equalsIgnoreCase("")) {
                 RESTClient.ID = allinallSharedPreferences.getString("userId", "");
@@ -146,9 +159,9 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     @Override
     public void onValidationSucceeded() {
         if (isProvider.isChecked())
-            allinAllController.providerLogin(numberEditText.getText().toString(), passwordEditText.getText().toString());
+            allinAllController.providerLogin(numberEditText.getText().toString(), passwordEditText.getText().toString(), allinallSharedPreferences.getString("regID", ""));
         else
-            allinAllController.userLogin(numberEditText.getText().toString(), passwordEditText.getText().toString());
+            allinAllController.userLogin(numberEditText.getText().toString(), passwordEditText.getText().toString(), allinallSharedPreferences.getString("regID", ""));
     }
 
     @Override

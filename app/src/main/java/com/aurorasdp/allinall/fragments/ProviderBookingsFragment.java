@@ -53,7 +53,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         View view = inflater.inflate(R.layout.fragment_provider_bookings, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_provider_book_listview);
-        allinAllController.listProviderBookings(RESTClient.ID, "Loading Bookings ...");
+        allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -70,7 +70,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                allinAllController.listProviderBookings(RESTClient.ID, null);
+                allinAllController.listProviderBookings(RESTClient.ID, "0", null);
             }
         });
 

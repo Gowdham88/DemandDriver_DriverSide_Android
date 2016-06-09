@@ -27,6 +27,7 @@ import com.aurorasdp.allinall.helper.Util;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
@@ -57,8 +58,12 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
 
     @InjectView(R.id.user_signup_password_edittext)
     @NotEmpty
-    @Password
+    @Password(min = 6, message = "Password must be 6 digits at least")
     EditText passwordEditText;
+
+    @InjectView(R.id.user_signup_confirm_password_edittext)
+    @ConfirmPassword
+    EditText confirmPasswordEditText;
 
     @InjectView(R.id.user_signup_terms_checkbox)
     @Checked(message = "Must accept terms and conditions")
@@ -76,6 +81,7 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
 
     private Validator userSignupValidator;
     private AllinAllController allinAllController;
+    private SharedPreferences allinAllSharedPreferences;
 
     public static final int GET_FROM_GALLERY = 0;
     private String profileImageExt, encodedProfileImage;
@@ -87,6 +93,7 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
         setContentView(R.layout.activity_user_signup);
         ButterKnife.inject(this);
         allinAllController = new AllinAllController(this, this);
+        allinAllSharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         userSignupValidator = new Validator(this);
         userSignupValidator.setValidationListener(this);
         Bundle extras = getIntent().getExtras();
@@ -148,7 +155,7 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
 //            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
 //        else {
         allinAllController.userSignUp(nameEditText.getText().toString(), code, mobile, emailEditText.getText().toString(),
-                addressEditText.getText().toString(), passwordEditText.getText().toString(), encodedProfileImage, profileImageExt);
+                addressEditText.getText().toString(), passwordEditText.getText().toString(), encodedProfileImage, profileImageExt, allinAllSharedPreferences.getString("regID", ""));
 //        }
     }
 
@@ -161,7 +168,7 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
     @Override
     public void sendServiceResult(String serviceResult) {
         if (serviceResult.equalsIgnoreCase(getString(R.string.user_signup_success))) {
-            SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = allinAllSharedPreferences.edit();
             editor.putBoolean("firstLaunch", false);
             editor.putString("userId", RESTClient.ID);
             editor.apply();

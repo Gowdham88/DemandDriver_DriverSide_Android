@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.activities.BookServiceMapActivity;
+import com.aurorasdp.allinall.activities.UserActivity;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
@@ -121,10 +124,19 @@ public class UserServicesFragment extends Fragment implements RESTClient.Service
             }
             serviceName = (TextView) convertView.findViewById(R.id.list_item_service_name_textview);
             serviceImage = (ImageView) convertView.findViewById(R.id.list_item_service_imageview);
-
+            int proportionalHeight = containerHeight(context);
+            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, proportionalHeight); // (width, height)
+            convertView.setLayoutParams(params);
             serviceName.setText(services.get(position).getServiceName());
             serviceImage.setImageResource(services.get(position).getImageResource());
             return convertView;
+        }
+
+        public int containerHeight(Context fragment) {
+            DisplayMetrics dm = new DisplayMetrics();
+            ((UserActivity) fragment).getWindowManager().getDefaultDisplay().getMetrics(dm);
+            double ratio = 5;
+            return (int) (dm.heightPixels / ratio);
         }
     }
 }

@@ -27,7 +27,9 @@ import com.aurorasdp.allinall.model.Service;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -54,7 +56,12 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
 
     @InjectView(R.id.provider_signup_password_edittext)
     @NotEmpty
+    @Password(min = 6, message = "Password must be 6 digits at least")
     EditText passwordEditText;
+
+    @InjectView(R.id.provider_signup_confirm_password_edittext)
+    @ConfirmPassword
+    EditText confirmPasswordEditText;
 
     @InjectView(R.id.provider_signup_service_spinner)
     Spinner serviceOfferedSpinner;
@@ -74,6 +81,7 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
 
     private Validator providerSignupValidator;
     private AllinAllController allinAllController;
+    private SharedPreferences allinAllSharedPreferences;
 
     public static final int GET_FROM_GALLERY = 0;
     private String encodedProfileImage, profileImageExt;
@@ -88,6 +96,7 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         providerSignupValidator.setValidationListener(this);
 
         allinAllController = new AllinAllController(this, this);
+        allinAllSharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mobile = extras.getString("mobile");
@@ -167,7 +176,7 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
             Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         else {
             allinAllController.providerSignUp(nameEditText.getText().toString(), emailEditText.getText().toString(), code,
-                    mobile, addressEditText.getText().toString(), ((Service) (serviceOfferedSpinner.getSelectedItem())).getServiceId(), passwordEditText.getText().toString(), encodedProfileImage, profileImageExt);
+                    mobile, addressEditText.getText().toString(), ((Service) (serviceOfferedSpinner.getSelectedItem())).getServiceId(), passwordEditText.getText().toString(), encodedProfileImage, profileImageExt, allinAllSharedPreferences.getString("regID", ""));
         }
     }
 

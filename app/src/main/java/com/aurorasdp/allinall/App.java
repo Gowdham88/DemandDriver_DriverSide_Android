@@ -1,10 +1,10 @@
 package com.aurorasdp.allinall;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
+
+import android.support.multidex.MultiDexApplication;
 
 import com.aurorasdp.allinall.helper.acra.ACRAReportSender;
+
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -17,7 +17,8 @@ import org.acra.annotation.ReportsCrashes;
 @ReportsCrashes(
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text)
-public class App extends Application {
+public class App extends MultiDexApplication {
+
 
     @Override
     public void onCreate() {
