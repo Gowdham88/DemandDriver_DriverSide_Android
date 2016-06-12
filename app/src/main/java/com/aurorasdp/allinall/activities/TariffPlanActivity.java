@@ -85,6 +85,7 @@ public class TariffPlanActivity extends AppCompatActivity {
         Context context;
         int resource;
         ArrayList<String> list;
+        TextView textView, text11, text12, text13, text21, text22, text23;
 
         public TarrifAdapter(Context context, int resource, ArrayList<String> list) {
             super(context, resource, list);
@@ -100,8 +101,36 @@ public class TariffPlanActivity extends AppCompatActivity {
                         Context.LAYOUT_INFLATER_SERVICE);
                 convertView = viewInflater.inflate(resource, parent, false);
             }
-            ImageView tariffImage = (ImageView) convertView.findViewById(R.id.list_item_tariff_imageview);
-            tariffImage.setImageResource(Integer.parseInt(list.get(position)));
+//            ImageView tariffImage = (ImageView) convertView.findViewById(R.id.list_item_tariff_imageview);
+//            tariffImage.setImageResource(Integer.parseInt(list.get(position)));
+            textView = (TextView) convertView.findViewById(R.id.textview1);
+            text11 = (TextView) convertView.findViewById(R.id.text11);
+            text12 = (TextView) convertView.findViewById(R.id.text12);
+            text13 = (TextView) convertView.findViewById(R.id.text13);
+            text21 = (TextView) convertView.findViewById(R.id.text21);
+            text22 = (TextView) convertView.findViewById(R.id.text22);
+            text23 = (TextView) convertView.findViewById(R.id.text23);
+            if (position == 0) {
+                textView.setText("CITY PACKAGE");
+                text11.setText("Min 12 Hours");
+                text21.setText("RS. 650.00");
+            } else if (position == 1) {
+                textView.setText("HOURLY - SILVER");
+                text11.setText("Min 4 Hours");
+                text21.setText("RS. 280.00");
+            } else if (position == 2) {
+                textView.setText("HOURLY GOLD");
+                text11.setText("Min 4 Hours");
+                text21.setText("RS. 300.00");
+            } else if (position == 3) {
+                textView.setText("VALET PARKING");
+                text11.setText("Min 5 Hours");
+                text21.setText("RS. 500.00");
+            }
+            text12.setText("Extra per hour");
+            text13.setText("Night Charges");
+            text22.setText("RS. 50.00");
+            text23.setText("RS. 0.00");
             return convertView;
         }
     }

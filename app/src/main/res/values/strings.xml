@@ -51,6 +51,7 @@
     <string name="service_offered_success">Services labels successfully viewed</string>
     <string name="service_get_providers_success">Available service providers for this service successfully viewed</string>
     <string name="service_get_providers_fail">No service providers available for this service</string>
+    <string name="appointment_complete_success">Appointment completed successfully</string>
 
 
     <string name="service_offered">Service Offered</string>
@@ -104,6 +105,8 @@
     <string name="set">Set</string>
     <string name="book">Book</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="complete">Complete</string>
+    <string name="confirmed_status">Confirmed</string>
 
     <string-array name="driver_type_array">
         <item>Hourly</item>

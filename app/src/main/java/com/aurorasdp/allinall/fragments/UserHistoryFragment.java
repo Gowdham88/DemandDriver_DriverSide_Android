@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.activities.UserBookingHistoryActivity;
@@ -59,7 +62,6 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserBooking userBooking = adapter.getItem(position);
                 Intent bookingIntent = new Intent(getContext(), UserBookingHistoryActivity.class);
                 Bundle bookingBundle = new Bundle();
                 bookingBundle.putInt("bookingIndex", position);
@@ -84,13 +86,21 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void sendServiceResult(String serviceResult) {
         if (adapter == null) {
             adapter = new UserHistoryListAdapter(getContext(), R.layout.list_item_user_history);
             listView.setAdapter(adapter);
         } else {
-            adapter.clear();
-            adapter.addAll(RESTClient.USER_BOOKINGS_HISTORY);
+//            adapter.clear();
+//            adapter.addAll(RESTClient.USER_BOOKINGS_HISTORY);
+            adapter.notifyDataSetChanged();
             swipeContainer.setRefreshing(false);
         }
     }

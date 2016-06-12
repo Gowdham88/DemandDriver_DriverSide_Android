@@ -238,6 +238,7 @@
         android:id="@+id/user_appointment_details_bookstts_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/user_appointment_details_complete_button"
         android:layout_below="@id/user_appointment_details_address_linearlayout"
         android:orientation="horizontal"
         android:weightSum="3">
@@ -285,5 +286,14 @@
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/user_appointment_details_complete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/redButton"
+        android:text="@string/complete"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

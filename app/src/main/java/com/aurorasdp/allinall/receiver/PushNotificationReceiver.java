@@ -56,8 +56,8 @@ public class PushNotificationReceiver extends BroadcastReceiver {
             Pushbots.sharedInstance().startActivity(resultIntent);
 */
             if (PushdataOpen.get("mode") != null) {
-                /*if (PushdataOpen.get("mode").toString().equals("MESSAGE_REPLY")) {
-                    Intent resultIntent = new Intent(context, com.aurorasdp.physionest.activities.LoginActivity.class);
+               /* if (PushdataOpen.get("mode").toString().equals("CANCEL_APPOINTMENT")) {
+                    Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.LoginActivity.class);
                     resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     resultIntent.putExtra("FROM_PUSH", "1");
                     Pushbots.sharedInstance().startActivity(resultIntent);
@@ -73,16 +73,15 @@ public class PushNotificationReceiver extends BroadcastReceiver {
         } // Handle Push Message when received
 
         else if (action.equals(PBConstants.EVENT_MSG_RECEIVE))
-
         {
             HashMap<?, ?> PushdataOpen = (HashMap<?, ?>) intent.getExtras().get(PBConstants.EVENT_MSG_RECEIVE);
 //            Toast.makeText(context, "Mode: " + PushdataOpen.get("mode"), Toast.LENGTH_SHORT).show();
-            if (PushdataOpen.get("mode") != null) {
+            /*if (PushdataOpen.get("mode") != null) {
                 if (PushdataOpen.get("mode").toString().equals("MESSAGE_REPLY"))
                     context.sendBroadcast(new Intent(UserMessageReceiver.ACTION_USER_MESSAGE_RECEIVED));
                 else if (PushdataOpen.get("mode").toString().equals("CONFIRM_APPOINTMENT_DOCTOR"))
                     context.sendBroadcast(new Intent(DoctorAppointmentConfirmedReceiver.ACTION_DOCTOR_APPOINTMENT_CONFIRMED_RECEIVED));
-            }
+            }*/
             //Insert new event in the database
           /*   DBController dbController = new DBController(context);
             Event event = new Event();

@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aurorasdp.allinall.R;
@@ -31,6 +33,9 @@ public class UserBookingHistoryActivity extends AppCompatActivity {
 
     @InjectView(R.id.user_booking_history_name_textview)
     TextView providerTextView;
+
+    @InjectView(R.id.user_appointment_details_review_linearlayout)
+    LinearLayout reviewLayout;
 
     @InjectView(R.id.user_appointment_details_review_textview)
     TextView reviewTextView;

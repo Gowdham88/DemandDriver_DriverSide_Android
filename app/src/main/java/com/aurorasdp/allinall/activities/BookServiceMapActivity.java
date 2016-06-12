@@ -43,6 +43,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -110,6 +111,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     //    HashMap<ServiceProvider, Float> sortedDistances;
 //    ArrayList<ServiceProvider> sortedProviders;
     SupportMapFragment mapFragment;
+    int markerIcon;
 
 
     @Override
@@ -126,6 +128,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             serviceId = extras.getString("serviceId");
             serviceName = extras.getString("serviceName");
             serviceImageId = extras.getInt("serviceImageId");
+            setMarkerIcon(serviceId);
             if (!serviceId.equalsIgnoreCase("1")) {
                 driverLayout.setVisibility(View.INVISIBLE);
                 carTypeSpinner.setVisibility(View.INVISIBLE);
@@ -181,6 +184,19 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                 bookLaterDateTimePicker.showDialog();
             }
         });
+    }
+
+    private void setMarkerIcon(String serviceId) {
+        if (serviceId.equalsIgnoreCase("1"))
+            markerIcon = R.drawable.lmdriver;
+        else if (serviceId.equalsIgnoreCase("2"))
+            markerIcon = R.drawable.lmcarbike;
+        else if (serviceId.equalsIgnoreCase("3"))
+            markerIcon = R.drawable.lmplumber;
+        else if (serviceId.equalsIgnoreCase("4"))
+            markerIcon = R.drawable.lmelectrician;
+        else if (serviceId.equalsIgnoreCase("5"))
+            markerIcon = R.drawable.lmcarpenter;
     }
 
     private CustomDateTimePicker getCustomDateTimePicker(final TextView textView) {
@@ -319,7 +335,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                     markers[i] = googleMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(latitude[i], longitude[i]))
 //                                    .title(surrounding.get(i).getAddress())
-//                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.callus))
+                                    .icon(BitmapDescriptorFactory.fromResource(markerIcon))
                     );
                 }
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -330,7 +346,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                 DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
                 int width = displayMetrics.widthPixels;
                 int height = displayMetrics.heightPixels;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width - 200, height - 300, 50);
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width - 200, height - 300, 100);
                 googleMap.animateCamera(cu);
             } catch (Exception e) {
                 e.printStackTrace();

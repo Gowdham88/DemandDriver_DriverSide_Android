@@ -167,13 +167,13 @@ public class AllinAllController {
                 new ArrayList<String>(Arrays.asList(userId)), message);
     }
 
-    public void completeBooking(String userId, String message) {
-        Log.e(context.getString(R.string.tag), "Controller: complete booking " + userId);
+    public void completeBooking(String appointmentId) {
+        Log.e(context.getString(R.string.tag), "Controller: complete booking " + appointmentId);
         RESTClient restClient = new RESTClient(context);
         restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getUserBookings",
-                new ArrayList<String>(Arrays.asList("user_id")),
-                new ArrayList<String>(Arrays.asList(userId)), message);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/completeAppointment",
+                new ArrayList<String>(Arrays.asList("appointment_id")),
+                new ArrayList<String>(Arrays.asList(appointmentId)), "Complete ...");
     }
 
     public void getServiceProviderList(String serviceId) {
@@ -183,6 +183,15 @@ public class AllinAllController {
         restClient.callRESTService(Request.Method.POST, DEV_URL + "/service/getAvailableServiceProvidersList",
                 new ArrayList<String>(Arrays.asList("service_id")),
                 new ArrayList<String>(Arrays.asList(serviceId)), "Loading Providers ...");
+    }
+
+    public void reviewAppointment(String appointmentId, String review) {
+        Log.e(context.getString(R.string.tag), "Controller: Review Appointment " + appointmentId + " " + review);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/reviewAppointment",
+                new ArrayList<String>(Arrays.asList("appointment_id", "review")),
+                new ArrayList<String>(Arrays.asList(appointmentId, review)), "sending ...");
     }
 
     public void bookAppointment(String userId, String date, String time, String serviceId,

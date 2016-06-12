@@ -33,6 +33,7 @@ public class UserActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

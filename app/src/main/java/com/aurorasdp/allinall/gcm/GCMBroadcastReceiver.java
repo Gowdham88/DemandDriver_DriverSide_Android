@@ -7,7 +7,6 @@ public class GCMBroadcastReceiver extends
 
     @Override
     protected String getGCMIntentServiceClassName(Context context) {
-
         return "com.aurorasdp.allinall.gcm.GCMIntentService";
     }
 }

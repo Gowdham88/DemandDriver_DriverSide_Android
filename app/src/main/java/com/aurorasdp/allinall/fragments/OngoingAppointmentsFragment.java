@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.aurorasdp.allinall.R;
-import com.aurorasdp.allinall.activities.UserBookingHistoryActivity;
 import com.aurorasdp.allinall.activities.UserOngoingBookingActivity;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
@@ -60,7 +59,7 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserBooking userBooking = adapter.getItem(position);
-                UserOngoingBookingActivity.booking = userBooking;
+                UserOngoingBookingActivity.bookingIndex = position;
                 Intent bookingIntent = new Intent(getContext(), UserOngoingBookingActivity.class);
                 startActivity(bookingIntent);
             }
@@ -82,13 +81,19 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void sendServiceResult(String serviceResult) {
         if (adapter == null) {
             adapter = new OngoingListAdapter(getContext(), R.layout.list_item_ongoing_bookings);
             listView.setAdapter(adapter);
         } else {
-            adapter.clear();
-            adapter.addAll(RESTClient.ONGOING_BOOKINGS);
+            adapter.notifyDataSetChanged();
             swipeContainer.setRefreshing(false);
         }
     }
