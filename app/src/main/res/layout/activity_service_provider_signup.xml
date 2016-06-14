@@ -136,7 +136,7 @@
                     android:id="@+id/provider_signup_service_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/provider_signup_password_edittext"
+                    android:layout_below="@+id/provider_signup_confirm_password_edittext"
                     android:layout_marginRight="@dimen/small_margin"
                     android:layout_marginTop="@dimen/small_margin"
                     android:background="@color/lightGray" />

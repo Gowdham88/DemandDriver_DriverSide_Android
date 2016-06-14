@@ -17,9 +17,8 @@
     <string name="app_name">AllinAll</string>
     <string name="number">Number</string>
     <string name="password">Password</string>
-    <string name="sign_up">Signup</string>
-    <string name="sign_in">login</string>
-
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Login</string>
 
     <string name="are_you_sp"><u>Are you service provider?</u></string>
     <string name="name">Name</string>
@@ -52,6 +51,10 @@
     <string name="service_get_providers_success">Available service providers for this service successfully viewed</string>
     <string name="service_get_providers_fail">No service providers available for this service</string>
     <string name="appointment_complete_success">Appointment completed successfully</string>
+    <string name="appointment_confirm_success">Appointment confirmed successfully</string>
+    <string name="appointment_reject_success">Appointment rejected successfully, and booked for next service provider</string>
+    <string name="appointment_book_success">Appointment booked successfully</string>
+    <string name="appointment_cancel_success">Appointment cancelled successfully</string>
 
 
     <string name="service_offered">Service Offered</string>

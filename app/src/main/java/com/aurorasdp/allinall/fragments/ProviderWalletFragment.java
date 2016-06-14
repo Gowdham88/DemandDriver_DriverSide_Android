@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class ProviderWalletFragment extends Fragment implements RESTClient.Servi
     private TextView schemeTextview;
     private Button signOutButton;
     private SharedPreferences allinallSharedPref;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public ProviderWalletFragment() {
         // Required empty public constructor
@@ -47,10 +49,17 @@ public class ProviderWalletFragment extends Fragment implements RESTClient.Servi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_provider_wallet, container, false);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         signOutButton = (Button) view.findViewById(R.id.fragment_provider_signout_button);
         balanceTextview = (TextView) view.findViewById(R.id.fragment_wallet_balance_textview);
         schemeTextview = (TextView) view.findViewById(R.id.fragment_wallet_scheme_textview);
         allinAllController.getWalletData(RESTClient.ID);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                allinAllController.getWalletData(RESTClient.ID);
+            }
+        });
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +96,13 @@ public class ProviderWalletFragment extends Fragment implements RESTClient.Servi
                         dialog.dismiss();
                     }
                 }).show();
+
     }
 
     @Override
     public void sendServiceResult(String serviceResult) {
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
         try {
             if (serviceResult.equalsIgnoreCase(getString(R.string.provider_get_wallet_success))) {
                 balanceTextview.setText("RS. " + RESTClient.BALANCE);

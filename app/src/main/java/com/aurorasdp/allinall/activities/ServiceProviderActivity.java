@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.adapters.ViewPagerAdapter;
@@ -26,6 +27,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider);
         ButterKnife.inject(this);
+//        Log.e("AllinAll", "Extras "+ getIntent().getExtras());
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
     }

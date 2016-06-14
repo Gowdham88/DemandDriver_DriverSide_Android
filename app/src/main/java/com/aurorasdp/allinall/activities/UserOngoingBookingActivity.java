@@ -71,13 +71,38 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
             addressTextView.setText(booking.getAddress());
             statusTextView.setText(booking.getStatus());
         }
-        if (booking.getStatus().equalsIgnoreCase(getString(R.string.confirmed_status)))
+        if (booking.getStatus().equalsIgnoreCase(getString(R.string.confirmed_status))) {
+            completeButton.setVisibility(View.VISIBLE);
+
             completeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    allinAllController.completeBooking(booking.getBookingId());
+                    showConformDialog(booking.getBookingId());
                 }
             });
+        } else {
+            completeButton.setVisibility(View.INVISIBLE);
+            completeButton.setOnClickListener(null);
+        }
+    }
+
+    private void showConformDialog(final String bookingId) {
+        new android.support.v7.app.AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("Complete")
+                .setMessage("Confirm this Booking Completed?")
+                .setIcon(R.drawable.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        allinAllController.completeBooking(bookingId);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     public void showRatingDialog() {

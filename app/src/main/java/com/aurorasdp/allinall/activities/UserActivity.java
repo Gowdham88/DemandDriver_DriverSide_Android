@@ -1,6 +1,8 @@
 package com.aurorasdp.allinall.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.aurorasdp.allinall.fragments.ProviderWalletFragment;
 import com.aurorasdp.allinall.fragments.UserHistoryFragment;
 import com.aurorasdp.allinall.fragments.UserServicesFragment;
 import com.aurorasdp.allinall.fragments.UserSupportFragment;
+import com.aurorasdp.allinall.helper.RESTClient;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,8 +34,20 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         ButterKnife.inject(this);
+
+        Bundle extras = getIntent().getExtras();
+        String fromPush = null;
+        if (extras != null)
+            fromPush = extras.getString("FROM_PUSH");
+        if (fromPush != null && fromPush.equalsIgnoreCase("1")) {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+            RESTClient.ID = sharedPreferences.getString("userId", "");
+        }
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        if (fromPush != null && fromPush.equalsIgnoreCase("1"))
+            viewPager.setCurrentItem(2);
+
 
     }
 

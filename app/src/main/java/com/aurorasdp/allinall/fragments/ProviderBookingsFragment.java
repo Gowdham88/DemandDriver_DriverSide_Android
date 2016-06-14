@@ -2,12 +2,16 @@ package com.aurorasdp.allinall.fragments;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.activities.ProviderBookingActivity;
@@ -25,6 +30,7 @@ import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.ProviderBooking;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +59,43 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         View view = inflater.inflate(R.layout.fragment_provider_bookings, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_provider_book_listview);
-        allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
+//        Bundle extras = getActivity().getIntent().getExtras();
+//        if (extras != null) {
+//            String fromPush = extras.getString("FROM_PUSH");
+//            if (fromPush != null && fromPush.equalsIgnoreCase("1")) {
+//        SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext().getString(R.string.app_name), Context.MODE_PRIVATE);
+//        String ids = sharedPreferences.getString("ids", "");
+//        String messages = sharedPreferences.getString("messages", "");
+//        Log.e("AllinAll", "messages: " + messages + "\n app ids: " + ids);
+//        if (!messages.equalsIgnoreCase("")) {
+//            String[] messagesList = TextUtils.split(messages, ",");
+//            final String[] idsList = TextUtils.split(ids, ",");
+//            for (int i = 0; i < idsList.length; i++) {
+//                final int finalI = i;
+//                new android.support.v7.app.AlertDialog.Builder(getContext())
+//                        //set message, title, and icon
+//                        .setTitle("New Booking: ")
+//                        .setMessage(messagesList[i])
+//                        .setIcon(R.drawable.ic_launcher)
+//                        .setCancelable(false)
+//                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                allinAllController.confirmAppointment(idsList[finalI]);
+//                            }
+//                        })
+//                        .setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                allinAllController.rejectAppointment(idsList[finalI]);
+//                            }
+//                        }).show();
+//
+//            }
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.remove("messages");
+//            editor.remove("ids");
+//            editor.apply();
+//        } else
+            allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,7 +108,6 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
             }
         });
 
-
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -77,25 +118,40 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         TextView emptyView = Util.getEmptyView(R.string.no_bookings, getContext());
         ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
         listView.setEmptyView(emptyView);
-
         return view;
     }
 
     @Override
     public void sendServiceResult(String serviceResult) {
-        if (adapter == null) {
-            adapter = new ProviderBookingsListAdapter(getContext(), R.layout.list_item_provider_booking);
-            listView.setAdapter(adapter);
-        } else {
-            adapter.clear();
-            adapter.addAll(RESTClient.PROVIDER_BOOKINGS);
-            swipeContainer.setRefreshing(false);
-        }
+        if (serviceResult.equalsIgnoreCase(getString(R.string.provider_list_bookings_success)) || serviceResult.equalsIgnoreCase(getString(R.string.provider_list_bookings_fail))) {
+            if (adapter == null) {
+                adapter = new ProviderBookingsListAdapter(getContext(), R.layout.list_item_provider_booking);
+                listView.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
+            }
+        } else if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_confirm_success)) || serviceResult.equalsIgnoreCase(getString(R.string.appointment_reject_success))) {
+            allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
+            Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
+
+//        } else if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_reject_success))) {
+
+        } else
+            Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void requestFailed() {
         Util.requestFailed(getContext());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
     }
 
     private class ProviderBookingsListAdapter extends ArrayAdapter<ProviderBooking> {

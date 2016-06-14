@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -125,7 +126,7 @@ public class UserServicesFragment extends Fragment implements RESTClient.Service
             serviceName = (TextView) convertView.findViewById(R.id.list_item_service_name_textview);
             serviceImage = (ImageView) convertView.findViewById(R.id.list_item_service_imageview);
             int proportionalHeight = containerHeight(context);
-            TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, proportionalHeight); // (width, height)
+            AbsListView.LayoutParams params = new AbsListView.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, proportionalHeight); // (width, height)
             convertView.setLayoutParams(params);
             serviceName.setText(services.get(position).getServiceName());
             serviceImage.setImageResource(services.get(position).getImageResource());

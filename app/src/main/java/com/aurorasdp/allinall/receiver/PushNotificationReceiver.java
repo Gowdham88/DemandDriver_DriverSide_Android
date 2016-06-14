@@ -2,10 +2,16 @@ package com.aurorasdp.allinall.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.aurorasdp.allinall.R;
+import com.aurorasdp.allinall.helper.RESTClient;
 import com.pushbots.push.PBNotificationIntent;
 import com.pushbots.push.Pushbots;
 import com.pushbots.push.utils.PBConstants;
@@ -56,25 +62,51 @@ public class PushNotificationReceiver extends BroadcastReceiver {
             Pushbots.sharedInstance().startActivity(resultIntent);
 */
             if (PushdataOpen.get("mode") != null) {
-               /* if (PushdataOpen.get("mode").toString().equals("CANCEL_APPOINTMENT")) {
-                    Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.LoginActivity.class);
-                    resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    resultIntent.putExtra("FROM_PUSH", "1");
-                    Pushbots.sharedInstance().startActivity(resultIntent);
-                } else if (PushdataOpen.get("mode").toString().equals("CONFIRM_APPOINTMENT_DOCTOR")) {
-                    Intent resultIntent = new Intent(context, com.aurorasdp.physionest.activities.LoginActivity.class);
-                    resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    Pushbots.sharedInstance().startActivity(resultIntent);
-                }*/
-                Toast.makeText(context, "Notification", Toast.LENGTH_LONG).show();
+                if (PushdataOpen.get("mode").toString().equals("CANCEL_APPOINTMENT") || PushdataOpen.get("mode").toString().equals("CONFIRM_APPOINTMENT")) {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+                    RESTClient.ID = sharedPreferences.getString("userId", "");
+                    if (!RESTClient.ID.equalsIgnoreCase("")) {
+                        Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.UserActivity.class);
+                        resultIntent.putExtra("FROM_PUSH", "1");
+                        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        Pushbots.sharedInstance().startActivity(resultIntent);
+                    } else {
+                        Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.LoginActivity.class);
+                        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        Pushbots.sharedInstance().startActivity(resultIntent);
+                    }
 
+                } else if (PushdataOpen.get("mode").toString().equals("PENDING_APPOINTMENT")) {
+                    Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.LoginActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("FROM_PUSH", "1");
+//                    bundle.putString("message", PushdataOpen.get("message").toString());
+//                    bundle.putString("appointment_id", PushdataOpen.get("appointment_id").toString());
+//                    resultIntent.putExtras(bundle);
+//                    Log.e("AllinAll", "resultIntent.getExtras() " + resultIntent.getExtras());
+                    resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    Pushbots.sharedInstance().startActivity(resultIntent);
+                }
+//                Toast.makeText(context, "Notification" + RESTClient.ID, Toast.LENGTH_LONG).show();
             }
 
         } // Handle Push Message when received
 
-        else if (action.equals(PBConstants.EVENT_MSG_RECEIVE))
-        {
+        else if (action.equals(PBConstants.EVENT_MSG_RECEIVE)) {
             HashMap<?, ?> PushdataOpen = (HashMap<?, ?>) intent.getExtras().get(PBConstants.EVENT_MSG_RECEIVE);
+//            SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
+//            String messages = sharedPreferences.getString("messages", "");
+//            String ids = sharedPreferences.getString("ids", "");
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            if (messages.equalsIgnoreCase("")) {
+//                editor.putString("messages", PushdataOpen.get("message").toString());
+//                editor.putString("ids", PushdataOpen.get("appointment_id").toString());
+//            } else {
+//                editor.putString("messages", messages + "," + PushdataOpen.get("message").toString());
+//                editor.putString("ids", ids + "," + PushdataOpen.get("appointment_id").toString());
+//            }
+//            editor.apply();
+
 //            Toast.makeText(context, "Mode: " + PushdataOpen.get("mode"), Toast.LENGTH_SHORT).show();
             /*if (PushdataOpen.get("mode") != null) {
                 if (PushdataOpen.get("mode").toString().equals("MESSAGE_REPLY"))
@@ -133,6 +165,7 @@ public class PushNotificationReceiver extends BroadcastReceiver {
 
         }
     }
+
 
 }
 

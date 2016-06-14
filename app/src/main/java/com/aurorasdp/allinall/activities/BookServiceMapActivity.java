@@ -15,9 +15,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,6 +132,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             serviceImageId = extras.getInt("serviceImageId");
             setMarkerIcon(serviceId);
             if (!serviceId.equalsIgnoreCase("1")) {
+                driverLayout.setLayoutParams(new RelativeLayout.LayoutParams(0, 0));
                 driverLayout.setVisibility(View.INVISIBLE);
                 carTypeSpinner.setVisibility(View.INVISIBLE);
                 driverTypeSpinner.setVisibility(View.INVISIBLE);
@@ -386,6 +389,10 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     @Override
     public void sendServiceResult(String serviceResult) {
         Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+        if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_book_success)))
+            finish();
+
+
     }
 
     @Override
@@ -507,7 +514,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                 //set message, title, and icon
                 .setTitle("Location Setting Error")
                 .setMessage("Can not complete booking without adjusting the location settings")
-//                .setIcon(R.drawable.ic_launcher)
+                .setIcon(R.drawable.ic_launcher)
                 .setCancelable(false)
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {

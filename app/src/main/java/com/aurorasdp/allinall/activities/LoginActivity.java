@@ -82,12 +82,16 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                 RESTClient.ID = allinallSharedPreferences.getString("userId", "");
                 Intent userIntent = new Intent(this, UserActivity.class);
                 userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                userIntent.putExtras(getIntent().getExtras());
                 startActivity(userIntent);
 
             } else if (!allinallSharedPreferences.getString("providerId", "").equalsIgnoreCase("")) {
                 RESTClient.ID = allinallSharedPreferences.getString("providerId", "");
                 Intent providerIntent = new Intent(this, ServiceProviderActivity.class);
                 providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Log.e("AllinAll", "getIntent().getExtras() " + getIntent().getExtras());
+                if (getIntent().getExtras() != null)
+//                    providerIntent.putExtras(getIntent().getExtras());
                 startActivity(providerIntent);
             }
         }

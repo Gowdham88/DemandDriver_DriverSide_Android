@@ -33,7 +33,6 @@ public class SendOTPActivity extends AppCompatActivity implements Validator.Vali
 
     @InjectView(R.id.send_otp_mobile_edittext)
     @NotEmpty
-    @Length(min = 10)
     EditText phoneEditText;
 
     @InjectView(R.id.send_otp_send_button)

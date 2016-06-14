@@ -32,11 +32,11 @@ public class AllinAllController {
         Log.e(context.getString(R.string.tag), "Controller: Send SMS " + mobile);
         RESTClient restClient = new RESTClient(context);
         restClient.setServiceResponseInterface(restClientInterface);
-        RESTClient.OTP = "1234";
-        restClient.sendServiceResult(context.getString(R.string.otp_sendsms_success));
-//        restClient.callRESTService(Request.Method.POST, DEV_URL + "/OTP/sendsms",
-//                new ArrayList<String>(Arrays.asList("phone")),
-//                new ArrayList<String>(Arrays.asList(mobile)), "Sending SMS .....");
+//        RESTClient.OTP = "1234";
+//        restClient.sendServiceResult(context.getString(R.string.otp_sendsms_success));
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/OTP/sendsms",
+                new ArrayList<String>(Arrays.asList("phone")),
+                new ArrayList<String>(Arrays.asList(mobile)), "Sending SMS .....");
     }
 
     public void userSignUp(String name, String countryCode, String mobile, String email, String address, String password, String profileImage, String profileImageExt, String regId) {
@@ -64,7 +64,7 @@ public class AllinAllController {
         restClient.setServiceResponseInterface(restClientInterface);
         restClient.callRESTService(Request.Method.POST, DEV_URL + "/service_provider/signup",
                 new ArrayList<String>(Arrays.asList("name", "email", "phone", "country_code", "address", "profile_pic", "image_extension", "service_id", "password", "reg_id")),
-                new ArrayList<String>(Arrays.asList(name, email, mobile, countryCode, address, profileImage, profileImageExt, serviceOffered, password, regId)), "Signing up .....");
+                new ArrayList<String>(Arrays.asList(name, email, mobile, countryCode, address, profileImage, profileImageExt, serviceOffered, Util.md5(password), regId)), "Signing up .....");
     }
 
     public void providerSignOut(String providerId) {
@@ -91,7 +91,7 @@ public class AllinAllController {
         restClient.setServiceResponseInterface(restClientInterface);
         restClient.callRESTService(Request.Method.POST, DEV_URL + "/service_provider/login",
                 new ArrayList<String>(Arrays.asList("phone", "password", "reg_id")),
-                new ArrayList<String>(Arrays.asList(phone, password, regId)), "Loging in .....");
+                new ArrayList<String>(Arrays.asList(phone, Util.md5(password), regId)), "Loging in .....");
     }
 
     public void listProviderBookings(String providerId, String newLogin, String message) {
@@ -205,4 +205,30 @@ public class AllinAllController {
                 new ArrayList<String>(Arrays.asList(userId, date, time, serviceId, longitude, latitude, carType, hourly, bookNow)), "Booking .... ");
     }
 
+    public void confirmAppointment(String appointmentId) {
+        Log.e(context.getString(R.string.tag), "Controller: Confirm Appointment " + appointmentId);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/confirmAppointment",
+                new ArrayList<String>(Arrays.asList("appointment_id")),
+                new ArrayList<String>(Arrays.asList(appointmentId)), "Confirming ...");
+    }
+
+    public void rejectAppointment(String appointmentId) {
+        Log.e(context.getString(R.string.tag), "Controller: Reject Appointment " + appointmentId);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/rejectAppointment",
+                new ArrayList<String>(Arrays.asList("appointment_id")),
+                new ArrayList<String>(Arrays.asList(appointmentId)), "Rejecting ...");
+    }
+
+    public void cancelAppointment(String appointmentId) {
+        Log.e(context.getString(R.string.tag), "Controller: Cancel Appointment " + appointmentId);
+        RESTClient restClient = new RESTClient(context);
+        restClient.setServiceResponseInterface(restClientInterface);
+        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/cancelAppointment",
+                new ArrayList<String>(Arrays.asList("appointment_id")),
+                new ArrayList<String>(Arrays.asList(appointmentId)), "Canceling ...");
+    }
 }
