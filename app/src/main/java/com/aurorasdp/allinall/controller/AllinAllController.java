@@ -1,6 +1,7 @@
 package com.aurorasdp.allinall.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -19,7 +20,6 @@ public class AllinAllController {
     Context context;
     RESTClient.ServiceResponseInterface restClientInterface;
     final String DEV_URL = "http://54.200.102.214/All_In_All_Backend/index.php";
-    final String DEPLOY_URL = "";
     String mainServiceURL;
 
     public AllinAllController(Context context, RESTClient.ServiceResponseInterface restClientInterface) {
@@ -49,7 +49,7 @@ public class AllinAllController {
     }
 
     public void userLogin(String phone, String password, String regId) {
-        Log.e(context.getString(R.string.tag), "Controller: User Login " + phone + " " + password + " " + regId);
+        Log.e(context.getString(R.string.tag), "Controller: User Login " + phone + " " + password + " " + Util.md5(password) + " " + regId);
         RESTClient restClient = new RESTClient(context);
         restClient.setServiceResponseInterface(restClientInterface);
         restClient.callRESTService(Request.Method.POST, DEV_URL + "/user/login",
@@ -95,30 +95,45 @@ public class AllinAllController {
     }
 
     public void listProviderBookings(String providerId, String newLogin, String message) {
-        Log.e(context.getString(R.string.tag), "Controller: List Provider Bookings " + providerId + " " + newLogin);
-        RESTClient restClient = new RESTClient(context);
-        restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getServiceProviderBookings",
-                new ArrayList<String>(Arrays.asList("service_provider_id", "new_login")),
-                new ArrayList<String>(Arrays.asList(providerId, newLogin)), message);
+        if (providerId == null)
+            startLogin();
+        else {
+
+            Log.e(context.getString(R.string.tag), "Controller: List Provider Bookings " + providerId + " " + newLogin);
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getServiceProviderBookings",
+                    new ArrayList<String>(Arrays.asList("service_provider_id", "new_login")),
+                    new ArrayList<String>(Arrays.asList(providerId, newLogin)), message);
+        }
     }
 
     public void getWalletData(String providerId) {
-        Log.e(context.getString(R.string.tag), "Controller: Get Provider Wallet data " + providerId);
-        RESTClient restClient = new RESTClient(context);
-        restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/service_provider/getWalletData",
-                new ArrayList<String>(Arrays.asList("service_provider_id")),
-                new ArrayList<String>(Arrays.asList(providerId)), "Loading Wallet Data ..... ");
+        if (providerId == null)
+            startLogin();
+        else {
+
+            Log.e(context.getString(R.string.tag), "Controller: Get Provider Wallet data " + providerId);
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/service_provider/getWalletData",
+                    new ArrayList<String>(Arrays.asList("service_provider_id")),
+                    new ArrayList<String>(Arrays.asList(providerId)), "Loading Wallet Data ..... ");
+        }
     }
 
     public void listUserHistory(String userId, String message) {
-        Log.e(context.getString(R.string.tag), "Controller: List User History " + userId);
-        RESTClient restClient = new RESTClient(context);
-        restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getHistoryForUser",
-                new ArrayList<String>(Arrays.asList("user_id")),
-                new ArrayList<String>(Arrays.asList(userId)), message);
+        if (userId == null)
+            startLogin();
+        else {
+
+            Log.e(context.getString(R.string.tag), "Controller: List User History " + userId);
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getHistoryForUser",
+                    new ArrayList<String>(Arrays.asList("user_id")),
+                    new ArrayList<String>(Arrays.asList(userId)), message);
+        }
     }
 
     public void resetPassword(String userPhone, String encryptedPass, String decryptedPass) {
@@ -160,11 +175,16 @@ public class AllinAllController {
 
     public void getOngoingAppointments(String userId, String message) {
         Log.e(context.getString(R.string.tag), "Controller: List User Ongoing appointments " + userId);
-        RESTClient restClient = new RESTClient(context);
-        restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getUserBookings",
-                new ArrayList<String>(Arrays.asList("user_id")),
-                new ArrayList<String>(Arrays.asList(userId)), message);
+        if (userId == null)
+            startLogin();
+        else {
+
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getUserBookings",
+                    new ArrayList<String>(Arrays.asList("user_id")),
+                    new ArrayList<String>(Arrays.asList(userId)), message);
+        }
     }
 
     public void completeBooking(String appointmentId) {
@@ -198,11 +218,15 @@ public class AllinAllController {
                                 String longitude, String latitude, String carType, String hourly, String bookNow) {
         Log.e(context.getString(R.string.tag), "Controller: Book Appointment " + userId + " " + date + " " + time + " " +
                 serviceId + " " + longitude + " " + latitude + " " + carType + " " + hourly + " " + bookNow);
-        RESTClient restClient = new RESTClient(context);
-        restClient.setServiceResponseInterface(restClientInterface);
-        restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/bookAppointment",
-                new ArrayList<String>(Arrays.asList("user_id", "date", "time", "service_id", "user_longitude", "user_latitude", "car_type", "hourly_or_outstation", "book_now")),
-                new ArrayList<String>(Arrays.asList(userId, date, time, serviceId, longitude, latitude, carType, hourly, bookNow)), "Booking .... ");
+        if (userId == null)
+            startLogin();
+        else {
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/bookAppointment",
+                    new ArrayList<String>(Arrays.asList("user_id", "date", "time", "service_id", "user_longitude", "user_latitude", "car_type", "hourly_or_outstation", "book_now")),
+                    new ArrayList<String>(Arrays.asList(userId, date, time, serviceId, longitude, latitude, carType, hourly, bookNow)), "Booking .... ");
+        }
     }
 
     public void confirmAppointment(String appointmentId) {
@@ -230,5 +254,25 @@ public class AllinAllController {
         restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/cancelAppointment",
                 new ArrayList<String>(Arrays.asList("appointment_id")),
                 new ArrayList<String>(Arrays.asList(appointmentId)), "Canceling ...");
+    }
+
+    public void getPendingAppointments(String providerId) {
+        Log.e(context.getString(R.string.tag), "Controller: Get Provider Pending Appointments" + providerId);
+        if (providerId == null) {
+            startLogin();
+        } else {
+            RESTClient restClient = new RESTClient(context);
+            restClient.setServiceResponseInterface(restClientInterface);
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getPendingAppointments",
+                    new ArrayList<String>(Arrays.asList("service_provider_id")),
+                    new ArrayList<String>(Arrays.asList(providerId)), null);
+        }
+    }
+
+
+    public void startLogin() {
+        Intent resultIntent = new Intent(context, com.aurorasdp.allinall.activities.LoginActivity.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(resultIntent);
     }
 }

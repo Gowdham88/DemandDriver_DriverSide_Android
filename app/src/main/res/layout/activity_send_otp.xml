@@ -25,33 +25,38 @@
             android:text="@string/mobile_number"
             android:textColor="@color/textColorPrimary" />
 
-        <Spinner
-            android:id="@+id/send_otp_country_code_spinner"
+        <RelativeLayout
+            android:id="@+id/send_otp_mobile_relativelayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/send_otp_mobile_textview"
-            android:layout_marginRight="@dimen/small_margin"
-            android:background="@color/lightGray" />
+            android:layout_below="@+id/send_otp_mobile_textview">
 
-        <EditText
-            android:id="@+id/send_otp_mobile_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/send_otp_country_code_spinner"
-            android:layout_alignTop="@+id/send_otp_country_code_spinner"
-            android:layout_below="@+id/send_otp_mobile_textview"
-            android:layout_toRightOf="@+id/send_otp_country_code_spinner"
-            android:background="@color/lightGray"
-            android:hint="@string/phone"
-            android:inputType="number"
-            android:maxLength="10"
-            android:padding="@dimen/medium_margin" />
+            <Spinner
+                android:id="@+id/send_otp_country_code_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/small_margin"
+                android:background="@color/lightGray" />
+
+            <EditText
+                android:id="@+id/send_otp_mobile_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/send_otp_country_code_spinner"
+                android:layout_alignTop="@+id/send_otp_country_code_spinner"
+                android:layout_toRightOf="@+id/send_otp_country_code_spinner"
+                android:background="@color/lightGray"
+                android:hint="@string/phone"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="@dimen/medium_margin" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/send_otp_send_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/send_otp_mobile_edittext"
+            android:layout_below="@+id/send_otp_mobile_relativelayout"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/normal_margin"
             android:layout_marginTop="@dimen/normal_margin"

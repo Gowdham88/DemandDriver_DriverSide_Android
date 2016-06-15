@@ -28,17 +28,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_weight="0.8"
-                    android:orientation="vertical"
-                    android:weightSum="1">`
+                    android:orientation="vertical">`
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginLeft="@dimen/normal_margin"
-                        android:layout_marginRight="@dimen/normal_margin"
-                        android:layout_weight="0.6"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/subscription" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/wallet_rupee" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -86,17 +82,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_weight="0.8"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginLeft="@dimen/normal_margin"
-                        android:layout_marginRight="@dimen/normal_margin"
-                        android:layout_weight="0.5"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/scheme" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/wallet_scheme" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -141,17 +133,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_weight="0.8"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginLeft="@dimen/normal_margin"
-                        android:layout_marginRight="@dimen/normal_margin"
-                        android:layout_weight="0.5"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/contact_us" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/wallet_contact" />
 
                 </LinearLayout>
 

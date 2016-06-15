@@ -54,10 +54,7 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         View view = inflater.inflate(R.layout.fragment_ongoing_appointments, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_ongoing_appointments_listview);
-        if (RESTClient.ID != null)
             allinAllController.getOngoingAppointments(RESTClient.ID, "Loading Bookings ....");
-        else
-            Toast.makeText(getContext(), "User ID is null", Toast.LENGTH_LONG).show();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

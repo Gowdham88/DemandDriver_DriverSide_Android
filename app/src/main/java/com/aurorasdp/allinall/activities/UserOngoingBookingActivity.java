@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
+import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.UserBooking;
 
 import java.text.ParseException;
@@ -155,6 +156,6 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
 
     @Override
     public void requestFailed() {
-
+        Util.requestFailed(this);
     }
 }

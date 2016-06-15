@@ -57,10 +57,7 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
         View view = inflater.inflate(R.layout.fragment_user_history, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_user_history_listview);
-        if (RESTClient.ID != null)
-            allinAllController.listUserHistory(RESTClient.ID, "Loading History ....");
-        else
-            Toast.makeText(getContext(), "User ID is null", Toast.LENGTH_LONG).show();
+        allinAllController.listUserHistory(RESTClient.ID, "Loading History ....");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

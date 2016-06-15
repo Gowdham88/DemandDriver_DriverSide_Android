@@ -44,6 +44,8 @@ public class RESTClient {
     public static String SCHEME;
     public static String EMAIL;
     public static ArrayList<ServiceProvider> PROVIDERS;
+    public static String PENDING_MESSAGES;
+    public static String PENDING_IDS;
     String parameters;
     // end static fields
 
@@ -178,6 +180,14 @@ public class RESTClient {
                                     if (!response.isNull("service_providers")) {
                                         final JSONArray providersJSON = response.getJSONArray("service_providers");
                                         PROVIDERS = jsonArrayToProvidersArray(providersJSON);
+                                    }
+                                }// /appointment/getPendingAppointments
+                                else if (message.equalsIgnoreCase(context.getString(R.string.appointment_pending_success))) {
+                                    if (!response.isNull("appointment_ids")) {
+                                        PENDING_IDS = response.getString("appointment_ids");
+                                    }
+                                    if (!response.isNull("notification_messages")) {
+                                        PENDING_MESSAGES = response.getString("notification_messages");
                                     }
                                 }
                                 sendServiceResult(message);

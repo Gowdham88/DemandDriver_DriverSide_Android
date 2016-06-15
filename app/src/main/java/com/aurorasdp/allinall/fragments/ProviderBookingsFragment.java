@@ -59,42 +59,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
         View view = inflater.inflate(R.layout.fragment_provider_bookings, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_provider_book_listview);
-//        Bundle extras = getActivity().getIntent().getExtras();
-//        if (extras != null) {
-//            String fromPush = extras.getString("FROM_PUSH");
-//            if (fromPush != null && fromPush.equalsIgnoreCase("1")) {
-//        SharedPreferences sharedPreferences = getContext().getSharedPreferences(getContext().getString(R.string.app_name), Context.MODE_PRIVATE);
-//        String ids = sharedPreferences.getString("ids", "");
-//        String messages = sharedPreferences.getString("messages", "");
-//        Log.e("AllinAll", "messages: " + messages + "\n app ids: " + ids);
-//        if (!messages.equalsIgnoreCase("")) {
-//            String[] messagesList = TextUtils.split(messages, ",");
-//            final String[] idsList = TextUtils.split(ids, ",");
-//            for (int i = 0; i < idsList.length; i++) {
-//                final int finalI = i;
-//                new android.support.v7.app.AlertDialog.Builder(getContext())
-//                        //set message, title, and icon
-//                        .setTitle("New Booking: ")
-//                        .setMessage(messagesList[i])
-//                        .setIcon(R.drawable.ic_launcher)
-//                        .setCancelable(false)
-//                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int whichButton) {
-//                                allinAllController.confirmAppointment(idsList[finalI]);
-//                            }
-//                        })
-//                        .setNegativeButton("Reject", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                allinAllController.rejectAppointment(idsList[finalI]);
-//                            }
-//                        }).show();
-//
-//            }
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.remove("messages");
-//            editor.remove("ids");
-//            editor.apply();
-//        } else
+
             allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,7 +104,6 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
 
         } else
             Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
-
     }
 
     @Override

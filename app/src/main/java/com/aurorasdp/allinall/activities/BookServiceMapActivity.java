@@ -107,7 +107,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
-    protected static final int SURROUNDING_DISTANCE = 30000000;
+    protected static final int SURROUNDING_DISTANCE = 30000;
     protected static final String TAG = "GettingUserLocation";
     private Location userLocation;
     //    HashMap<ServiceProvider, Float> sortedDistances;
@@ -324,6 +324,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d("Locationnnnnnn ", "Latit " + userLocation.getLatitude() + " long: " + userLocation.getLongitude());
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         if (RESTClient.PROVIDERS != null) {
             ArrayList<ServiceProvider> surrounding = getSurroundingProviders();
@@ -341,16 +342,18 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                                     .icon(BitmapDescriptorFactory.fromResource(markerIcon))
                     );
                 }
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                for (Marker marker : markers) {
-                    builder.include(marker.getPosition());
+                if (markers.length > 0) {
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (Marker marker : markers) {
+                        builder.include(marker.getPosition());
+                    }
+                    LatLngBounds bounds = builder.build();
+                    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                    int width = displayMetrics.widthPixels;
+                    int height = displayMetrics.heightPixels;
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width - 200, height - 300, 50);
+                    googleMap.animateCamera(cu);
                 }
-                LatLngBounds bounds = builder.build();
-                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-                int width = displayMetrics.widthPixels;
-                int height = displayMetrics.heightPixels;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width - 200, height - 300, 100);
-                googleMap.animateCamera(cu);
             } catch (Exception e) {
                 e.printStackTrace();
             } // end catch
@@ -365,6 +368,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             providerLocation.setLatitude(Double.parseDouble(prov.getLatitude()));
             providerLocation.setLongitude(Double.parseDouble(prov.getLongitude()));
             float distance = userLocation.distanceTo(providerLocation);
+            Log.e(getString(R.string.tag), "distance: " + distance);
             distances.put(prov, distance);
             if (distance <= SURROUNDING_DISTANCE)
                 providers.add(prov);
