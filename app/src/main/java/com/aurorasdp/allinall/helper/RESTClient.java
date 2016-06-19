@@ -37,9 +37,11 @@ public class RESTClient {
     public static String OTP;
     public static ArrayList<Service> SERVICES;
     public static ArrayList<Service> SERVICES_OFFERED;
-    public static ArrayList<ProviderBooking> PROVIDER_BOOKINGS;
-    public static ArrayList<UserBooking> USER_BOOKINGS_HISTORY;
-    public static ArrayList<UserBooking> ONGOING_BOOKINGS;
+    public static ArrayList<ProviderBooking> PROVIDER_BOOKINGS = new ArrayList<ProviderBooking>();
+    public static ArrayList<UserBooking> USER_BOOKINGS_HISTORY = new ArrayList<UserBooking>();
+    ;
+    public static ArrayList<UserBooking> ONGOING_BOOKINGS = new ArrayList<UserBooking>();
+    ;
     public static String BALANCE;
     public static String SCHEME;
     public static String EMAIL;
@@ -129,15 +131,11 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_success))) {
                                     if (!response.isNull("bookings")) {
                                         final JSONArray bookingJSON = response.getJSONArray("bookings");
-                                        if (PROVIDER_BOOKINGS == null)
-                                            PROVIDER_BOOKINGS = jsonArrayToBookingsArray(bookingJSON);
-                                        else {
                                             PROVIDER_BOOKINGS.clear();
                                             PROVIDER_BOOKINGS.addAll(jsonArrayToBookingsArray(bookingJSON));
-                                        }
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_fail))) {
-                                    PROVIDER_BOOKINGS = new ArrayList<ProviderBooking>();
+                                    PROVIDER_BOOKINGS.clear();
                                 }// /service_provider/getWalletData
                                 else if (message.equalsIgnoreCase(context.getString(R.string.provider_get_wallet_success))) {
                                     if (!response.isNull("wallet_data")) {
@@ -149,15 +147,12 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.user_list_history_success))) {
                                     if (!response.isNull("history")) {
                                         final JSONArray historyJSON = response.getJSONArray("history");
-                                        if (USER_BOOKINGS_HISTORY == null)
-                                            USER_BOOKINGS_HISTORY = jsonArrayToHistoryArray(historyJSON);
-                                        else {
-                                            USER_BOOKINGS_HISTORY.clear();
-                                            USER_BOOKINGS_HISTORY.addAll(jsonArrayToHistoryArray(historyJSON));
-                                        }
+                                        USER_BOOKINGS_HISTORY.clear();
+                                        USER_BOOKINGS_HISTORY.addAll(jsonArrayToHistoryArray(historyJSON));
+
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.user_list_history_fail))) {
-                                    USER_BOOKINGS_HISTORY = new ArrayList<UserBooking>();
+                                    USER_BOOKINGS_HISTORY.clear();
                                 }// /user/getUserEmail
                                 else if (message.equalsIgnoreCase(context.getString(R.string.user_get_mail_success))) {
                                     if (!response.isNull("email")) {
@@ -167,15 +162,11 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.user_ongoing_appo_success))) {
                                     if (!response.isNull("bookings")) {
                                         final JSONArray bookingsJSON = response.getJSONArray("bookings");
-                                        if (ONGOING_BOOKINGS == null)
-                                            ONGOING_BOOKINGS = jsonArrayToOngoingArray(bookingsJSON);
-                                        else {
-                                            ONGOING_BOOKINGS.clear();
-                                            ONGOING_BOOKINGS.addAll(jsonArrayToOngoingArray(bookingsJSON));
-                                        }
+                                        ONGOING_BOOKINGS.clear();
+                                        ONGOING_BOOKINGS.addAll(jsonArrayToOngoingArray(bookingsJSON));
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.user_ongoing_appo_fail))) {
-                                    ONGOING_BOOKINGS = new ArrayList<UserBooking>();
+                                    ONGOING_BOOKINGS.clear();
                                 }// /service/getAvailableServiceProvidersList
                                 else if (message.equalsIgnoreCase(context.getString(R.string.service_get_providers_success))) {
                                     if (!response.isNull("service_providers")) {

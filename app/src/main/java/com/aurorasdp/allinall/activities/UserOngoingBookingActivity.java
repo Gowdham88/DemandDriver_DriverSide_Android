@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurorasdp.allinall.R;
 import com.aurorasdp.allinall.controller.AllinAllController;
@@ -121,7 +122,6 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
                                 allinAllController.reviewAppointment(booking.getBookingId(), review);
                                 booking.setReview(review);
                                 RESTClient.USER_BOOKINGS_HISTORY.add((booking));
-                                finish();
                                 dialog.dismiss();
                             }
                         })
@@ -152,7 +152,10 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
         if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_complete_success))) {
             showRatingDialog();
             RESTClient.ONGOING_BOOKINGS.remove(bookingIndex);
-        }
+        } else if (serviceResult.equalsIgnoreCase(getString(R.string.apppointment_review_success)))
+            finish();
+        else
+            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
     }
 
     @Override
