@@ -1,5 +1,6 @@
 package com.aurorasdp.allinall.activities;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -32,9 +33,6 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
     @InjectView(R.id.provider_book_address_textview)
     TextView addressTextView;
 
-    @InjectView(R.id.provider_book_service_type_textview)
-    TextView serviceTextView;
-
     @InjectView(R.id.provider_book_cancel_button)
     Button cancelButton;
 
@@ -63,16 +61,35 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 dateTimeTextView.setText(booking.getDateTime());
                 contactTextView.setText(booking.getUserPhone());
                 addressTextView.setText(booking.getUserAddress());
-                serviceTextView.setText(booking.getService());
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        allinAllController.cancelAppointment(booking.getBookingId());
+                        showConfirmDialog(booking.getBookingId());
                     }
                 });
             }
         }
 
+    }
+
+    private void showConfirmDialog(final String bookId) {
+        new android.support.v7.app.AlertDialog.Builder(this)
+                //set message, title, and icon
+                .setTitle("Cancel")
+                .setMessage("Are you sure you want to cancel this appointment?")
+                .setIcon(R.drawable.ic_launcher)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        allinAllController.cancelAppointment(bookId);
+                    }
+                })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     @Override

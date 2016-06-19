@@ -41,16 +41,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="1">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:paddingLeft="@dimen/normal_margin"
-                    android:paddingRight="@dimen/normal_margin"
-                    android:scaleType="fitXY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@drawable/name_ic" />
             </LinearLayout>
 
@@ -99,16 +95,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="1">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:paddingLeft="@dimen/normal_margin"
-                    android:paddingRight="@dimen/normal_margin"
-                    android:scaleType="fitXY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@drawable/date_time_ic" />
             </LinearLayout>
 
@@ -155,16 +147,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="1">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:paddingLeft="@dimen/normal_margin"
-                    android:paddingRight="@dimen/normal_margin"
-                    android:scaleType="fitXY"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@drawable/contact_ic" />
 
             </LinearLayout>
@@ -217,11 +205,8 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:paddingLeft="@dimen/normal_margin"
-                    android:paddingRight="@dimen/normal_margin"
-                    android:scaleType="fitXY"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:src="@drawable/address_ic" />
 
             </LinearLayout>
@@ -240,7 +225,6 @@
                     android:text="Please a wire tape" />
 
                 <TextView
-                    android:id="@+id/provider_book_service_type_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"

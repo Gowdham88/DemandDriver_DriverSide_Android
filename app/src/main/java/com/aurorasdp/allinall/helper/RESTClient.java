@@ -46,6 +46,7 @@ public class RESTClient {
     public static ArrayList<ServiceProvider> PROVIDERS;
     public static String PENDING_MESSAGES;
     public static String PENDING_IDS;
+    public static UserBooking BOOKED_APPOINTMENT;
     String parameters;
     // end static fields
 
@@ -183,11 +184,18 @@ public class RESTClient {
                                     }
                                 }// /appointment/getPendingAppointments
                                 else if (message.equalsIgnoreCase(context.getString(R.string.appointment_pending_success))) {
-                                    if (!response.isNull("appointment_ids")) {
+                                    if (!response.isNull("appointment_ids"))
                                         PENDING_IDS = response.getString("appointment_ids");
-                                    }
-                                    if (!response.isNull("notification_messages")) {
+
+                                    if (!response.isNull("notification_messages"))
                                         PENDING_MESSAGES = response.getString("notification_messages");
+
+                                }// /appointment/bookAppointment
+                                else if (message.equalsIgnoreCase(context.getString(R.string.appointment_book_success))) {
+                                    if (!response.isNull("appointment_data")) {
+                                        JSONObject appointmentJsonObject = response.getJSONObject("appointment_data");
+                                        BOOKED_APPOINTMENT = jsonObjectToUserBooking(appointmentJsonObject);
+                                        RESTClient.ONGOING_BOOKINGS.add(BOOKED_APPOINTMENT);
                                     }
                                 }
                                 sendServiceResult(message);
@@ -236,6 +244,23 @@ public class RESTClient {
                 sendServiceResult(context.getString(R.string.user_list_bookings_success));
             }*/
         }
+    }
+
+    private UserBooking jsonObjectToUserBooking(JSONObject appointmentJsonObject) {
+        UserBooking appointment = new UserBooking();
+        try {
+            appointment.setBookingId(appointmentJsonObject.getString("appointment_id"));
+            appointment.setBookingCode(appointmentJsonObject.getString("appointment_code"));
+            appointment.setProviderName(appointmentJsonObject.getString("service_provider_name"));
+            appointment.setService(appointmentJsonObject.getString("service_label"));
+            appointment.setDateTime(appointmentJsonObject.getString("appointment_date"), appointmentJsonObject.getString("appointment_time"));
+            appointment.setStatus(appointmentJsonObject.getString("status"));
+            appointment.setAddress(appointmentJsonObject.getString("address"));
+            appointment.setDecodedPic(Base64.decode(appointmentJsonObject.getString("profile_pic_url"), Base64.DEFAULT));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return appointment;
     }
 
     private ArrayList<ServiceProvider> jsonArrayToProvidersArray(JSONArray providersJSON) {

@@ -29,6 +29,7 @@ import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.ServiceProvider;
+import com.aurorasdp.allinall.model.UserBooking;
 import com.aurorasdp.allinall.view.CustomDateTimePicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -393,10 +394,9 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     @Override
     public void sendServiceResult(String serviceResult) {
         Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
-        if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_book_success)))
+        if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_book_success))) {
             finish();
-
-
+        }
     }
 
     @Override

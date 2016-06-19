@@ -67,6 +67,13 @@
             android:label="@string/title_activity_service_details_map" />
         <activity android:name=".activities.TariffPlanActivity"></activity>
 
+        <receiver
+            android:name=".receiver.NotificationBroadcastReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="allinallapp.NOTIFICATION_RECEIVED"></action>
+            </intent-filter>
+        </receiver>
 
         <receiver
             android:name="com.aurorasdp.allinall.gcm.GCMBroadcastReceiver"

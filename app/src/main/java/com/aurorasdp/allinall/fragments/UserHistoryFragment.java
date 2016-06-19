@@ -118,14 +118,12 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
         public ImageView providerImageview;
         public Context context;
         public int resource;
-        ArrayList<UserBooking> userBookings;
 
 
         public UserHistoryListAdapter(Context context, int resource) {
             super(context, resource, RESTClient.USER_BOOKINGS_HISTORY);
             this.context = context;
             this.resource = resource;
-            this.userBookings = RESTClient.USER_BOOKINGS_HISTORY;
         }
 
         @Override
@@ -136,18 +134,19 @@ public class UserHistoryFragment extends Fragment implements RESTClient.ServiceR
                 convertView = viewInflater.inflate(resource, null);
             }
             mView = convertView;
+            UserBooking booking = RESTClient.USER_BOOKINGS_HISTORY.get(position);
             userNameTextview = (TextView) convertView.findViewById(R.id.list_item_booking_user_name_textview);
             dateTimeTextview = (TextView) convertView.findViewById(R.id.list_item_booking_datetime_textview);
             serviceTextview = (TextView) convertView.findViewById(R.id.list_item_booking_service_textview);
             providerImageview = (ImageView) convertView.findViewById(R.id.list_item_booking_user_imagview);
 
-            userNameTextview.setText(userBookings.get(position).getProviderName());
-            dateTimeTextview.setText(userBookings.get(position).getDateTime());
-            serviceTextview.setText(userBookings.get(position).getService());
-            if (userBookings.get(position).getDecodedPic() == null || userBookings.get(position).getDecodedPic().length == 0) {
+            userNameTextview.setText(booking.getProviderName());
+            dateTimeTextview.setText(booking.getDateTime());
+            serviceTextview.setText(booking.getService());
+            if (booking.getDecodedPic() == null || booking.getDecodedPic().length == 0) {
                 providerImageview.setImageResource(R.drawable.profile_circle);
             } else {
-                byte[] decodedImage = userBookings.get(position).getDecodedPic();
+                byte[] decodedImage = booking.getDecodedPic();
                 providerImageview.setImageBitmap(BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length));
             }
             return convertView;

@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                 Intent providerIntent = new Intent(this, ServiceProviderActivity.class);
                 providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Log.e("AllinAll", "getIntent().getExtras() " + getIntent().getExtras());
-                if (getIntent().getExtras() != null)
+//                if (getIntent().getExtras() != null)
 //                    providerIntent.putExtras(getIntent().getExtras());
                 startActivity(providerIntent);
             }

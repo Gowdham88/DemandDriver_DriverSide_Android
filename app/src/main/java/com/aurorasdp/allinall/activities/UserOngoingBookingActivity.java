@@ -131,6 +131,7 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 RESTClient.USER_BOOKINGS_HISTORY.add((booking));
+                                finish();
                                 dialog.cancel();
                             }
                         }).setCancelable(false).show();

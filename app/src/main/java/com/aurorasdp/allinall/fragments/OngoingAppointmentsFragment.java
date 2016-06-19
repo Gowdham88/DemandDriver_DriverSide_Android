@@ -3,6 +3,7 @@ package com.aurorasdp.allinall.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.UserBooking;
+import com.aurorasdp.allinall.receiver.NotificationBroadcastReceiver;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
     private AllinAllController allinAllController;
     private OngoingListAdapter adapter;
     private ListView listView;
+    private NotificationBroadcastReceiver mReceiver;
 
     public OngoingAppointmentsFragment() {
         // Required empty public constructor
@@ -77,6 +80,13 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         TextView emptyView = Util.getEmptyView(R.string.no_bookings, getContext());
         ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
         listView.setEmptyView(emptyView);
+        mReceiver = new NotificationBroadcastReceiver() {
+            public void onReceive(Context context, Intent intent) {
+//                Toast.makeText(getContext(), "MEssage Received", Toast.LENGTH_LONG).show();
+               allinAllController.getOngoingAppointments(RESTClient.ID, null);
+            }
+        };
+        getActivity().registerReceiver(mReceiver, new IntentFilter(NotificationBroadcastReceiver.NOTIFICATION_RECEIVED));
 
         return view;
     }
@@ -104,6 +114,17 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         Util.requestFailed(getContext());
     }
 
+    @Override
+    public void onDestroy() {
+        try {
+            getActivity().unregisterReceiver(mReceiver);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+
     private class OngoingListAdapter extends ArrayAdapter<UserBooking> {
         public View mView;
         public TextView userNameTextview;
@@ -112,14 +133,12 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         public ImageView providerImageview;
         public Context context;
         public int resource;
-        ArrayList<UserBooking> userBookings;
 
 
         public OngoingListAdapter(Context context, int resource) {
             super(context, resource, RESTClient.ONGOING_BOOKINGS);
             this.context = context;
             this.resource = resource;
-            this.userBookings = RESTClient.ONGOING_BOOKINGS;
         }
 
         @Override
@@ -130,18 +149,19 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
                 convertView = viewInflater.inflate(resource, null);
             }
             mView = convertView;
+            UserBooking booking = RESTClient.ONGOING_BOOKINGS.get(position);
             userNameTextview = (TextView) convertView.findViewById(R.id.list_item_booking_user_name_textview);
             dateTimeTextview = (TextView) convertView.findViewById(R.id.list_item_booking_datetime_textview);
             serviceTextview = (TextView) convertView.findViewById(R.id.list_item_booking_service_textview);
             providerImageview = (ImageView) convertView.findViewById(R.id.list_item_booking_user_imagview);
 
-            userNameTextview.setText(userBookings.get(position).getProviderName());
-            dateTimeTextview.setText(userBookings.get(position).getDateTime());
-            serviceTextview.setText(userBookings.get(position).getService());
-            if (userBookings.get(position).getDecodedPic() == null || userBookings.get(position).getDecodedPic().length == 0) {
+            userNameTextview.setText(booking.getProviderName());
+            dateTimeTextview.setText(booking.getDateTime());
+            serviceTextview.setText(booking.getService());
+            if (booking.getDecodedPic() == null || booking.getDecodedPic().length == 0) {
                 providerImageview.setImageResource(R.drawable.profile_circle);
             } else {
-                byte[] decodedImage = userBookings.get(position).getDecodedPic();
+                byte[] decodedImage = booking.getDecodedPic();
                 providerImageview.setImageBitmap(BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length));
             }
             return convertView;
