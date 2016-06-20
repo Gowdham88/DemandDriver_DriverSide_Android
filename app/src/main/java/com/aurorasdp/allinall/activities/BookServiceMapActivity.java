@@ -29,7 +29,6 @@ import com.aurorasdp.allinall.controller.AllinAllController;
 import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.ServiceProvider;
-import com.aurorasdp.allinall.model.UserBooking;
 import com.aurorasdp.allinall.view.CustomDateTimePicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -491,7 +490,8 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     @Override
     protected void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
+        if (mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
     }
 
     @Override

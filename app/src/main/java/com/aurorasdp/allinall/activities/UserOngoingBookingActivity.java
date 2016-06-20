@@ -19,9 +19,6 @@ import com.aurorasdp.allinall.helper.RESTClient;
 import com.aurorasdp.allinall.helper.Util;
 import com.aurorasdp.allinall.model.UserBooking;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -130,6 +127,7 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                booking.setReview("0");
                                 RESTClient.USER_BOOKINGS_HISTORY.add((booking));
                                 finish();
                                 dialog.cancel();
