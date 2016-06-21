@@ -69,14 +69,8 @@ public class UserSupportFragment extends Fragment implements RESTClient.ServiceR
                         RESTClient.ID = null;
                         Intent loginIntent = new Intent(getContext(), LoginActivity.class);
                         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                         startActivity(loginIntent);
-
-                        getActivity()
-
-                                .
-
-                                        finish();
+                        getActivity().finish();
 
                     }
                 })

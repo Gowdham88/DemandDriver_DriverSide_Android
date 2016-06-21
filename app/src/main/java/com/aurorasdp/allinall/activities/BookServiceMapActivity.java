@@ -103,6 +103,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
     protected LocationSettingsRequest mLocationSettingsRequest;
+    ArrayList<ServiceProvider> providers = new ArrayList<ServiceProvider>();
 
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
@@ -160,21 +161,23 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
         bookNowTextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!serviceId.equalsIgnoreCase("1") || carTypeSpinner.getSelectedItemPosition() > 0) {
+                if (providers.size() > 0) {
+                    if (!serviceId.equalsIgnoreCase("1") || carTypeSpinner.getSelectedItemPosition() > 0) {
+                        Date now = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
 
-                    Date now = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
+                        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+                        stf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 
-                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
-                    stf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
-
-                    bookDate = sdf.format(now);
-                    bookTime = stf.format(now);
-                    bookNow = "1";
-                    showConfirmDialog();
+                        bookDate = sdf.format(now);
+                        bookTime = stf.format(now);
+                        bookNow = "1";
+                        showConfirmDialog();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Must select car type and options", Toast.LENGTH_LONG).show();
                 } else
-                    Toast.makeText(getApplicationContext(), "Must select car type and options", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "We are sorry, there is no service providers for this service at your region", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -184,7 +187,11 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
         bookLaterTextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bookLaterDateTimePicker.showDialog();
+                if (providers.size() > 0)
+                    bookLaterDateTimePicker.showDialog();
+                else
+                    Toast.makeText(getApplicationContext(), "We are sorry, there is no service providers for this service at your region", Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -235,8 +242,6 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
             @Override
             public void onCancel() {
-
-
             }
         });
         return custom;
@@ -327,15 +332,15 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
         Log.d("Locationnnnnnn ", "Latit " + userLocation.getLatitude() + " long: " + userLocation.getLongitude());
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         if (RESTClient.PROVIDERS != null) {
-            ArrayList<ServiceProvider> surrounding = getSurroundingProviders();
-            int numOfProviders = surrounding.size();
+            getSurroundingProviders();
+            int numOfProviders = providers.size();
             Double[] latitude = new Double[numOfProviders];
             Double[] longitude = new Double[numOfProviders];
             Marker[] markers = new Marker[numOfProviders];
             try {
                 for (int i = 0; i < numOfProviders; i++) {
-                    latitude[i] = Double.valueOf(surrounding.get(i).getLatitude());
-                    longitude[i] = Double.valueOf(surrounding.get(i).getLongitude());
+                    latitude[i] = Double.valueOf(providers.get(i).getLatitude());
+                    longitude[i] = Double.valueOf(providers.get(i).getLongitude());
                     markers[i] = googleMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(latitude[i], longitude[i]))
 //                                    .title(surrounding.get(i).getAddress())
@@ -362,7 +367,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
     private ArrayList<ServiceProvider> getSurroundingProviders() {
         HashMap<ServiceProvider, Float> distances = new HashMap<ServiceProvider, Float>();
-        ArrayList<ServiceProvider> providers = new ArrayList<ServiceProvider>();
+
         for (ServiceProvider prov : RESTClient.PROVIDERS) {
             Location providerLocation = new Location(prov.getServiceProviderName());
             providerLocation.setLatitude(Double.parseDouble(prov.getLatitude()));
@@ -373,6 +378,8 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             if (distance <= SURROUNDING_DISTANCE)
                 providers.add(prov);
         }
+        if (providers.size() <= 0)
+            Toast.makeText(getApplicationContext(), "We are sorry, there is no service providers for this service at your region", Toast.LENGTH_LONG).show();
 //        sortDistances(distances);
 
         return providers;
@@ -401,7 +408,6 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     @Override
     public void requestFailed() {
         Util.requestFailed(this);
-
     }
 
     private static final class ValueComparator<V extends Comparable<? super V>>

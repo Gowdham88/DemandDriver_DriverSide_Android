@@ -131,8 +131,8 @@ public class RESTClient {
                                 else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_success))) {
                                     if (!response.isNull("bookings")) {
                                         final JSONArray bookingJSON = response.getJSONArray("bookings");
-                                            PROVIDER_BOOKINGS.clear();
-                                            PROVIDER_BOOKINGS.addAll(jsonArrayToBookingsArray(bookingJSON));
+                                        PROVIDER_BOOKINGS.clear();
+                                        PROVIDER_BOOKINGS.addAll(jsonArrayToBookingsArray(bookingJSON));
                                     }
                                 } else if (message.equalsIgnoreCase(context.getString(R.string.provider_list_bookings_fail))) {
                                     PROVIDER_BOOKINGS.clear();
@@ -392,9 +392,13 @@ public class RESTClient {
     }
 
     public void sendServiceResult(String serviceResult) {
-        if (loading != null)
-            loading.dismiss();
-        serviceResponseInterface.sendServiceResult(serviceResult);
+        try {
+            if (loading != null)
+                loading.dismiss();
+            serviceResponseInterface.sendServiceResult(serviceResult);
+        } catch (IllegalArgumentException e) {
+            e.getStackTrace();
+        }
     }
 
 
