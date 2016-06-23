@@ -69,7 +69,8 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-        allinallSharedPreferences = this.getSharedPreferences(getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+        allinallSharedPreferences = this.getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+
         String regID = allinallSharedPreferences.getString("regID", "");
         if (regID.equalsIgnoreCase("")) {
             loading = ProgressDialog.show(this, "Registering ... ", "Please wait...");
@@ -136,6 +137,8 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
             }
         });
     }
+
+
 
     private void showResetDialog(final String phone) {
         new android.support.v7.app.AlertDialog.Builder(this)

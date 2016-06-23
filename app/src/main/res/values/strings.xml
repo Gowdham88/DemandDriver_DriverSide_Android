@@ -57,6 +57,8 @@
     <string name="appointment_cancel_success">Appointment cancelled successfully</string>
     <string name="appointment_pending_success">Pending appointments successfully viewed</string>
     <string name="apppointment_review_success">Appointment reviewed successfully</string>
+    <string name="appointment_reject_fail">No available service provider</string>
+    <string name="appointment_pending_fail">No pending appointments exist</string>
 
 
     <string name="service_offered">Service Offered</string>

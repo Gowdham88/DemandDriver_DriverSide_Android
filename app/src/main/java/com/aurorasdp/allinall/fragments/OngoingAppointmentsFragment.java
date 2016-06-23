@@ -57,7 +57,7 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         View view = inflater.inflate(R.layout.fragment_ongoing_appointments, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         listView = (ListView) view.findViewById(R.id.fragment_ongoing_appointments_listview);
-            allinAllController.getOngoingAppointments(RESTClient.ID, "Loading Bookings ....");
+        allinAllController.getOngoingAppointments(RESTClient.ID, "Loading Bookings ....");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,7 +83,10 @@ public class OngoingAppointmentsFragment extends Fragment implements RESTClient.
         mReceiver = new NotificationBroadcastReceiver() {
             public void onReceive(Context context, Intent intent) {
 //                Toast.makeText(getContext(), "MEssage Received", Toast.LENGTH_LONG).show();
-               allinAllController.getOngoingAppointments(RESTClient.ID, null);
+                Bundle extra = intent.getExtras();
+                if (extra != null && extra.getString("Push") != null && extra.getString("Push").equalsIgnoreCase("1")) {
+                    allinAllController.getOngoingAppointments(RESTClient.ID, null);
+                }
             }
         };
         getActivity().registerReceiver(mReceiver, new IntentFilter(NotificationBroadcastReceiver.NOTIFICATION_RECEIVED));

@@ -91,7 +91,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
             public void onReceive(Context context, Intent intent) {
 //                Toast.makeText(getContext(), "MEssage Received", Toast.LENGTH_LONG).show();
                 Bundle extra = intent.getExtras();
-                if (extra != null) {
+                if (extra != null && extra.getString("message") != null) {
                     showPendingBookingDialog(extra.getString("message"), extra.getString("id"));
                 }
             }
@@ -144,7 +144,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
             }
         } else if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_confirm_success)))
             allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
-        else
+        else if (!serviceResult.equalsIgnoreCase(getString(R.string.appointment_reject_fail)) || !serviceResult.equalsIgnoreCase(getString(R.string.appointment_pending_fail)))
             Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
 
     }
