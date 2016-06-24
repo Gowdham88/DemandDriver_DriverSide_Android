@@ -107,9 +107,9 @@
                 <category android:name="com.aurorasdp.allinall" />
             </intent-filter>
         </receiver>
-       <!-- <receiver
+        <receiver
             android:name="com.pushbots.push.DefaultPushHandler"
-            android:process=":pushProcess" />-->
+            android:process=":pushProcess" />
         <receiver
             android:name=".receiver.PushNotificationReceiver"
             android:process=":pushProcess" />

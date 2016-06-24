@@ -144,7 +144,7 @@ public class ProviderBookingsFragment extends Fragment implements RESTClient.Ser
             }
         } else if (serviceResult.equalsIgnoreCase(getString(R.string.appointment_confirm_success)))
             allinAllController.listProviderBookings(RESTClient.ID, "1", "Loading Bookings ...");
-        else if (!serviceResult.equalsIgnoreCase(getString(R.string.appointment_reject_fail)) || !serviceResult.equalsIgnoreCase(getString(R.string.appointment_pending_fail)))
+        else if (!serviceResult.equalsIgnoreCase(getString(R.string.appointment_reject_fail)) && !serviceResult.equalsIgnoreCase(getString(R.string.appointment_pending_fail)))
             Toast.makeText(getContext(), serviceResult, Toast.LENGTH_LONG).show();
 
     }
