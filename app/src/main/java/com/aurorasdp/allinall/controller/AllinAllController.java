@@ -19,7 +19,7 @@ public class AllinAllController {
 
     Context context;
     RESTClient.ServiceResponseInterface restClientInterface;
-    final String DEV_URL = "http://54.200.102.214/All_In_All_Backend/index.php";
+    final String DEV_URL = "http://54.200.102.214/All_In_All_Backend_Dev/index.php";
     String mainServiceURL;
 
     public AllinAllController(Context context, RESTClient.ServiceResponseInterface restClientInterface) {
@@ -263,7 +263,7 @@ public class AllinAllController {
         } else {
             RESTClient restClient = new RESTClient(context);
             restClient.setServiceResponseInterface(restClientInterface);
-            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getPendingAppointments",
+            restClient.callRESTService(Request.Method.POST, DEV_URL + "/appointment/getPendingAppointmentsForProvider",
                     new ArrayList<String>(Arrays.asList("service_provider_id")),
                     new ArrayList<String>(Arrays.asList(providerId)), null);
         }

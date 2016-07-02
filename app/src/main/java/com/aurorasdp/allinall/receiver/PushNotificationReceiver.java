@@ -107,6 +107,7 @@ public class PushNotificationReceiver extends BroadcastReceiver {
                 editor.apply();
                 Intent intent1 = new Intent(NotificationBroadcastReceiver.NOTIFICATION_RECEIVED);
                 Bundle extra = new Bundle();
+                extra.putString("Push", "1");
                 extra.putString("user_message", PushdataOpen.get("message").toString());
                 intent1.putExtras(extra);
                 context.sendBroadcast(intent1);
