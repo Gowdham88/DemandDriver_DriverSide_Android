@@ -1,20 +1,20 @@
 <resources>
 
-    <!--string name="google_app_id">263724583873</string-->
+    <!--string name="google_app_id">263724583873  1051214438871</string-->
     <!-- Pushbots Application ID  -->
     <string name="pb_appid">574c490d4a9efa740a8b4567</string>
     <!-- GCM Sender ID -->
-    <string name="pb_senderid">263724583873</string>
+    <string name="pb_senderid">364656976939</string>
     <!-- Pushbots Log Level  log Tag "PB2" -->
     <string name="pb_logLevel">DEBUG</string>
 
 
-    <string name="tag">AllinAllLog</string>
+    <string name="tag">Demand DriverLog</string>
     <string name="error_title"> Server Error </string>
     <string name="no_connection_error_msg"> Could not complete your request due to network connectivity problem. Please try again later.</string>
     <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
 
-    <string name="app_name">AllinAll</string>
+    <string name="app_name">DemandDriver</string>
     <string name="number">Number</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign up</string>
@@ -28,7 +28,7 @@
     <string name="verify_otp">Verify</string>
 
     <string name="contact_us">Contact Us</string>
-    <string name="email_address">E: info@allinall.com</string>
+    <string name="email_address">E: info@demandriver.com</string>
     <string name="scheme">Scheme</string>
     <string name="subscription">Subscription</string>
 
@@ -59,6 +59,8 @@
     <string name="apppointment_review_success">Appointment reviewed successfully</string>
     <string name="appointment_reject_fail">No available service provider</string>
     <string name="appointment_pending_fail">No pending appointments exist</string>
+    
+    <string name="otp_content">We have sent you an access code via SMS for mobile phone verification.</string>
 
 
     <string name="service_offered">Service Offered</string>
@@ -344,7 +346,6 @@
         <item>XYLO</item>
         <item>ZEN ESTILO</item>
         <item>ZEN MARUTI</item>
-
 
     </string-array>
 

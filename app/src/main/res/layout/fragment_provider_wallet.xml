@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0066ff"
     android:paddingBottom="@dimen/normal_margin"
     android:paddingRight="@dimen/normal_margin"
     android:paddingTop="@dimen/normal_margin">
@@ -31,10 +32,10 @@
                     android:orientation="vertical">`
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/wallet_rupee" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -48,6 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
+                        android:textColor="@color/white"
                         android:text="RS. " />
 
                     <TextView
@@ -55,13 +57,14 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
                         android:text="@string/subscription"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/abc_text_size_headline_material" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/darker_gray" />
+                        android:background="@android:color/white" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -85,10 +88,10 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/wallet_scheme" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,6 +104,7 @@
                         android:id="@+id/fragment_wallet_scheme_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_margin="@dimen/small_margin" />
 
                     <TextView
@@ -108,13 +112,14 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
                         android:text="@string/scheme"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/abc_text_size_headline_material" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/darker_gray" />
+                        android:background="@android:color/white" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -136,10 +141,10 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/wallet_contact" />
+                         />
 
                 </LinearLayout>
 
@@ -153,18 +158,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
-                        android:text="T: +91 34102840" />
+                        android:textColor="@color/white"
+                        android:text="T: +919941123110" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
+                        android:textColor="@color/white"
                         android:text="@string/email_address" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
+                        android:textColor="@color/white"
                         android:text="@string/contact_us"
                         android:textSize="@dimen/abc_text_size_headline_material" />
 
@@ -172,7 +180,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/darker_gray" />
+                        android:background="@android:color/white" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -184,6 +192,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:text="@string/sign_out"
+                android:background="#ffca00"
                 android:textAllCaps="false" />
 
         </RelativeLayout>

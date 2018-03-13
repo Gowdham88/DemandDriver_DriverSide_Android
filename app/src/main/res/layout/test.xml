@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".activities.BookServiceMapActivity">
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/user_service_details_toolbar"

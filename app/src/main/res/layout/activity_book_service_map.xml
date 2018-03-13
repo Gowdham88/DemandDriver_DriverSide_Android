@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".activities.BookServiceMapActivity">
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/user_service_details_toolbar"
@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2.7" />
+
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -51,12 +52,15 @@
                     android:layout_height="match_parent"
                     android:background="@color/darkGray" />
 
-                <Spinner
+                <AutoCompleteTextView
                     android:id="@+id/service_details_car_type_spinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
+                    android:hint="Enter or select car name."
                     android:background="@drawable/border"
+                    android:textColorHint="#000"
+                    android:textSize="15dp"
                     android:entries="@array/car_type_array" />
             </LinearLayout>
 
@@ -179,8 +183,10 @@
         android:id="@+id/service_details_book_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/redButton"
+        android:background="#ffca00"
         android:text="@string/book"
-        android:textColor="@color/white" />
+        android:textColor="@color/black"/>
+
+
 </LinearLayout>
 

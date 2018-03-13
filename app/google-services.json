@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1051214438871",
+    "firebase_url": "https://fir-demanddriver.firebaseio.com",
+    "project_id": "firebase-demanddriver",
+    "storage_bucket": "firebase-demanddriver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051214438871:android:5499d98a68dfc826",
+        "android_client_info": {
+          "package_name": "com.czsm.driverin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051214438871-6jkdq571c9o03ho7f59cl80077avvbg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

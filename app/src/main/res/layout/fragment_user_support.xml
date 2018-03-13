@@ -2,23 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aurorasdp.allinall.fragments.UserSupportFragment">
+    android:background="#0066ff"
+    >
 
-    <TextView
-        android:id="@+id/header"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkGray"
-        android:gravity="center"
-        android:padding="@dimen/edit_text_padding"
-        android:text="@string/support"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/abc_text_size_headline_material" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AllinAllMaterialTheme.AppBarOverlay"
+        android:titleTextAppearance="@color/textColorPrimary" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/toolbar"
         android:layout_margin="@dimen/normal_margin">
 
         <RelativeLayout
@@ -27,8 +25,11 @@
 
             <TextView
                 android:id="@+id/fragment_call_textview"
+                android:layout_toRightOf="@+id/img_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="#fff"
                 android:text="@string/call_text"
                 android:textSize="@dimen/text_size_large" />
 
@@ -36,10 +37,13 @@
                 android:id="@+id/fragment_support_phone_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/img_call"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/fragment_call_textview"
-                android:text="8765423167"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/abc_text_size_headline_material" />
+                android:text="+919941123110"
+                android:textColor="#fff"
+                android:textSize="18dp" />
 
             <View
                 android:id="@+id/divider1"
@@ -48,15 +52,16 @@
                 android:layout_below="@+id/fragment_support_phone_textview"
                 android:layout_marginBottom="@dimen/normal_margin"
                 android:layout_marginTop="@dimen/normal_margin"
-                android:background="@android:color/darker_gray" />
+                android:layout_marginLeft="50dp"
+                android:background="#fff" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/img_call"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/callus" />
+                android:src="@drawable/contact" />
 
 
             <TextView
@@ -64,17 +69,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/divider1"
+                android:layout_marginLeft="30dp"
+                android:textColor="#fff"
+                android:layout_toRightOf="@+id/img_mail"
                 android:text="@string/mail_text"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/fragment_support_mail_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/img_mail"
                 android:layout_below="@+id/fragment_mail_textview"
-                android:text="inf@allinall.com"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/abc_text_size_headline_material" />
+                android:text="info@demanddriver.com"
+                android:textColor="#fff"
+                android:textSize="18dp" />
 
             <View
                 android:id="@+id/divider2"
@@ -83,15 +94,16 @@
                 android:layout_below="@+id/fragment_support_mail_textview"
                 android:layout_marginBottom="@dimen/normal_margin"
                 android:layout_marginTop="@dimen/normal_margin"
-                android:background="@android:color/darker_gray" />
+                android:layout_marginLeft="50dp"
+                android:background="#fff" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/img_mail"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/divider1"
-                android:src="@drawable/mailus" />
+                android:src="@drawable/email" />
 
 
             <TextView
@@ -99,26 +111,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/divider2"
+                android:layout_marginLeft="30dp"
+                android:textColor="#fff"
+                android:layout_toRightOf="@+id/Img_web"
                 android:text="@string/website_text"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/fragment_support_website_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/Img_web"
                 android:layout_below="@+id/fragment_website_textview"
-                android:text="www.allinall.com"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/abc_text_size_headline_material" />
+                android:text="www.demanddriver.com"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#fff"
+                android:textSize="18dp" />
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:id="@+id/Img_web"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/divider2"
-                android:src="@drawable/website" />
+                android:src="@drawable/website1" />
 
             <Button
                 android:id="@+id/fragment_user_support_signout_button"
@@ -128,6 +146,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:text="@string/sign_out"
+                android:background="#ffca00"
                 android:textAllCaps="false" />
         </RelativeLayout>
 

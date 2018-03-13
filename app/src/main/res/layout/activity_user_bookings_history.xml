@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0066ff">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/user_booking_history_toolbar"
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/app_id"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,13 +59,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
 
         </LinearLayout>
     </LinearLayout>
@@ -105,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/app_date_time"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -112,13 +116,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -161,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/name"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -168,13 +174,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -216,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/address"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -223,13 +231,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -269,6 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/review"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -276,15 +286,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
-

@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#0066ff"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".DoctorAppointmentActivity">
+    >
 
 
     <android.support.v7.widget.Toolbar
@@ -44,10 +45,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/name_ic" />
+                    android:background="@drawable/name_ic" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/white"
                     android:text="Tom Steward" />
 
                 <TextView
@@ -68,13 +70,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
                     android:text="@string/name"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/white" />
 
             </LinearLayout>
         </LinearLayout>
@@ -98,10 +101,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/date_time_ic" />
+                    android:background="@drawable/date_time_ic" />
             </LinearLayout>
 
             <LinearLayout
@@ -115,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/white"
                     android:text="temp date and time" />
 
                 <TextView
@@ -122,13 +126,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
                     android:text="@string/date_time"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
 
@@ -150,10 +155,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/contact_ic" />
+                    android:background="@drawable/contact_ic" />
 
             </LinearLayout>
 
@@ -168,6 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/white"
                     android:text="age" />
 
                 <TextView
@@ -175,13 +181,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
                     android:text="@string/contact"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
 
@@ -204,10 +211,10 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/address_ic" />
+                    android:background="@drawable/address_ic" />
 
             </LinearLayout>
 
@@ -222,6 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/white"
                     android:text="Please a wire tape" />
 
                 <TextView
@@ -229,27 +237,49 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"
                     android:text="@string/address"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/abc_text_size_headline_material" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/medium_margin"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2"
+        android:orientation="horizontal">
 
     <Button
         android:id="@+id/provider_book_cancel_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/redButton"
+        android:layout_weight="1"
+        android:layout_marginRight="1dp"
+        android:background="#ffca00"
         android:text="@string/cancel"
         android:textAllCaps="false"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/black" />
+
+
+        <Button
+            android:id="@+id/provider_book_complete_button"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#ffca00"
+            android:layout_marginLeft="1dp"
+            android:text="Complete"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

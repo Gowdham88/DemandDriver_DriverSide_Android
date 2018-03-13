@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0066ff">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/user_ongoing_booking_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -17,7 +18,7 @@
         android:id="@+id/user_appointment_details_id_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/user_ongoing_booking_toolbar"
+        android:layout_below="@id/toolbar"
         android:layout_marginBottom="@dimen/medium_margin"
         android:layout_marginTop="@dimen/normal_margin"
         android:orientation="horizontal"
@@ -32,11 +33,11 @@
             android:weightSum="1">`
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/book_id" />
+                android:background="@drawable/book_id" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/app_id"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,13 +59,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
 
         </LinearLayout>
     </LinearLayout>
@@ -87,11 +90,11 @@
             android:weightSum="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/book_dt" />
+                android:background="@drawable/book_dt" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/app_date_time"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -112,13 +116,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -141,11 +146,11 @@
             android:weightSum="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/provider_name" />
+                android:background="@drawable/provider_name" />
 
         </LinearLayout>
 
@@ -160,6 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="@string/name"
                 android:textStyle="bold" />
 
@@ -168,13 +174,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -197,11 +204,11 @@
             android:weightSum="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/address" />
+                android:background="@drawable/address" />
 
         </LinearLayout>
 
@@ -216,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/address"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -223,13 +231,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
@@ -238,7 +247,7 @@
         android:id="@+id/user_appointment_details_bookstts_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/user_appointment_details_complete_button"
+        android:layout_above="@+id/lly"
         android:layout_below="@id/user_appointment_details_address_linearlayout"
         android:orientation="horizontal"
         android:weightSum="3">
@@ -252,11 +261,11 @@
             android:weightSum="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/booking_status" />
+                android:background="@drawable/booking_status" />
         </LinearLayout>
 
         <LinearLayout
@@ -270,6 +279,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/book_stts"
+                android:textColor="#fff"
                 android:textStyle="bold" />
 
             <TextView
@@ -277,23 +287,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
+                android:textColor="#fff"
                 android:text="" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:background="@android:color/darker_gray" />
+                android:background="#fff" />
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/user_appointment_details_complete_button"
+
+    <LinearLayout
+        android:id="@+id/lly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/redButton"
-        android:text="@string/complete"
-        android:textColor="@color/white" />
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/user_appointment_details_cancel_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="1dp"
+            android:background="#ffca00"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+
+        <Button
+            android:id="@+id/user_appointment_details_complete_button"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#ffca00"
+            android:layout_marginLeft="1dp"
+            android:text="Complete"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

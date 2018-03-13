@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aurorasdp.allinall">
+    package="com.czsm.driverin">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,60 +17,90 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+
+
     <permission
-        android:name="com.aurorasdp.allinall.permission.C2D_MESSAGE"
+        android:name="com.czsm.driverin.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.aurorasdp.allinall.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.czsm.driverin.permission.C2D_MESSAGE" />
     <!-- This app has permission to register and receive dataf message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
 
     <application
-        android:name="com.aurorasdp.allinall.App"
+        android:name="com.czsm.driverin.App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/login_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AllinAllMaterialTheme">
         <activity
-            android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait">
+            android:name="com.czsm.driverin.activities.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
-            android:name=".activities.UserSignupActivity"
+            android:name="com.czsm.driverin.activities.UserSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.ServiceProviderSignupActivity"
+            android:name="com.czsm.driverin.activities.ServiceProviderSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activities.ServiceProviderActivity"
+            android:name="com.czsm.driverin.activities.ServiceProviderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UserActivity"
+            android:name="com.czsm.driverin.activities.UserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.SendOTPActivity"
+            android:name="com.czsm.driverin.activities.SendOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ProviderBookingActivity"
+            android:name="com.czsm.driverin.activities.ProviderBookingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UserBookingHistoryActivity"
+            android:name="com.czsm.driverin.activities.UserBookingHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.VerifyOTPActivity"
+            android:name="com.czsm.driverin.activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UserOngoingBookingActivity"
+            android:name="com.czsm.driverin.activities.UserOngoingBookingActivity"
             android:screenOrientation="portrait" />
+
+
+
+        <activity
+            android:name="com.czsm.driverin.activities.BookServiceMapActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.czsm.driverin.activities.UserSupportActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.czsm.driverin.activities.UserHistoryActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.czsm.driverin.activities.OngoingAppointmentActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.czsm.driverin.activities.DashBoardActivity"
+            android:screenOrientation="portrait" />
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -77,19 +110,24 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" />
+
+        <!--<activity-->
+            <!--android:name="com.czsm.driverin.activities.BookServiceMapActivity"-->
+            <!--android:label="@string/title_activity_service_details_map"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
-            android:name=".activities.BookServiceMapActivity"
-            android:label="@string/title_activity_service_details_map"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.TariffPlanActivity"
+            android:name="com.czsm.driverin.activities.TariffPlanActivity"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".receiver.NotificationBroadcastReceiver"
+            android:name="com.czsm.driverin.receiver.NotificationBroadcastReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="allinallapp.NOTIFICATION_RECEIVED"></action>
@@ -97,24 +135,44 @@
         </receiver>
 
         <receiver
-            android:name="com.aurorasdp.allinall.gcm.GCMBroadcastReceiver"
+            android:name="com.czsm.driverin.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.aurorasdp.allinall" />
+                <category android:name="com.czsm.driverin" />
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.pushbots.push.DefaultPushHandler"
             android:process=":pushProcess" />
         <receiver
-            android:name=".receiver.PushNotificationReceiver"
+            android:name="com.czsm.driverin.receiver.PushNotificationReceiver"
             android:process=":pushProcess" />
 
-        <service android:name=".gcm.GCMIntentService" />
+        <service android:name="com.czsm.driverin.gcm.GCMIntentService" />
+
+        <service android:name="com.czsm.driverin.Service.CapPhoto" android:enabled ="true"/>
+
+        <receiver android:name="com.czsm.driverin.Service.MyBroadcastReceiver" >
+        </receiver>
+
+
+
+        <!--<service android:name="com.czsm.driverin.receiver.MyFirebaseMessagingService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--<service android:name="com.czsm.driverin.receiver.MyFirebaseInstanceIDService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
     </application>
 
 </manifest>
