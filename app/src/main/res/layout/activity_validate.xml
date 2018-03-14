@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/top_img"
+            android:layout_width="290dp"
+            android:layout_height="130dp"
+            android:src="@drawable/upsidecopy"/>
+
+    <TextView
+        style="@style/FontAvenirBook"
+        android:id="@+id/txt_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="@string/otpscreen_string"
+        android:gravity="center"
+        android:textColor="@color/phonenum_clr"
+        android:layout_below="@+id/top_img"/>
+        <!--&gt;-->
+    <RelativeLayout
+        android:id="@+id/verifyotp_lay"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txt_view"
+        android:background="@drawable/baground"
+        >
+        <EditText
+            style="@style/FontAvenirBook"
+            android:id="@+id/phone_edt"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:inputType="phone"
+            android:hint="9704343825"
+            android:textSize="12dp"
+            android:textColor="@color/phonenum_clr"
+            android:textColorHint="@color/phonenum_clr"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+
+           />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/verifyotp_layoutone"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/verifyotp_lay"
+        android:background="@drawable/baground"
+        >
+        <EditText
+            style="@style/FontAvenirBook"
+            android:id="@+id/otp_edt"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:inputType="phone"
+            android:hint=""
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/verifyotp_lay"
+        android:background="@drawable/bgroundclr"
+        android:layout_marginTop="90dp">
+    <TextView
+        style="@style/FontAvenirBook"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:text="Resend OTP"
+        android:layout_marginLeft="15dp"
+        android:textSize="12dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/phonenum_clr"
+        android:textAllCaps="false"
+        />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/btm_img"
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="70dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/buttomsidecopy"/>
+</RelativeLayout>

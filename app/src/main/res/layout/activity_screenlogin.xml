@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<FrameLayout
+    android:id="@+id/frm_lay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/top_img"
+        android:layout_width="290dp"
+        android:layout_height="130dp"
+        android:src="@drawable/upsidecopy"/>
+    <TextView
+        style="@style/FontAvenirBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="0dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/textmain_clr"
+        android:gravity="center"/>
+</FrameLayout>
+    <RelativeLayout
+        android:id="@+id/reledit"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/frm_lay"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/baground">
+        <TextView
+            style="@style/FontAvenirBook"
+            android:id="@+id/country_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country"
+            android:textSize="12dp"
+            android:textColor="@color/country_clr"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+    <TextView
+        style="@style/FontAvenirBook"
+        android:id="@+id/code_txt"
+        android:layout_width="270dp"
+        android:layout_below="@+id/country_txt"
+        android:layout_height="60dp"
+        android:inputType="phone"
+        android:text="India(+91)"
+        android:textSize="12dp"
+        android:textColor="@color/phonenum_clr"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        />
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/mbl_lay"
+        android:layout_width="3500dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/reledit"
+       >
+        <RelativeLayout
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:forceHasOverlappingRendering="true"
+            android:background="@drawable/baground">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+          android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/user"/>
+
+    <EditText
+        style="@style/FontAvenirBook"
+        android:id="@+id/phone_edt"
+        android:layout_width="270dp"
+        android:layout_height="45dp"
+        android:inputType="phone"
+        android:textSize="12dp"
+        android:layout_marginLeft="40dp"
+        android:hint="Mobile Number"
+        android:textColorHint="@color/country_clr"
+        android:textColor="@color/phonenum_clr"
+        android:background="@null"
+
+        />
+        </RelativeLayout>
+    <ImageView
+        android:id="@+id/rel_lay"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="70dp"
+        android:background="@drawable/circlebagnd" />
+        <ImageView
+            android:id="@+id/rel_img"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow"
+            android:elevation="1dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"/>
+    </FrameLayout>
+
+    <RadioButton
+        android:id="@+id/radio_button"
+        android:checked="true"
+        android:buttonTint="@color/textmain_clr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp" />
+
+    <TextView
+        style="@style/FontAvenirBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mbl_lay"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:text="Is ServiceDriver?"
+        android:textSize="12dp"
+        android:textColor="@color/phonenum_clr"
+        android:layout_toEndOf="@+id/radio_button"
+        android:id="@+id/textView" />
+    <ImageView
+        android:id="@+id/btm_img"
+        android:layout_width="300dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="70dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/buttomsidecopy"/>
+</RelativeLayout>

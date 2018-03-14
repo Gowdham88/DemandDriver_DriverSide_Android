@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "1051214438871",
-    "firebase_url": "https://fir-demanddriver.firebaseio.com",
-    "project_id": "firebase-demanddriver",
-    "storage_bucket": "firebase-demanddriver.appspot.com"
+    "project_number": "380284191115",
+    "firebase_url": "https://propane-nomad-707.firebaseio.com",
+    "project_id": "propane-nomad-707",
+    "storage_bucket": "propane-nomad-707.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1051214438871:android:5499d98a68dfc826",
+        "mobilesdk_app_id": "1:380284191115:android:34a592a6fd197501",
         "android_client_info": {
-          "package_name": "com.czsm.driverin"
+          "package_name": "com.czsm.Demand_Driver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1051214438871-6jkdq571c9o03ho7f59cl80077avvbg2.apps.googleusercontent.com",
+          "client_id": "380284191115-0uqmdelg9jqqcjhs4jr5aghru78i6j6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.czsm.Demand_Driver",
+            "certificate_hash": "c8120cd6ff053c52864a2c24373906363a0b2f8a"
+          }
+        },
+        {
+          "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8"
+          "current_key": "AIzaSyDv46sopDf8ZYADTgfjTSx5YLYjf5fgu5o"
         }
       ],
       "services": {
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380284191115-fa8c11595b87hfvqg80ti5d9493e4ig4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.CZ.Demand-Driver"
+              }
+            },
+            {
+              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

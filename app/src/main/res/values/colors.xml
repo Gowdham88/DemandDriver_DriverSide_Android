@@ -13,4 +13,8 @@
     <color name="redButton">#EF5350</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="textmain_clr">#00BDFF</color>
+    <color name="textmaininside_clr">#2700bdff</color>
+    <color name="country_clr">#9b9b9b</color>
+    <color name="phonenum_clr">#01384B</color>
 </resources>

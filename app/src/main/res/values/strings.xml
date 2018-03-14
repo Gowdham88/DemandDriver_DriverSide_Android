@@ -59,7 +59,7 @@
     <string name="apppointment_review_success">Appointment reviewed successfully</string>
     <string name="appointment_reject_fail">No available service provider</string>
     <string name="appointment_pending_fail">No pending appointments exist</string>
-    
+
     <string name="otp_content">We have sent you an access code via SMS for mobile phone verification.</string>
 
 
@@ -116,6 +116,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="complete">Complete</string>
     <string name="confirmed_status">Confirmed</string>
+    <string name="otpscreen_string">We have sent you an access code\n via SMS for mobilr phone\n verification</string>
 
     <string-array name="driver_type_array">
         <item>Hourly</item>
