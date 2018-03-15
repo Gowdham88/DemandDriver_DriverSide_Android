@@ -116,7 +116,11 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="complete">Complete</string>
     <string name="confirmed_status">Confirmed</string>
-    <string name="otpscreen_string">We have sent you an access code\n via SMS for mobilr phone\n verification</string>
+    <string name="calldriver">Call\nDriver</string>
+    <string name="supporthome">Support</string>
+    <string name="currentbooking">Current\nBooking</string>
+    <string name="historyhm">My\nHistory</string>
+    <string name="otpscreen_string">We have sent you an access code\n via SMS for mobile phone\n verification</string>
 
     <string-array name="driver_type_array">
         <item>Hourly</item>

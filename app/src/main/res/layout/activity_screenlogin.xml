@@ -110,7 +110,7 @@
 
     <RadioButton
         android:id="@+id/radio_button"
-        android:checked="true"
+        android:checked="false"
         android:buttonTint="@color/textmain_clr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

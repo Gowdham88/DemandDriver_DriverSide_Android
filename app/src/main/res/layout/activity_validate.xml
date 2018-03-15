@@ -28,13 +28,14 @@
         android:layout_below="@+id/txt_view"
         android:background="@drawable/baground"
         >
-        <EditText
+        <TextView
             style="@style/FontAvenirBook"
             android:id="@+id/phone_edt"
             android:layout_width="270dp"
             android:layout_height="40dp"
             android:inputType="phone"
-            android:hint="9704343825"
+            android:gravity="center_vertical"
+            android:hint=""
             android:textSize="12dp"
             android:textColor="@color/phonenum_clr"
             android:textColorHint="@color/phonenum_clr"
@@ -57,12 +58,55 @@
             android:layout_width="270dp"
             android:layout_height="40dp"
             android:inputType="phone"
-            android:hint=""
+            android:textSize="12dp"
+            android:hint="Enter code here"
             android:layout_marginLeft="15dp"
             android:background="@null"
 
             />
     </RelativeLayout>
+    <!--<FrameLayout-->
+        <!--android:id="@+id/mbl_lay"-->
+        <!--android:layout_width="3500dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_below="@+id/verifyotp_lay"-->
+        <!--&gt;-->
+        <!--<RelativeLayout-->
+            <!--android:layout_width="270dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:forceHasOverlappingRendering="true"-->
+            <!--android:background="@drawable/baground">-->
+
+            <!--<EditText-->
+                <!--style="@style/FontAvenirBook"-->
+                <!--android:id="@+id/otp_edt"-->
+                <!--android:layout_width="270dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:inputType="phone"-->
+                <!--android:textSize="12dp"-->
+                <!--android:hint="Enter code here"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:background="@null"-->
+
+                <!--/>-->
+        <!--</RelativeLayout>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/rel_lay"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="70dp"-->
+            <!--android:background="@drawable/circlebagnd" />-->
+        <!--<ImageView-->
+            <!--android:id="@+id/rel_img"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:src="@drawable/arrow"-->
+            <!--android:elevation="1dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="70dp"/>-->
+    <!--</FrameLayout>-->
 
     <RelativeLayout
         android:layout_width="130dp"
@@ -71,6 +115,7 @@
         android:background="@drawable/bgroundclr"
         android:layout_marginTop="90dp">
     <TextView
+        android:id="@+id/resend_txt"
         style="@style/FontAvenirBook"
         android:layout_width="130dp"
         android:layout_height="35dp"

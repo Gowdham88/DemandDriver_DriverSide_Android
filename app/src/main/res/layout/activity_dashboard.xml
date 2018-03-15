@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/frm_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/top_img"
+            android:layout_width="290dp"
+            android:layout_height="130dp"
+            android:src="@drawable/upsidecopy"/>
+
+        <ImageView
+
+            android:id="@+id/logo_img"
+            android:layout_width="220dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/logocopy201" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/frm_lay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frm_lay">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="300dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/Group3x" />
+        <TextView
+            style="@style/FontAvenirBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calldriver"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="90dp"
+            android:textColor="@color/textmain_clr"/>
+        <TextView
+            style="@style/FontAvenirBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/supporthome"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_marginTop="85dp"
+            android:layout_marginLeft="250dp"
+            android:textColor="@color/textmain_clr"/>
+        <TextView
+            style="@style/FontAvenirBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currentbooking"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_marginTop="225dp"
+            android:layout_marginLeft="80dp"
+            android:textColor="@color/textmain_clr"/>
+        <TextView
+            style="@style/FontAvenirBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/historyhm"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_marginTop="225dp"
+            android:layout_marginLeft="250dp"
+            android:textColor="@color/textmain_clr"/>
+    </FrameLayout>
+</RelativeLayout>
