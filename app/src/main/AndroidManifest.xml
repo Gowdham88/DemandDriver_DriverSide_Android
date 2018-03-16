@@ -48,7 +48,7 @@
             android:name=".activities.ValidateActivity"
             android:screenOrientation="portrait" />
 
-        <!--<activity-->
+        <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity

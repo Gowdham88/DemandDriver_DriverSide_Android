@@ -39,11 +39,13 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
     ImageView FrdRelLay;
     ImageView RelImg;
     String otpNumber;
+    String value;
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     String mVerificationId;
     PhoneAuthCredential credential;
+    boolean string;
     private android.support.v7.app.AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,27 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
         Intent intent = this.getIntent();
         bundle = intent.getExtras();
         mAuth = FirebaseAuth.getInstance();
-        if (bundle != null) {
-            phonrnum = bundle.getString("phonenumber");
-            mVerificationId=bundle.getString("vericode");
+        value = bundle.getString("value", "empty");
+     if(value.equals("dashboard")){
+         if (bundle != null) {
+             phonrnum = bundle.getString("phonenumber");
+             mVerificationId=bundle.getString("vericode");
 //            mResendToken= (PhoneAuthProvider.ForceResendingToken) bundle.get("mtoken");
 //            Toast.makeText(this, mVerificationId, Toast.LENGTH_SHORT).show();
-        }
+         }
+     }
+     else {
+
+             phonrnum = bundle.getString("phonenumber1");
+             mVerificationId=bundle.getString("vericode1");
+//            mResendToken= (PhoneAuthProvider.ForceResendingToken) bundle.get("mtoken");
+//            Toast.makeText(this, mVerificationId, Toast.LENGTH_SHORT).show();
+
+     }
+//     else{
+//
+//     }
+
         mPhonenumbetEdt.setText(phonrnum);
         mOtpEdt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,23 +108,23 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
         mResendtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resendVerificationCode(phonrnum, mResendToken);
+//                resendVerificationCode(phonrnum, mResendToken);
             }
         });
 
 
     }
 
-    private void resendVerificationCode(String phoneNumber,
-                                        PhoneAuthProvider.ForceResendingToken token) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                ValidateActivity.this,               // Activity (for callback binding)
-                mCallbacks,         // OnVerificationStateChangedCallbacks
-                token);             // ForceResendingToken from callbacks
-    }
+//    private void resendVerificationCode(String phoneNumber,
+//                                        PhoneAuthProvider.ForceResendingToken token) {
+//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                phoneNumber,        // Phone number to verify
+//                60,                 // Timeout duration
+//                TimeUnit.SECONDS,   // Unit of timeout
+//                ValidateActivity.this,               // Activity (for callback binding)
+//                mCallbacks,         // OnVerificationStateChangedCallbacks
+//                token);             // ForceResendingToken from callbacks
+//    }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -119,9 +136,17 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
                             //Log.d(TAG, "signInWithCredential:success");
 //                            Toast.makeText(ValidateActivity.this,"Verification done",Toast.LENGTH_LONG).show();
                             FirebaseUser user = task.getResult().getUser();
-                            Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
-                            startActivity(intent);
-                            finish();
+                            if(value.equals("dashboard")){
+                                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Intent intent=new Intent(ValidateActivity.this,DashBoardActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+
                             // ...
                         } else {
                             // Sign in failed, display a message and update the UI

@@ -1,5 +1,6 @@
 package com.czsm.Demand_Driver.activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,11 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -108,7 +111,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     String serviceId = "1";
     String serviceName = "Driver";
     String bookDate, bookTime, bookNow;
-    public static  String BaseUrl;
+    public static String BaseUrl;
 
 
     protected GoogleApiClient mGoogleApiClient;
@@ -129,17 +132,17 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     private GoogleMap googleMap;
     int markerIcon;
     List<Integer> minIndex = new ArrayList<Integer>();
-    String distance,time,userid,username,usermobileno,useraddress,userimage = "";
+    String distance, time, userid, username, usermobileno, useraddress, userimage = "";
     long timems;
 
     /**********Firebase**************/
 
     DatabaseReference db;
     ArrayList<ServiceList> filterserviceproviders = new ArrayList<ServiceList>();
-    ArrayList<ServiceList> serviceproviders       = new ArrayList<ServiceList>();
-    ArrayList<AppointmentList> appointmentlist    = new ArrayList<AppointmentList>();
+    ArrayList<ServiceList> serviceproviders = new ArrayList<ServiceList>();
+    ArrayList<AppointmentList> appointmentlist = new ArrayList<AppointmentList>();
     SharedPreferences sharedPreferences;
-    int i = 1,maxproviders = 0;
+    int i = 1, maxproviders = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,19 +153,15 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
         db = FirebaseDatabase.getInstance().getReference();
 
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        userid            = sharedPreferences.getString("userId","");
-        username          = sharedPreferences.getString("username","");
-        usermobileno      = sharedPreferences.getString("usermobile","");
-        useraddress       = sharedPreferences.getString("useraddress","");
-        userimage         = sharedPreferences.getString("userimage","");
+        userid = sharedPreferences.getString("userId", "");
+        username = sharedPreferences.getString("username", "");
+        usermobileno = sharedPreferences.getString("usermobile", "");
+        useraddress = sharedPreferences.getString("useraddress", "");
+        userimage = sharedPreferences.getString("userimage", "");
 
-    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
-
-
-
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.user_service_details_toolbar);
@@ -178,17 +177,15 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             }
         });
 
-        serviceTextView   = (TextView) findViewById(R.id.service_details_service_textview);
-        serviceImageView  = (ImageView) findViewById(R.id.service_details_service_imageview);
-        driverLayout      = (LinearLayout) findViewById(R.id.service_details_call_driver_linearlayout);
+        serviceTextView = (TextView) findViewById(R.id.service_details_service_textview);
+        serviceImageView = (ImageView) findViewById(R.id.service_details_service_imageview);
+        driverLayout = (LinearLayout) findViewById(R.id.service_details_call_driver_linearlayout);
         driverTypeSpinner = (Spinner) findViewById(R.id.service_details_driver_type_spinner);
-        carTypeSpinner    = (AutoCompleteTextView) findViewById(R.id.service_details_car_type_spinner);
-        tariffLayout      = (LinearLayout) findViewById(R.id.service_details_tariff_linearlayout);
-        bookNowTextview   = (TextView) findViewById(R.id.service_details_book_now_textview);
+        carTypeSpinner = (AutoCompleteTextView) findViewById(R.id.service_details_car_type_spinner);
+        tariffLayout = (LinearLayout) findViewById(R.id.service_details_tariff_linearlayout);
+        bookNowTextview = (TextView) findViewById(R.id.service_details_book_now_textview);
         bookLaterTextview = (TextView) findViewById(R.id.service_details_book_later_textview);
-        bookButton        = (Button) findViewById(R.id.service_details_book_button);
-
-
+        bookButton = (Button) findViewById(R.id.service_details_book_button);
 
 
         setMarkerIcon(serviceId);
@@ -225,7 +222,6 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
             }
         });
-
 
 
         buildGoogleApiClient();
@@ -329,7 +325,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
-                 /******************Adding appointments**********************/
+                        /******************Adding appointments**********************/
 
                         addappointment(0);
 
@@ -342,7 +338,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
                                     final AppointmentList appointmentList = child.getValue(AppointmentList.class);
 
-                                     appointmentlist.clear();
+                                    appointmentlist.clear();
 
                                     if (appointmentList.getUserid().equals(userid)) {
 
@@ -361,9 +357,9 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                                                 @Override
                                                 public void run() {
 
-                                                    if(appointmentlist.get(0).getStatus().equals("pending")) {
+                                                    if (appointmentlist.get(0).getStatus().equals("pending")) {
 
-                                                        Toast.makeText(getApplicationContext(), ""+i, Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getApplicationContext(), "" + i, Toast.LENGTH_SHORT).show();
 
                                                         if (i == 1) {
 
@@ -394,7 +390,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
                                         } else {
 
-                                            if(appointmentlist.get(0).getStatus().equals("pending") && i == maxproviders) {
+                                            if (appointmentlist.get(0).getStatus().equals("pending") && i == maxproviders) {
 
                                                 child.getRef().child("status").setValue("Cancelled");
                                             }
@@ -410,7 +406,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
-                                Log.e("Databaseerror",""+databaseError.toException().toString());
+                                Log.e("Databaseerror", "" + databaseError.toException().toString());
 
                             }
                         });
@@ -470,6 +466,16 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
     protected void startLocationUpdates() {
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient,
                 mLocationRequest,
@@ -493,12 +499,12 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     public void onMapReady(GoogleMap Map) {
         Log.d("Locationnnnnnn ", "Latit " + userLocation.getLatitude() + " long: " + userLocation.getLongitude());
 
-        googleMap  = Map;
+        googleMap = Map;
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
-        if (serviceproviders.size() > 0 ) {
+        if (serviceproviders.size() > 0) {
             getSurroundingProviders();
-            Log.e("Size",""+filterserviceproviders.size());
+            Log.e("Size", "" + filterserviceproviders.size());
             int numOfProviders = filterserviceproviders.size();
             Double[] latitude = new Double[numOfProviders];
             Double[] longitude = new Double[numOfProviders];
@@ -507,13 +513,13 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             try {
                 for (int i = 0; i < numOfProviders; i++) {
 
-                    Log.e("lat",""+filterserviceproviders.get(i).getLatitude());
-                    latitude[i]  = Double.valueOf(filterserviceproviders.get(i).getLatitude());
+                    Log.e("lat", "" + filterserviceproviders.get(i).getLatitude());
+                    latitude[i] = Double.valueOf(filterserviceproviders.get(i).getLatitude());
                     longitude[i] = Double.valueOf(filterserviceproviders.get(i).getLongitude());
-                     markers[i]  = googleMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(latitude[i], longitude[i]))
-                                   .title(filterserviceproviders.get(i).getName())
-                                    .icon(BitmapDescriptorFactory.fromResource(markerIcon))
+                    markers[i] = googleMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(latitude[i], longitude[i]))
+                            .title(filterserviceproviders.get(i).getName())
+                            .icon(BitmapDescriptorFactory.fromResource(markerIcon))
                     );
 
                 }
@@ -522,9 +528,9 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                     for (Marker marker : markers) {
                         builder.include(marker.getPosition());
                     }
-                    LatLngBounds bounds           = builder.build();
+                    LatLngBounds bounds = builder.build();
                     DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-                    int width  = displayMetrics.widthPixels;
+                    int width = displayMetrics.widthPixels;
                     int height = displayMetrics.heightPixels;
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width - 200, height - 300, 50);
                     googleMap.animateCamera(cu);
@@ -559,22 +565,20 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             ArrayList<Float> nstore = new ArrayList<Float>(distancelist);
             Collections.sort(distancelist);
 
-            for(int i= 0 ;i < distancelist.size();i++)
-            {
+            for (int i = 0; i < distancelist.size(); i++) {
 
                 minIndex.add(nstore.indexOf(distancelist.get(i)));
-                Log.e("ssssssss",""+minIndex.get(i));
-                Log.e("ssssssss",""+filterserviceproviders.get(i).getProviderid());
+                Log.e("ssssssss", "" + minIndex.get(i));
+                Log.e("ssssssss", "" + filterserviceproviders.get(i).getProviderid());
 
             }
 
             maxproviders = filterserviceproviders.size();
 
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
 
             e.printStackTrace();
         }
-
 
 
         if (filterserviceproviders.size() <= 0)
@@ -618,6 +622,16 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (userLocation == null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             userLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (userLocation != null) {
                 mapFragment.getMapAsync(this);

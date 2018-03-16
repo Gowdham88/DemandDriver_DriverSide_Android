@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.czsm.Demand_Driver.Manifest;
@@ -25,7 +26,7 @@ import com.czsm.Demand_Driver.receiver.NotificationBroadcastReceiver;
 public class DashBoardActivity extends AppCompatActivity {
 
 
-    LinearLayout Img_map,Img_support,Img_ongoing,Img_history;
+    ImageView Img_map,Img_support,Img_ongoing,Img_history;
 
     SharedPreferences sharedPreferences;
     private NotificationBroadcastReceiver mReceiver;
@@ -34,7 +35,7 @@ public class DashBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_dashboard);
 
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         Bundle extras     = getIntent().getExtras();
@@ -74,10 +75,10 @@ public class DashBoardActivity extends AppCompatActivity {
         registerReceiver(mReceiver, new IntentFilter(NotificationBroadcastReceiver.NOTIFICATION_RECEIVED));
 
 
-        Img_map     = (LinearLayout) findViewById(R.id.Img_book_driver);
-        Img_support = (LinearLayout) findViewById(R.id.Img_support);
-        Img_ongoing = (LinearLayout) findViewById(R.id.Img_current_book);
-        Img_history = (LinearLayout) findViewById(R.id.Img_history);
+        Img_map     = (ImageView) findViewById(R.id.Img_book_driver);
+        Img_support = (ImageView) findViewById(R.id.Img_support);
+        Img_ongoing = (ImageView) findViewById(R.id.Img_current_book);
+        Img_history = (ImageView) findViewById(R.id.Img_history);
 
         Img_map.setOnClickListener(new View.OnClickListener() {
             @Override

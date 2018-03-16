@@ -27,6 +27,10 @@
         <item name="colorAccent">#ffffff</item>
         <item name="android:textColorSecondary">#ffffff</item>
     </style>
+    <style name="checkboxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">@color/textmain_clr</item>
+        <item name="android:textColorSecondary">@color/textmain_clr</item>
+    </style>
     <style name="AllinAllMaterialTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

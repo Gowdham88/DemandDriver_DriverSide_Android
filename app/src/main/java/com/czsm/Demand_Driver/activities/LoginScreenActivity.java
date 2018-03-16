@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -32,6 +33,7 @@ public class LoginScreenActivity extends AppCompatActivity {
 EditText PhoneEdt;
     ImageView FrdRelLay;
 ImageView RelImg;
+    CheckBox isProvider;
     private FirebaseAuth mAuth;
     String phoneNumber;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -48,20 +50,30 @@ ImageView RelImg;
    FrdRelLay=(ImageView) findViewById(R.id.rel_lay);
         RelImg=(ImageView)findViewById(R.id.rel_img);
         mAuth = FirebaseAuth.getInstance();
-        mRadioBtn=(RadioButton) findViewById(R.id.radio_button);
+        isProvider=(CheckBox) findViewById(R.id.login_isprovider_checkbox);
         RelImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.hideKeyboard(LoginScreenActivity.this);
                 if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
                     Toast.makeText(getApplicationContext(), "Please enter the phone number", Toast.LENGTH_SHORT).show();
-                }else{
+                }
+                else{
+//                    if(mRadioBtn.isChecked()){
                     phoneNumber=PhoneEdt.getText().toString();
                     startPhoneNumberVerification(phoneNumber);
-//                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
-//                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+////                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    startActivity(intent);
+////                    Toast.makeText(LoginScreenActivity.this, phoneNumber, Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Intent intent=new Intent(LoginScreenActivity.this,DashBoardActivity.class);
+////                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    intent.putExtra("vericode",mVerificationId.toString());
 //                    startActivity(intent);
-//                    Toast.makeText(LoginScreenActivity.this, phoneNumber, Toast.LENGTH_SHORT).show();
+//                    PhoneEdt.setText("");
+//                    finish();
                 }
             }
         });
@@ -71,13 +83,24 @@ ImageView RelImg;
                 Utils.hideKeyboard(LoginScreenActivity.this);
                 if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
                     Toast.makeText(getApplicationContext(), "Please enter the phone number", Toast.LENGTH_SHORT).show();
-                }else{
+                }
+                else
+//                    if(mRadioBtn.isChecked()){
                     phoneNumber=PhoneEdt.getText().toString();
                     startPhoneNumberVerification(phoneNumber);
-//                    Toast.makeText(LoginScreenActivity.this, phoneNumber, Toast.LENGTH_SHORT).show();
-//                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
-//                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    Toast.makeText(LoginScreenActivity.this, phoneNumber, Toast.LENGTH_SHORT).show();
+////                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+////                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    startActivity(intent);
+//                }
+//                else
+                    {
+//                    Intent intent=new Intent(LoginScreenActivity.this,DashBoardActivity.class);
+////                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+////                    intent.putExtra("vericode",mVerificationId.toString());
 //                    startActivity(intent);
+//                    PhoneEdt.setText("");
+//                    finish();
                 }
             }
         });
@@ -113,21 +136,27 @@ ImageView RelImg;
 
                 mResendToken = token;
 
-                if(mRadioBtn.isChecked()){
+                if (isProvider.isChecked()){
                     Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+                    intent.putExtra("value","dashboard");
+                    intent.putExtra("string",true);
                     intent.putExtra("phonenumber",PhoneEdt.getText().toString());
                     intent.putExtra("vericode",mVerificationId.toString());
 
 //                    intent.putExtra("mtoken",mResendToken);
                     startActivity(intent);
-                    finish();
+                isProvider.setChecked(false);
+                PhoneEdt.setText("");
                 }
                 else{
-                    Intent intent=new Intent(LoginScreenActivity.this,DashBoardActivity.class);
-//                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
-//                    intent.putExtra("vericode",mVerificationId.toString());
+                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+//                    intent.putExtra("value","service");
+                    intent.putExtra("phonenumber1",PhoneEdt.getText().toString());
+                    intent.putExtra("vericode1",mVerificationId.toString());
                     startActivity(intent);
-                    finish();
+                    PhoneEdt.setText("");
+                    isProvider.setChecked(false);
+//                    finish();
                 }
 
             }
@@ -136,6 +165,14 @@ ImageView RelImg;
 
     }
 
+    private void startPhoneNumberVerification(String phoneNumber) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks);        // OnVerificationStateChangedCallbacks
+    }
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
 //        showProgressDialog();
         mAuth.signInWithCredential(credential)
@@ -162,14 +199,7 @@ ImageView RelImg;
     }
 
 
-    private void startPhoneNumberVerification(String phoneNumber) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
-                mCallbacks);        // OnVerificationStateChangedCallbacks
-    }
+
     public void showProgressDialog() {
 
 

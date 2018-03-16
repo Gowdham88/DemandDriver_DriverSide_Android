@@ -83,6 +83,7 @@
         android:layout_height="45dp"
         android:inputType="phone"
         android:textSize="12dp"
+        android:imeOptions="actionDone"
         android:layout_marginLeft="40dp"
         android:hint="Mobile Number"
         android:textColorHint="@color/country_clr"
@@ -108,29 +109,40 @@
             android:layout_marginLeft="70dp"/>
     </FrameLayout>
 
-    <RadioButton
-        android:id="@+id/radio_button"
-        android:checked="false"
-        android:buttonTint="@color/textmain_clr"
+    <!--<RadioButton-->
+        <!--android:id="@+id/radio_button"-->
+        <!--android:checked="false"-->
+        <!--android:buttonTint="@color/textmain_clr"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBaseline="@+id/textView"-->
+        <!--android:layout_alignBottom="@+id/textView"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginStart="13dp" />-->
+    <CheckBox
+        android:id="@+id/login_isprovider_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp" />
-
-    <TextView
-        style="@style/FontAvenirBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/mbl_lay"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
-        android:text="Is ServiceDriver?"
-        android:textSize="12dp"
-        android:textColor="@color/phonenum_clr"
-        android:layout_toEndOf="@+id/radio_button"
-        android:id="@+id/textView" />
+        android:button="@drawable/custom_checkbox"
+        android:text="  Is Service Provider?"
+        android:textColor="@color/textmain_clr"
+        android:layout_marginLeft="15dp"
+        android:theme="@style/checkboxStyle"
+        android:checked="false" />
+    <!--<TextView-->
+        <!--style="@style/FontAvenirBook"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/mbl_lay"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:text="Is ServiceDriver?"-->
+        <!--android:textSize="12dp"-->
+        <!--android:textColor="@color/phonenum_clr"-->
+        <!--android:layout_toEndOf="@+id/radio_button"-->
+        <!--android:id="@+id/textView" />-->
     <ImageView
         android:id="@+id/btm_img"
         android:layout_width="300dp"

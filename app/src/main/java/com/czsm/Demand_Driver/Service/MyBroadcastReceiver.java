@@ -41,7 +41,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
         userid            = sharedPreferences.getString("providerId","");
 
-        Toast.makeText(context,"dsss",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context,"dsss",Toast.LENGTH_SHORT).show();
 
 
         ValueEventListener appointmentlistner = new ValueEventListener() {
