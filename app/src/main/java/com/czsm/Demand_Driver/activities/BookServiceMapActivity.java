@@ -568,7 +568,8 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             for (int i = 0; i < distancelist.size(); i++) {
 
                 minIndex.add(nstore.indexOf(distancelist.get(i)));
-                Log.e("ssssssss", "" + minIndex.get(i));
+
+//                Log.e("ssssssss", "" + minIndex.get(i));
                 Log.e("ssssssss", "" + filterserviceproviders.get(i).getProviderid());
 
             }
