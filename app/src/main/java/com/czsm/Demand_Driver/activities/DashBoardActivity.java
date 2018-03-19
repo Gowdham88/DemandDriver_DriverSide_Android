@@ -85,7 +85,7 @@ public class DashBoardActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent map = new Intent(getApplicationContext(),BookServiceMapActivity.class);
+                Intent map = new Intent(getApplicationContext(),BookmapActivity.class);
                 startActivity(map);
 
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.czsm.Demand_Driver.PreferencesHelper;
 import com.czsm.Demand_Driver.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -30,9 +31,34 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                boolean isLoggedIn = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_LOGGED_IN);
+                if(isLoggedIn )
+                {
+                    boolean isDashboard = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_DASHBOARD);
+                    if(isDashboard){
+                        Intent indashboard=new Intent(SplashActivity.this,DashBoardActivity.class);
+                        indashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(indashboard);
+                        finish();
+
+                    }
+                    else{
+                        Intent inservice=new Intent(SplashActivity.this,ServiceProviderActivity.class);
+                        inservice.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(inservice);
+                        finish();
+                    }
+
+
+                }
+                else {
+                    Intent in=new Intent(SplashActivity.this,LoginScreenActivity.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(in);
+                    finish();
+                }
 //                Toast.makeText(SplashActivity.this, "haii", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SplashActivity.this,LoginScreenActivity.class));
-                SplashActivity.this.finish();
             }
         }, 3000);
     }
