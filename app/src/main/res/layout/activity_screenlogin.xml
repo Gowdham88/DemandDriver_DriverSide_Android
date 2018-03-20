@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/parentlay"
     android:layout_height="match_parent">
 <FrameLayout
     android:id="@+id/frm_lay"
@@ -50,7 +51,7 @@
         android:layout_below="@+id/country_txt"
         android:layout_height="60dp"
         android:inputType="phone"
-        android:text="India(+91)"
+        android:text=""
         android:textSize="12dp"
         android:textColor="@color/phonenum_clr"
         android:gravity="center_vertical"

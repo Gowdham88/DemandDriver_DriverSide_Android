@@ -2,6 +2,7 @@ package com.czsm.Demand_Driver.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,19 +15,21 @@ import android.widget.TextView;
 
 import com.czsm.Demand_Driver.R;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 public class TariffPlanActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-//    @Optional
+    @Nullable
     @BindView(R.id.tariff_plan_assurance_textview)
     TextView assuranceTextview;
-//    @Optional
+    @Nullable
     @BindView(R.id.tariff_plan_pricing_textview)
     TextView pricingTextview;
     String serviceId;
@@ -54,10 +57,10 @@ public class TariffPlanActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_tariff_plan);
                 ButterKnife.bind(this);
                 if (serviceId.equalsIgnoreCase("2")) { // car/pick mechanic
-                    assuranceTextview.setText(getString(R.string.tariff_assurance_mechanic));
+//                    assuranceTextview.setText(getString(R.string.tariff_assurance_mechanic));
                     pricingTextview.setText(getString(R.string.tariff_pricing_mechanic));
                 } else if (Arrays.asList(new String[]{"3", "4", "5"}).contains(serviceId)) {
-                    assuranceTextview.setText(getString(R.string.tariff_assurance_elec_mas_pl_carp));
+//                    assuranceTextview.setText(getString(R.string.tariff_assurance_elec_mas_pl_carp));
                     pricingTextview.setText(getString(R.string.tariff_pricing_elec_mas_pl_carp));
                 }
             }
@@ -78,7 +81,7 @@ public class TariffPlanActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
-    public class TarrifAdapter extends ArrayAdapter<String> {
+    public static class TarrifAdapter extends ArrayAdapter<String> {
         Context context;
         int resource;
         ArrayList<String> list;

@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -45,6 +47,7 @@ public class LoginScreenActivity extends AppCompatActivity {
 EditText PhoneEdt;
     ImageView FrdRelLay;
 ImageView RelImg;
+RelativeLayout parentLayout;
     CheckBox isProvider;
     private FirebaseAuth mAuth;
     String phoneNumber;
@@ -53,6 +56,7 @@ ImageView RelImg;
     String mVerificationId;
     RadioButton mRadioBtn;
     PhoneAuthCredential credential;
+    TextView countrycode;
     private android.support.v7.app.AlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,16 @@ ImageView RelImg;
         setContentView(R.layout.activity_screenlogin);
         PhoneEdt=(EditText)findViewById(R.id.phone_edt);
    FrdRelLay=(ImageView) findViewById(R.id.rel_lay);
+        parentLayout=(RelativeLayout)findViewById(R.id.parentlay);
+        parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.hideKeyboard(LoginScreenActivity.this);
+            }
+        });
+        countrycode=(TextView)findViewById(R.id.code_txt);
+        countrycode.setText("India(+91)");
+        String getcountrycode=countrycode.getText().toString();
         RelImg=(ImageView)findViewById(R.id.rel_img);
         mAuth = FirebaseAuth.getInstance();
         isProvider=(CheckBox) findViewById(R.id.login_isprovider_checkbox);

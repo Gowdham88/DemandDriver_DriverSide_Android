@@ -47,7 +47,6 @@
         <activity
             android:name=".activities.ValidateActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
@@ -111,9 +110,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!--<meta-data-->
-            <!--android:name="com.google.android.geo.API_KEY"-->
-            <!--android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" />-->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.geo.API_KEY" -->
+        <!-- android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" /> -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJYIzy_nsoG6vklpRathGgBz1bxXNWfC8" />
@@ -158,7 +157,7 @@
             android:name=".Service.CapPhoto"
             android:enabled="true" />
 
-        <receiver android:name=".Service.MyBroadcastReceiver"></receiver>
+        <receiver android:name=".Service.MyBroadcastReceiver" />
 
         <!-- <service android:name="com.czsm.driverin.receiver.MyFirebaseMessagingService"> -->
         <!-- <intent-filter> -->
@@ -173,6 +172,7 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
 
+        <activity android:name=".activities.TariffActivity"></activity>
     </application>
 
 </manifest>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:weightSum="4"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="4">
 
 <android.support.v7.widget.Toolbar
     android:id="@+id/user_service_details_toolbar"
@@ -13,11 +13,13 @@ android:weightSum="4"
     android:background="?attr/colorPrimary"
     android:theme="@style/AllinAllMaterialTheme.AppBarOverlay"
     android:titleTextAppearance="@color/textColorPrimary" />
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="0dp"
+    android:layout_weight="2.7"/>
 <!--<fragment-->
     <!--android:id="@+id/map"-->
     <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
@@ -26,169 +28,169 @@ android:weightSum="4"
     <!--android:layout_weight="2.7" />-->
 
 
-<!--<ScrollView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1.3">-->
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1.3">
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_margin="@dimen/medium_margin">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/medium_margin">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/service_details_call_driver_linearlayout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:weightSum="3">-->
+        <LinearLayout
+            android:id="@+id/service_details_call_driver_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3">
 
-            <!--<Spinner-->
-                <!--android:id="@+id/service_details_driver_type_spinner"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/border"-->
-                <!--android:entries="@array/driver_type_array" />-->
+            <Spinner
+                android:id="@+id/service_details_driver_type_spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:entries="@array/driver_type_array" />
 
-            <!--<LinearLayout-->
-                <!--android:layout_width=".5dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@color/darkGray" />-->
+            <LinearLayout
+                android:layout_width=".5dp"
+                android:layout_height="match_parent"
+                android:background="@color/darkGray" />
 
-            <!--<AutoCompleteTextView-->
-                <!--android:id="@+id/service_details_car_type_spinner"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="2"-->
-                <!--android:hint="Enter or select car name."-->
-                <!--android:background="@drawable/border"-->
-                <!--android:textColorHint="#000"-->
-                <!--android:textSize="15dp"-->
-                <!--android:entries="@array/car_type_array" />-->
-        <!--</LinearLayout>-->
+            <AutoCompleteTextView
+                android:id="@+id/service_details_car_type_spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:hint="Enter or select car name."
+                android:background="@drawable/border"
+                android:textColorHint="#000"
+                android:textSize="15dp"
+                android:entries="@array/car_type_array" />
+        </LinearLayout>
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_below="@+id/service_details_call_driver_linearlayout"-->
-            <!--android:weightSum="3">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/service_details_call_driver_linearlayout"
+            android:weightSum="3">
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/border"-->
-                <!--android:orientation="vertical"-->
-                <!--android:weightSum="6">-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:weightSum="6">
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="1" />-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/service_details_service_textview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="Driver"-->
-                    <!--android:textSize="@dimen/text_size_large" />-->
-
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/service_details_service_imageview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="2.5"-->
-                    <!--android:src="@drawable/driver" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="0.5" />-->
+                <TextView
+                    android:id="@+id/service_details_service_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Driver"
+                    android:textSize="@dimen/text_size_large" />
 
 
-            <!--</LinearLayout>-->
+                <ImageView
+                    android:id="@+id/service_details_service_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2.5"
+                    android:src="@drawable/driver" />
 
-            <!--<LinearLayout-->
-                <!--android:id="@+id/service_details_tariff_linearlayout"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/border"-->
-                <!--android:orientation="vertical"-->
-                <!--android:weightSum="6">-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="1" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/service_details_tariff_textview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="Tariff"-->
-                    <!--android:textSize="@dimen/text_size_large" />-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5" />
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/service_details_tariff_imageview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:src="@drawable/tariff" />-->
+            </LinearLayout>
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="1" />-->
-            <!--</LinearLayout>-->
+            <LinearLayout
+                android:id="@+id/service_details_tariff_linearlayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:weightSum="6">
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/border"-->
-                <!--android:orientation="vertical"-->
-                <!--android:weightSum="2.1">-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/service_details_book_now_textview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="Book Now" />-->
+                <TextView
+                    android:id="@+id/service_details_tariff_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Tariff"
+                    android:textSize="@dimen/text_size_large" />
 
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height=".5dp"-->
-                    <!--android:background="@color/darkGray" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/service_details_book_later_textview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="Book Later" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-    <!--</RelativeLayout>-->
-<!--</ScrollView>-->
+                <ImageView
+                    android:id="@+id/service_details_tariff_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/tariff" />
 
-<!--<Button-->
-    <!--android:id="@+id/service_details_book_button"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#ffca00"-->
-    <!--android:text="@string/book"-->
-    <!--android:textColor="@color/black"/>-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:orientation="vertical"
+                android:weightSum="2.1">
+
+                <TextView
+                    android:id="@+id/service_details_book_now_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Book Now" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/darkGray" />
+
+                <TextView
+                    android:id="@+id/service_details_book_later_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Book Later" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
+
+<Button
+    android:id="@+id/service_details_book_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffca00"
+    android:text="@string/book"
+    android:textColor="@color/black"/>
 
 
 </LinearLayout>

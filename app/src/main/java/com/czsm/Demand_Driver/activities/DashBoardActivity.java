@@ -13,9 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.czsm.Demand_Driver.Manifest;
 import com.czsm.Demand_Driver.R;
 import com.czsm.Demand_Driver.helper.RESTClient;
 import com.czsm.Demand_Driver.receiver.NotificationBroadcastReceiver;

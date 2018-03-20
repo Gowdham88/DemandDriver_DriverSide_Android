@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
     ImageView RelImg;
     String otpNumber;
     String value;
+    RelativeLayout parentLayout;
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -57,6 +59,13 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
         FrdRelLay = (ImageView) findViewById(R.id.rel_lay);
         RelImg = (ImageView) findViewById(R.id.rel_img);
         mResendtxt=(TextView)findViewById(R.id.resend_txt);
+        parentLayout=(RelativeLayout)findViewById(R.id.parent_lay);
+        parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.hideKeyboard(ValidateActivity.this);
+            }
+        });
         Intent intent = this.getIntent();
         bundle = intent.getExtras();
         mAuth = FirebaseAuth.getInstance();

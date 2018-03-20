@@ -35,20 +35,20 @@ public class SplashActivity extends AppCompatActivity {
                 boolean isLoggedIn = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_LOGGED_IN);
                 if(isLoggedIn )
                 {
-                    boolean isDashboard = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_DASHBOARD);
-                    if(isDashboard){
+//                    boolean isDashboard = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_DASHBOARD);
+//                    if(isDashboard){
                         Intent indashboard=new Intent(SplashActivity.this,DashBoardActivity.class);
                         indashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(indashboard);
                         finish();
 
-                    }
-                    else{
-                        Intent inservice=new Intent(SplashActivity.this,ServiceProviderActivity.class);
-                        inservice.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(inservice);
-                        finish();
-                    }
+//                    }
+//                    else{
+//                        Intent inservice=new Intent(SplashActivity.this,ServiceProviderActivity.class);
+//                        inservice.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(inservice);
+//                        finish();
+//                    }
 
 
                 }
