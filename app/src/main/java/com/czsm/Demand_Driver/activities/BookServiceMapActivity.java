@@ -556,7 +556,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
             if (distance <= SURROUNDING_DISTANCE) {
                 filterserviceproviders.add(prov);
                 distancelist.add(distance);
-
+//
             }
         }
 
@@ -569,7 +569,7 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
 
                 minIndex.add(nstore.indexOf(distancelist.get(i)));
 
-//                Log.e("ssssssss", "" + minIndex.get(i));
+                Log.e("ssssssss", "" + minIndex.get(i));
                 Log.e("ssssssss", "" + filterserviceproviders.get(i).getProviderid());
 
             }

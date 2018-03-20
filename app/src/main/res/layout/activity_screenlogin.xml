@@ -129,7 +129,6 @@
         android:text="  Is Service Provider?"
         android:textColor="@color/textmain_clr"
         android:layout_marginLeft="15dp"
-        android:theme="@style/checkboxStyle"
         android:checked="false" />
     <!--<TextView-->
         <!--style="@style/FontAvenirBook"-->

@@ -83,7 +83,7 @@
             android:textSize="16dp"
             android:gravity="center"
             android:layout_marginTop="215dp"
-            android:layout_marginLeft="85dp"
+            android:layout_marginLeft="80dp"
             android:textColor="@color/textmain_clr"/>
 
 

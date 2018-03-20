@@ -64,7 +64,7 @@ public class UserSupportActivity extends AppCompatActivity  implements RESTClien
                 //set message, title, and icon
                 .setTitle("Sign out")
                 .setMessage("Do you want to sign out?")
-                .setIcon(R.drawable.ic_launcher)
+                .setIcon(R.drawable.logo01)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         allinAllController.userSignOut(RESTClient.ID);
@@ -76,7 +76,7 @@ public class UserSupportActivity extends AppCompatActivity  implements RESTClien
                         stopService(service);
                         FirebaseAuth.getInstance().signOut();
                         RESTClient.ID = null;
-                        Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent loginIntent = new Intent(getApplicationContext(), LoginScreenActivity.class);
                         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(loginIntent);
                         finish();

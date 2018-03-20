@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,9 +15,13 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 
+import com.czsm.Demand_Driver.PreferencesHelper;
 import com.czsm.Demand_Driver.R;
 import com.czsm.Demand_Driver.Utils;
+import com.czsm.Demand_Driver.model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
@@ -26,7 +31,14 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class LoginScreenActivity extends AppCompatActivity {
@@ -135,35 +147,38 @@ ImageView RelImg;
                 mVerificationId = verificationId;
 
                 mResendToken = token;
-
-                if (isProvider.isChecked()){
-                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
-                    intent.putExtra("value","dashboard");
-                    intent.putExtra("string",true);
-                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
-                    intent.putExtra("vericode",mVerificationId.toString());
-
-//                    intent.putExtra("mtoken",mResendToken);
-                    startActivity(intent);
-                isProvider.setChecked(false);
-                PhoneEdt.setText("");
-                }
-                else{
-                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
-//                    intent.putExtra("value","service");
-                    intent.putExtra("phonenumber1",PhoneEdt.getText().toString());
-                    intent.putExtra("vericode1",mVerificationId.toString());
-                    startActivity(intent);
-                    PhoneEdt.setText("");
-                    isProvider.setChecked(false);
-//                    finish();
-                }
+                final FirebaseUser user = mAuth.getCurrentUser();
+                AddDatabase(phoneNumber);
+//                if (isProvider.isChecked()){
+//                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+//                    intent.putExtra("value","dashboard");
+//                    intent.putExtra("string",true);
+//                    intent.putExtra("phonenumber",PhoneEdt.getText().toString());
+//                    intent.putExtra("vericode",mVerificationId.toString());
+//
+////                    intent.putExtra("mtoken",mResendToken);
+//                    startActivity(intent);
+//                isProvider.setChecked(false);
+//                PhoneEdt.setText("");
+//                }
+//                else{
+//                    Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
+////                    intent.putExtra("value","service");
+//                    intent.putExtra("phonenumber1",PhoneEdt.getText().toString());
+//                    intent.putExtra("vericode1",mVerificationId.toString());
+//                    startActivity(intent);
+//                    PhoneEdt.setText("");
+//                    isProvider.setChecked(false);
+////                    finish();
+//                }
 
             }
         };
 
 
     }
+
+
 
     private void startPhoneNumberVerification(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -182,6 +197,8 @@ ImageView RelImg;
                         if (task.isSuccessful()) {
 //                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
+//                            PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
+
 //                            hideProgressDialog();
 //                            Toast.makeText(LoginScreenActivity.this, (CharSequence) user, Toast.LENGTH_SHORT).show();
 //                            Intent intent=new Intent(LoginScreenActivity.this,ValidateActivity.class);
@@ -199,6 +216,58 @@ ImageView RelImg;
     }
 
 
+    private void AddDatabase(String phoneNumber){
+
+        String uid = PreferencesHelper.getPreference(LoginScreenActivity.this, PreferencesHelper.PREFERENCE_FIREBASE_UUID);
+//        Toast.makeText(LoginScreenActivity.this, uid, Toast.LENGTH_SHORT).show();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        final Users users = new Users(PhoneEdt.getText().toString());
+//        showProgressDialog();
+        Map<String, Boolean> comData = new HashMap<>();
+        comData.put(uid, true);
+
+        Users users1 = new Users(phoneNumber,uid);
+
+        db.collection("Users").add(users1).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+
+                if (isProvider.isChecked()) {
+                    Intent intent = new Intent(LoginScreenActivity.this, ValidateActivity.class);
+                    intent.putExtra("value", "dashboard");
+                    intent.putExtra("string", true);
+                    intent.putExtra("phonenumber", PhoneEdt.getText().toString());
+                    intent.putExtra("vericode", mVerificationId.toString());
+
+//                    intent.putExtra("mtoken",mResendToken);
+                    startActivity(intent);
+                    isProvider.setChecked(false);
+                    PhoneEdt.setText("");
+                } else {
+                    Intent intent = new Intent(LoginScreenActivity.this, ValidateActivity.class);
+//                    intent.putExtra("value","service");
+                    intent.putExtra("phonenumber1", PhoneEdt.getText().toString());
+                    intent.putExtra("vericode1", mVerificationId.toString());
+                    startActivity(intent);
+                    PhoneEdt.setText("");
+                    isProvider.setChecked(false);
+//                    finish();
+                }
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Error", "Error adding document", e);
+                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
+    }
 
     public void showProgressDialog() {
 

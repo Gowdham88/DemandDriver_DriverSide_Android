@@ -95,6 +95,9 @@
         <activity
             android:name=".activities.DashBoardActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.BookmapActivity"
+            android:screenOrientation="portrait" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -107,9 +110,13 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <!--<meta-data-->
+            <!--android:name="com.google.android.geo.API_KEY"-->
+            <!--android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" />-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" />
+            android:value="AIzaSyDJYIzy_nsoG6vklpRathGgBz1bxXNWfC8" />
 
         <!-- <activity -->
         <!-- android:name="com.czsm.driverin.activities.BookServiceMapActivity" -->
