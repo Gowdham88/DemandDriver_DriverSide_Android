@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DemandDriver.iml" filepath="$PROJECT_DIR$/DemandDriver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DemandDriverdriver.iml" filepath="$PROJECT_DIR$/DemandDriverdriver.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

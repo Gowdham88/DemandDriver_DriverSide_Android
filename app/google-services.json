@@ -40,15 +40,66 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "380284191115-fa8c11595b87hfvqg80ti5d9493e4ig4.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.CZ.Demand-Driver"
               }
-            },
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380284191115:android:b47165c5e2a0417c",
+        "android_client_info": {
+          "package_name": "com.czsm.DD_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380284191115-2g8kf05kdr716lap07jhtlu1kno6egoo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.czsm.DD_driver",
+            "certificate_hash": "c8120cd6ff053c52864a2c24373906363a0b2f8a"
+          }
+        },
+        {
+          "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv46sopDf8ZYADTgfjTSx5YLYjf5fgu5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
             {
               "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "380284191115-fa8c11595b87hfvqg80ti5d9493e4ig4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.CZ.Demand-Driver"
+              }
             }
           ]
         },

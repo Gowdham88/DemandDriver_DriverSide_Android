@@ -120,17 +120,17 @@
         <!--android:layout_alignBottom="@+id/textView"-->
         <!--android:layout_alignParentStart="true"-->
         <!--android:layout_marginStart="13dp" />-->
-    <CheckBox
-        android:id="@+id/login_isprovider_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/mbl_lay"
-        android:button="@drawable/custom_checkbox"
-        android:text="  Is Service Provider?"
-        android:textColor="@color/textmain_clr"
-        android:layout_marginLeft="15dp"
-        android:checked="false" />
+    <!--<CheckBox-->
+        <!--android:id="@+id/login_isprovider_checkbox"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_below="@+id/mbl_lay"-->
+        <!--android:button="@drawable/custom_checkbox"-->
+        <!--android:text="  Is Service Provider?"-->
+        <!--android:textColor="@color/textmain_clr"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:checked="false" />-->
     <!--<TextView-->
         <!--style="@style/FontAvenirBook"-->
         <!--android:layout_width="wrap_content"-->
