@@ -21,7 +21,7 @@
 
     <!-- This app has permission to register and receive dataf message. -->
     <application
-        android:name="com.czsm.DD_driver.App"
+        android:name=".App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/logo01copy"
@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AllinAllMaterialTheme">
         <activity
-            android:name="com.czsm.DD_driver.activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AllinAllMaterialTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -40,65 +40,64 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.czsm.DD_driver.activities.LoginScreenActivity"
+            android:name=".activities.LoginScreenActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.ValidateActivity"
+            android:name=".activities.ValidateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserSignupActivity"
+            android:name=".activities.UserSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.czsm.DD_driver.activities.ServiceProviderSignupActivity"
+            android:name=".activities.ServiceProviderSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.czsm.DD_driver.activities.ServiceProviderActivity"
+            android:name=".activities.ServiceProviderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserActivity"
+            android:name=".activities.UserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.SendOTPActivity"
+            android:name=".activities.SendOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.ProviderBookingActivity"
+            android:name=".activities.ProviderBookingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserBookingHistoryActivity"
+            android:name=".activities.UserBookingHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.VerifyOTPActivity"
+            android:name=".activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserOngoingBookingActivity"
+            android:name=".activities.UserOngoingBookingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.BookServiceMapActivity"
+            android:name=".activities.BookServiceMapActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserSupportActivity"
+            android:name=".activities.UserSupportActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.UserHistoryActivity"
+            android:name=".activities.UserHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.OngoingAppointmentActivity"
+            android:name=".activities.OngoingAppointmentActivity"
             android:screenOrientation="portrait" />
-         <activity
-         android:name="com.czsm.DD_driver.activities.DashBoardActivity"
-         android:screenOrientation="portrait" />
         <activity
-            android:name="com.czsm.DD_driver.activities.BookmapActivity"
+            android:name=".activities.DashBoardActivity"
             android:screenOrientation="portrait" />
-
-
-        <activity android:name="com.czsm.DD_driver.activities.MapActivity"
-             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.BookmapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MapActivity"
+            android:screenOrientation="portrait" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -124,18 +123,18 @@
         <!-- android:label="@string/title_activity_service_details_map" -->
         <!-- android:screenOrientation="portrait" /> -->
         <activity
-            android:name="com.czsm.DD_driver.activities.TariffPlanActivity"
+            android:name=".activities.TariffPlanActivity"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name="com.czsm.DD_driver.receiver.NotificationBroadcastReceiver"
+            android:name=".receiver.NotificationBroadcastReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="allinallapp.NOTIFICATION_RECEIVED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.czsm.DD_driver.gcm.GCMBroadcastReceiver"
+            android:name=".gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
 
@@ -151,15 +150,15 @@
             android:name="com.pushbots.push.DefaultPushHandler"
             android:process=":pushProcess" />
         <receiver
-            android:name="com.czsm.DD_driver.receiver.PushNotificationReceiver"
+            android:name=".receiver.PushNotificationReceiver"
             android:process=":pushProcess" />
 
-        <service android:name="com.czsm.DD_driver.gcm.GCMIntentService" />
+        <service android:name=".gcm.GCMIntentService" />
         <service
-            android:name="com.czsm.DD_driver.Service.CapPhoto"
+            android:name=".Service.CapPhoto"
             android:enabled="true" />
 
-        <receiver android:name="com.czsm.DD_driver.Service.MyBroadcastReceiver" />
+        <receiver android:name=".Service.MyBroadcastReceiver" />
 
         <!-- <service android:name="com.czsm.driverin.receiver.MyFirebaseMessagingService"> -->
         <!-- <intent-filter> -->
@@ -173,6 +172,7 @@
         <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
+        <activity android:name=".activities.CurrentReqActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.czsm.DD_driver.activities;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -32,11 +35,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public class ValidateActivity extends AppCompatActivity {
-EditText mOtpEdt;
-TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
+    EditText mOtpEdt;
+    TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
     Bundle bundle;
     String phonrnum;
     ImageView FrdRelLay;
@@ -74,13 +78,13 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
         mAuth = FirebaseAuth.getInstance();
 //        value = bundle.getString("value", "empty");
 //     if(value.equals("dashboard")){
-         if (bundle != null) {
-             phonrnum = bundle.getString("phonenumber");
-             mVerificationId=bundle.getString("vericode");
+        if (bundle != null) {
+            phonrnum = bundle.getString("phonenumber");
+            mVerificationId=bundle.getString("vericode");
 //            mResendToken= (PhoneAuthProvider.ForceResendingToken) bundle.get("mtoken");
 //            Toast.makeText(this, mVerificationId, Toast.LENGTH_SHORT).show();
 //         }
-     }
+        }
 //     else {
 //
 //             phonrnum = bundle.getString("phonenumber1");
@@ -116,27 +120,78 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
             }
         });
 
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential credential) {
+                Log.e("okiok", "onVerificationCompleted:" + credential);
+                signInWithPhoneAuthCredential(credential);
+            }
 
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+
+//                Log.w(TAG, "onVerificationFailed", e);
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+//                    mPhoneNumberField.setError("Invalid phone number.");
+                } else if (e instanceof FirebaseTooManyRequestsException) {
+                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
+                            Snackbar.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
+                // The SMS verification code has been sent to the provided phone number, we
+                // now need to ask the user to enter the code and then construct a credential
+                // by combining the code with a verification ID.
+                //Log.d(TAG, "onCodeSent:" + verificationId);
+//                Toast.makeText(LoginScreenActivity.this,"Verification code sent to mobile",Toast.LENGTH_LONG).show();
+                // Save verification ID and resending token so we can use them later
+                mVerificationId = verificationId;
+
+                mResendToken = token;
+                final FirebaseUser user = mAuth.getCurrentUser();
+
+
+            }
+        };
         mResendtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                resendVerificationCode(phonrnum, mResendToken);
+                startPhoneNumberVerification(phonrnum);
+                resendVerificationCode(phonrnum, mResendToken);
+            }
+        });
+        mResendtxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPhoneNumberVerification(phonrnum);
+                resendVerificationCode(phonrnum, mResendToken);
             }
         });
 
 
     }
 
-//    private void resendVerificationCode(String phoneNumber,
-//                                        PhoneAuthProvider.ForceResendingToken token) {
-//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-//                phoneNumber,        // Phone number to verify
-//                60,                 // Timeout duration
-//                TimeUnit.SECONDS,   // Unit of timeout
-//                ValidateActivity.this,               // Activity (for callback binding)
-//                mCallbacks,         // OnVerificationStateChangedCallbacks
-//                token);             // ForceResendingToken from callbacks
-//    }
+    private void startPhoneNumberVerification(String phoneNumber) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks);        // OnVerificationStateChangedCallbacks
+    }
+
+    private void resendVerificationCode(String phoneNumber,
+                                        PhoneAuthProvider.ForceResendingToken token) {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                ValidateActivity.this,               // Activity (for callback binding)
+                mCallbacks,         // OnVerificationStateChangedCallbacks
+                token);             // ForceResendingToken from callbacks
+    }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -147,9 +202,10 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
 
                             FirebaseUser user = task.getResult().getUser();
                             String uid = user.getUid();
+                            String Phno=user.getPhoneNumber();
                             PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID,uid);
                             uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
-                            Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 
                             AddDatabase(phonrnum,uid);
 ////
@@ -175,11 +231,11 @@ TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Drivers").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Users").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+                Intent intent=new Intent(ValidateActivity.this,DashBoardActivity.class);
                 startActivity(intent);
                 finish();
             }

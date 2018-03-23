@@ -112,7 +112,7 @@
 
     <RelativeLayout
         android:layout_width="130dp"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:layout_below="@+id/verifyotp_lay"
         android:background="@drawable/bgroundclr"
         android:layout_marginTop="90dp">
@@ -120,7 +120,7 @@
         android:id="@+id/resend_txt"
         style="@style/FontAvenirBook"
         android:layout_width="130dp"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:text="Resend OTP"
         android:layout_marginLeft="15dp"
         android:textSize="12dp"
