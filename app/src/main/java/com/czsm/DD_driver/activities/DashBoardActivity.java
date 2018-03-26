@@ -34,7 +34,7 @@ public class DashBoardActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
+        onBackPressed();
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         Bundle extras     = getIntent().getExtras();
         String fromPush   = null;
@@ -165,16 +165,20 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
 
+//    @Override
+//    public void onDestroy() {
+//        try {
+//            unregisterReceiver(mReceiver);
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//        }
+//        super.onDestroy();
+//    }
     @Override
-    public void onDestroy() {
-        try {
-            unregisterReceiver(mReceiver);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        super.onDestroy();
-    }
+    public void onBackPressed() {
+        finish();
 
+    }
 
 //    private void showPendingBookingDialog(String message,final DataSnapshot child) {
 //        new android.support.v7.app.AlertDialog.Builder(getContext())

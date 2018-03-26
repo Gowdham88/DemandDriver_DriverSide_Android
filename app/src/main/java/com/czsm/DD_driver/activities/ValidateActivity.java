@@ -194,6 +194,7 @@ public class ValidateActivity extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        showProgressDialog();
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -208,6 +209,7 @@ public class ValidateActivity extends AppCompatActivity {
 //                            Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 
                             AddDatabase(phonrnum,uid);
+                            hideProgressDialog();
 ////
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -215,6 +217,7 @@ public class ValidateActivity extends AppCompatActivity {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 Toast.makeText(ValidateActivity.this,"Verification failed code invalid",Toast.LENGTH_LONG).show();
+                                hideProgressDialog();
                             }
                         }
                     }
@@ -235,7 +238,7 @@ public class ValidateActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,DashBoardActivity.class);
+                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
                 startActivity(intent);
                 finish();
             }

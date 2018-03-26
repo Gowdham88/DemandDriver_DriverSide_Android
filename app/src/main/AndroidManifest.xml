@@ -18,6 +18,7 @@
     <!-- GCM requires a Google account. -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <!-- This app has permission to register and receive dataf message. -->
     <application
@@ -91,6 +92,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DashBoardActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.BookmapActivity"
@@ -98,6 +100,18 @@
         <activity
             android:name=".activities.MapActivity"
             android:screenOrientation="portrait" />
+        <service android:name=".MyFirebaseMessagingService"
+            >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -116,7 +130,7 @@
         <!-- android:value="AIzaSyDK8-PV7Lc0iQVsi5IA-dj0N6COnRqNgh8" /> -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBIggS-TXr7qBFnKJ-UH-8RqLqHpu9RmUY" />
+            android:value="AIzaSyCp-kY4JQkP6rHt1s8PPJS0q5XQU9EfLV4" />
 
         <!-- <activity -->
         <!-- android:name="com.czsm.driverin.activities.BookServiceMapActivity" -->
@@ -172,7 +186,8 @@
         <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
-        <activity android:name=".activities.CurrentReqActivity"></activity>
+        <activity android:name=".activities.CurrentReqActivity" />
+        <activity android:name=".activities.MapScreenActivity"></activity>
     </application>
 
 </manifest>
