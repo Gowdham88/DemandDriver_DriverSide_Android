@@ -1,6 +1,8 @@
 package com.czsm.DD_driver.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.czsm.DD_driver.R;
 public class SplashActivity extends AppCompatActivity {
     Window mWindow;
     ImageView topSlice,BtmSlice,logoImg,TextImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,29 +34,19 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+//
 
                 boolean isLoggedIn = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_LOGGED_IN);
                 if(isLoggedIn )
                 {
-//                    boolean isDashboard = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_DASHBOARD);
-//                    if(isDashboard){
-                        Intent indashboard=new Intent(SplashActivity.this,DashBoardActivity.class);
+                        Intent indashboard=new Intent(SplashActivity.this,LoginScreenActivity.class);
                         indashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(indashboard);
                         finish();
 
-//                    }
-//                    else{
-//                        Intent inservice=new Intent(SplashActivity.this,ServiceProviderActivity.class);
-//                        inservice.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(inservice);
-//                        finish();
-//                    }
-
-
                 }
                 else {
-                    Intent in=new Intent(SplashActivity.this,LoginScreenActivity.class);
+                    Intent in=new Intent(SplashActivity.this,ServiceProviderActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
                     finish();

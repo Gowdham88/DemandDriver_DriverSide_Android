@@ -40,15 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "380284191115-fa8c11595b87hfvqg80ti5d9493e4ig4.apps.googleusercontent.com",
+              "client_id": "380284191115-nctsf4t8a7q9okpghsho4lgu8guacboj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.CZ.Demand-Driver"
+                "bundle_id": "com.cz.DD-Driver"
               }
+            },
+            {
+              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },
@@ -91,15 +91,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "380284191115-fa8c11595b87hfvqg80ti5d9493e4ig4.apps.googleusercontent.com",
+              "client_id": "380284191115-nctsf4t8a7q9okpghsho4lgu8guacboj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.CZ.Demand-Driver"
+                "bundle_id": "com.cz.DD-Driver"
               }
+            },
+            {
+              "client_id": "380284191115-emcnoed5rdsig16googdmohecovcq4fb.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },

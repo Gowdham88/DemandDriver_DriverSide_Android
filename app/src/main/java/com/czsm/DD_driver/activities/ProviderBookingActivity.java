@@ -102,8 +102,8 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             @Override
             public void onClick(View v) {
 
-                showConfirmDialog("Cancelled","Are you sure you want to cancel this appointment.");
-
+//                 showConfirmDialog("Cancelled","Are you sure you want to cancel this appointment.");
+//
 
             }
         });
@@ -112,7 +112,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             @Override
             public void onClick(View v) {
 
-                showConfirmDialog("Completed","Are you sure you want to cancel this appointment.");
+//                showConfirmDialog("Completed","Are you sure you want to cancel this appointment.");
 
             }
         });
@@ -120,81 +120,81 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
     }
 
-    private void showConfirmDialog(final String type,final String message) {
-        new android.support.v7.app.AlertDialog.Builder(this)
-                //set message, title, and icon
-                .setTitle("Cancel")
-                .setMessage(message)
-                .setIcon(R.drawable.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-
-                        ValueEventListener maplistner = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                                    child.getRef().child("status").setValue(type);
-
-                                    Intent service = new Intent(getApplicationContext(), CapPhoto.class);
-                                    stopService(service);
-
-
-                                }
-
-                                Toast.makeText(getApplicationContext(),"Your appointment has been "+type,Toast.LENGTH_SHORT).show();
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                            }
-                        };
-
-                        db.child("AppointmentList").orderByKey().equalTo(userid).addListenerForSingleValueEvent(maplistner);
-
-                        ValueEventListener listner = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                                    ServiceproviderList data = child.getValue(ServiceproviderList.class);
-
-                                    if(data.getStatus().equals("onduty"))
-
-                                        child.getRef().child("status").setValue("free");
-
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                            }
-                        };
-
-                        db.child("ServiceproviderList").orderByKey().equalTo(id).addValueEventListener(listner);
-
-
-                    }
-                })
-
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                }).show();
-    }
+//    private void showConfirmDialog(final String type,final String message) {
+//        new android.support.v7.app.AlertDialog.Builder(this)
+//                //set message, title, and icon
+//                .setTitle("Cancel")
+//                .setMessage(message)
+//                .setIcon(R.drawable.ic_launcher)
+//                .setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//
+//                        ValueEventListener maplistner = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                                    child.getRef().child("status").setValue(type);
+//
+//                                    Intent service = new Intent(getApplicationContext(), CapPhoto.class);
+//                                    stopService(service);
+//
+//
+//                                }
+//
+//                                Toast.makeText(getApplicationContext(),"Your appointment has been "+type,Toast.LENGTH_SHORT).show();
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                            }
+//                        };
+//
+//                        db.child("AppointmentList").orderByKey().equalTo(userid).addListenerForSingleValueEvent(maplistner);
+//
+//                        ValueEventListener listner = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                                    ServiceproviderList data = child.getValue(ServiceproviderList.class);
+//
+//                                    if(data.getStatus().equals("onduty"))
+//
+//                                        child.getRef().child("status").setValue("free");
+//
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                            }
+//                        };
+//
+//                        db.child("ServiceproviderList").orderByKey().equalTo(id).addValueEventListener(listner);
+//
+//
+//                    }
+//                })
+//
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        dialog.dismiss();
+//
+//                    }
+//                }).show();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -18,7 +18,9 @@
     <!-- GCM requires a Google account. -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.location" android:required="true" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
 
     <!-- This app has permission to register and receive dataf message. -->
     <application
@@ -91,25 +93,20 @@
             android:name=".activities.OngoingAppointmentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.DashBoardActivity"
-            android:noHistory="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.BookmapActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MapActivity"
             android:screenOrientation="portrait" />
-        <service android:name=".MyFirebaseMessagingService"
-            >
+
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
@@ -186,8 +183,17 @@
         <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
-        <activity android:name=".activities.CurrentReqActivity" />
-        <activity android:name=".activities.MapScreenActivity"></activity>
+        <activity
+            android:name=".activities.CurrentReqActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MapScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AlertActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.GPSTrackers"></activity>
     </application>
 
 </manifest>

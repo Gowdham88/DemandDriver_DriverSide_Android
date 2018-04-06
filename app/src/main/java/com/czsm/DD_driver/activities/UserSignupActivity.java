@@ -50,7 +50,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserSignupActivity extends AppCompatActivity implements Validator.ValidationListener, RESTClient.ServiceResponseInterface {
+public class UserSignupActivity extends AppCompatActivity {
 
 
     @BindView(R.id.user_signup_name_edittext)
@@ -114,10 +114,10 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
         db      = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
 
-        allinAllController        = new AllinAllController(this, this);
-        allinAllSharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
-        userSignupValidator       = new Validator(this);
-        userSignupValidator.setValidationListener(this);
+//        allinAllController        = new AllinAllController(this, this);
+//        allinAllSharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+//        userSignupValidator       = new Validator(this);
+//        userSignupValidator.setValidationListener(this);
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -197,99 +197,99 @@ public class UserSignupActivity extends AppCompatActivity implements Validator.V
         }
     }
 
-    @Override
-    public void onValidationSucceeded() {
+//    @Override
+//    public void onValidationSucceeded() {
+//
+//        auth.createUserWithEmailAndPassword(mobile+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(UserSignupActivity.this, new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                if(task.isSuccessful()){
+//
+//                    UserList user = new UserList();
+//                    user.setName(nameEditText.getText().toString());
+//                    user.setEmail(emailEditText.getText().toString());
+//                    user.setAddress(addressEditText.getText().toString());
+//                    user.setCountrycode(code);
+//                    user.setMobileno(mobile);
+//                    user.setProfilepic(encodedProfileImage);
+//
+//                    db.child("UserList").push().setValue(user);
+//
+//                    ValueEventListener postListener = new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                            for (DataSnapshot child: dataSnapshot.getChildren()) {
+//
+//                                UserList user = child.getValue(UserList.class);
+//                                Log.e("Dddddd",child.getKey());
+//
+//                                if(child.getKey() != null){
+//
+//                                    SharedPreferences.Editor editor = allinAllSharedPreferences.edit();
+//                                    editor.putBoolean("firstLaunch", false);
+//                                    editor.putString("userId", child.getKey());
+//                                    editor.putString("username", user.getName());
+//                                    editor.putString("usermobile", user.getMobileno());
+//                                    editor.putString("useraddress", user.getAddress());
+//                                    editor.putString("userimage", user.getProfilepic());
+//                                    editor.apply();
+//                                    Intent userIntent = new Intent(UserSignupActivity.this, DashBoardActivity.class);
+//                                    userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    startActivity(userIntent);
+//
+//
+//                                }
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                            Log.w("loadPost:onCancelled", databaseError.toException());
+//
+//                        }
+//                    };
+//                    db.child("UserList").orderByChild("mobileno").equalTo(mobile).addValueEventListener(postListener);
+//
+//
+//
+//                } else {
+//
+//                    Toast.makeText(getApplicationContext(),task.getException().toString(),Toast.LENGTH_SHORT).show();
+//
+//                }
+//
+//            }
+//        });
+//
+//
+//
+//    }
 
-        auth.createUserWithEmailAndPassword(mobile+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(UserSignupActivity.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful()){
-
-                    UserList user = new UserList();
-                    user.setName(nameEditText.getText().toString());
-                    user.setEmail(emailEditText.getText().toString());
-                    user.setAddress(addressEditText.getText().toString());
-                    user.setCountrycode(code);
-                    user.setMobileno(mobile);
-                    user.setProfilepic(encodedProfileImage);
-
-                    db.child("UserList").push().setValue(user);
-
-                    ValueEventListener postListener = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            for (DataSnapshot child: dataSnapshot.getChildren()) {
-
-                                UserList user = child.getValue(UserList.class);
-                                Log.e("Dddddd",child.getKey());
-
-                                if(child.getKey() != null){
-
-                                    SharedPreferences.Editor editor = allinAllSharedPreferences.edit();
-                                    editor.putBoolean("firstLaunch", false);
-                                    editor.putString("userId", child.getKey());
-                                    editor.putString("username", user.getName());
-                                    editor.putString("usermobile", user.getMobileno());
-                                    editor.putString("useraddress", user.getAddress());
-                                    editor.putString("userimage", user.getProfilepic());
-                                    editor.apply();
-                                    Intent userIntent = new Intent(UserSignupActivity.this, DashBoardActivity.class);
-                                    userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(userIntent);
-
-
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                            Log.w("loadPost:onCancelled", databaseError.toException());
-
-                        }
-                    };
-                    db.child("UserList").orderByChild("mobileno").equalTo(mobile).addValueEventListener(postListener);
-
-
-
-                } else {
-
-                    Toast.makeText(getApplicationContext(),task.getException().toString(),Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });
-
-
-
-    }
-
-
-    @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        Util.onValidationFailed(this, errors);
-    }
-
-    @Override
-    public void sendServiceResult(String serviceResult) {
-        if (serviceResult.equalsIgnoreCase(getString(R.string.user_signup_success))) {
-            SharedPreferences.Editor editor = allinAllSharedPreferences.edit();
-            editor.putBoolean("firstLaunch", false);
-            editor.putString("userId", RESTClient.ID);
-            editor.apply();
-            Intent userIntent = new Intent(this, DashBoardActivity.class);
-            userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(userIntent);
-        } else Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void requestFailed() {
-        Util.requestFailed(this);
-    }
+//    @Override
+//    public void onValidationFailed(List<ValidationError> errors) {
+//        Util.onValidationFailed(this, errors);
+//    }
+//
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//        if (serviceResult.equalsIgnoreCase(getString(R.string.user_signup_success))) {
+//            SharedPreferences.Editor editor = allinAllSharedPreferences.edit();
+//            editor.putBoolean("firstLaunch", false);
+//            editor.putString("userId", RESTClient.ID);
+//            editor.apply();
+//            Intent userIntent = new Intent(this, DashBoardActivity.class);
+//            userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(userIntent);
+//        } else Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+//    }
+//
+//    @Override
+//    public void requestFailed() {
+//        Util.requestFailed(this);
+//    }
 }

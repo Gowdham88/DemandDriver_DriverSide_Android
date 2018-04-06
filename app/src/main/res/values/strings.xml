@@ -122,7 +122,8 @@
     <string name="historyhm">My\nHistory</string>
     <string name="otpscreen_string">We have sent you an access code\n via SMS for mobile phone\n verification</string>
     <string name="req">Demand Driver Request</string>
-    <string name="reqtxt">You have a request for an\ndemand driver as this location\n</string>
+    <string name="reqtxt">You have a request to drive at</string>
+    <string name="reqtxtmore">this location</string>
 
     <string-array name="driver_type_array">
         <item>Hourly</item>

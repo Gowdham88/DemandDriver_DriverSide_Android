@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class UserSupportActivity extends AppCompatActivity  implements RESTClient.ServiceResponseInterface {
 
     private Button signoutButton;
-    private SharedPreferences allinallSharedPref;
+    private SharedPreferences sharedPreferences;
     private AllinAllController allinAllController;
 
     @Override
@@ -45,7 +45,7 @@ public class UserSupportActivity extends AppCompatActivity  implements RESTClien
         });
 
         allinAllController = new AllinAllController(UserSupportActivity.this, this);
-        allinallSharedPref = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         signoutButton      = (Button) findViewById(R.id.fragment_user_support_signout_button);
         signoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +67,10 @@ public class UserSupportActivity extends AppCompatActivity  implements RESTClien
                 .setIcon(R.drawable.logo01)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        allinAllController.userSignOut(RESTClient.ID);
-                        SharedPreferences.Editor editor = allinallSharedPref.edit();
-                        editor.putBoolean("firstLaunch", true);
-                        editor.remove("userId");
+//                        allinAllController.userSignOut(RESTClient.ID);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("activity_executed", true);
+//                        editor.remove("userId");
                         editor.apply();
                         Intent service = new Intent(getApplicationContext(), CapPhoto.class);
                         stopService(service);

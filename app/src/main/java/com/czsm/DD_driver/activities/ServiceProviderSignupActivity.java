@@ -53,7 +53,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ServiceProviderSignupActivity extends AppCompatActivity implements Validator.ValidationListener, RESTClient.ServiceResponseInterface {
+public class ServiceProviderSignupActivity extends AppCompatActivity {
     @BindView(R.id.provider_signup_name_edittext)
     @NotEmpty
     EditText nameEditText;
@@ -115,13 +115,13 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_service_provider_signup2);
         ButterKnife.bind(this);
         providerSignupValidator = new Validator(this);
-        providerSignupValidator.setValidationListener(this);
+//        providerSignupValidator.setValidationListener(this);
 
         auth    = FirebaseAuth.getInstance();
         db      = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
 
-        allinAllController = new AllinAllController(this, this);
+//        allinAllController = new AllinAllController(this, this);
         allinAllSharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -198,107 +198,107 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
         }
     }
 
-    @Override
-    public void sendServiceResult(String serviceResult) {
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//
+//        if (serviceResult.equalsIgnoreCase(getString(R.string.provider_signup_success))) {
+//
+//            SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+//            editor.putBoolean("firstLaunch", false);
+//            editor.putString("providerId", RESTClient.ID);
+//            editor.apply();
+//            Intent providerIntent = new Intent(this, ServiceProviderActivity.class);
+//            providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(providerIntent);
+//
+//        } else
+//            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+//    }
 
-        if (serviceResult.equalsIgnoreCase(getString(R.string.provider_signup_success))) {
-
-            SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
-            editor.putBoolean("firstLaunch", false);
-            editor.putString("providerId", RESTClient.ID);
-            editor.apply();
-            Intent providerIntent = new Intent(this, ServiceProviderActivity.class);
-            providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(providerIntent);
-
-        } else
-            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void requestFailed() {
-        Util.requestFailed(this);
-    }
-
-    @Override
-    public void onValidationSucceeded() {
-
-        String error = validateSpinnerData();
-        if (error != null)
-            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
-        else {
-
-
-            auth.createUserWithEmailAndPassword(mobile+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(ServiceProviderSignupActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    if(task.isSuccessful()){
-
-                        ServiceproviderList service = new ServiceproviderList();
-                        service.setName(nameEditText.getText().toString());
-                        service.setEmail(emailEditText.getText().toString());
-                        service.setAddress(addressEditText.getText().toString());
-                        service.setCountrycode(code);
-                        service.setMobileno(mobile);
-                        service.setProfilepic(encodedProfileImage);
-                        service.setWalletbalance("0");
-                        service.setApplication_usage_count(0);
-                        service.setBookings_count(0);
-                        service.setLatitude("12.9010");
-                        service.setLongitude("80.2279");
-                        service.setLongitude("free");
-
-                        db.child("ServiceproviderList").push().setValue(service);
-
-                        ValueEventListener postListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                                    ServiceproviderList user = child.getValue(ServiceproviderList.class);
-                                    Log.e("Dddddd",child.getKey());
-
-                                    if(child.getKey() != null){
-
-                                        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
-                                        editor.putBoolean("firstLaunch", false);
-                                        editor.putString("providerId", child.getKey());
-                                        editor.apply();
-                                        Intent providerIntent = new Intent(ServiceProviderSignupActivity.this, ServiceProviderActivity.class);
-                                        providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(providerIntent);
-
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.w("loadPost:onCancelled", databaseError.toException());
-
-                            }
-                        };
-
-                        db.child("ServiceproviderList").orderByChild("mobileno").equalTo(mobile).addValueEventListener(postListener);
-
-
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(),"Login failed please try again",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-            });
-
-        }
-
-    }
+//    @Override
+//    public void requestFailed() {
+//        Util.requestFailed(this);
+//    }
+//
+//    @Override
+//    public void onValidationSucceeded() {
+//
+//        String error = validateSpinnerData();
+//        if (error != null)
+//            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+//        else {
+//
+//
+//            auth.createUserWithEmailAndPassword(mobile+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(ServiceProviderSignupActivity.this, new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                    if(task.isSuccessful()){
+//
+//                        ServiceproviderList service = new ServiceproviderList();
+//                        service.setName(nameEditText.getText().toString());
+//                        service.setEmail(emailEditText.getText().toString());
+//                        service.setAddress(addressEditText.getText().toString());
+//                        service.setCountrycode(code);
+//                        service.setMobileno(mobile);
+//                        service.setProfilepic(encodedProfileImage);
+//                        service.setWalletbalance("0");
+//                        service.setApplication_usage_count(0);
+//                        service.setBookings_count(0);
+//                        service.setLatitude("12.9010");
+//                        service.setLongitude("80.2279");
+//                        service.setLongitude("free");
+//
+//                        db.child("ServiceproviderList").push().setValue(service);
+//
+//                        ValueEventListener postListener = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                                    ServiceproviderList user = child.getValue(ServiceproviderList.class);
+//                                    Log.e("Dddddd",child.getKey());
+//
+//                                    if(child.getKey() != null){
+//
+//                                        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+//                                        editor.putBoolean("firstLaunch", false);
+//                                        editor.putString("providerId", child.getKey());
+//                                        editor.apply();
+//                                        Intent providerIntent = new Intent(ServiceProviderSignupActivity.this, ServiceProviderActivity.class);
+//                                        providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                        startActivity(providerIntent);
+//
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.w("loadPost:onCancelled", databaseError.toException());
+//
+//                            }
+//                        };
+//
+//                        db.child("ServiceproviderList").orderByChild("mobileno").equalTo(mobile).addValueEventListener(postListener);
+//
+//
+//
+//                    } else {
+//
+//                        Toast.makeText(getApplicationContext(),"Login failed please try again",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                }
+//            });
+//
+//        }
+//
+//    }
 
     private String validateSpinnerData() {
 
@@ -308,10 +308,10 @@ public class ServiceProviderSignupActivity extends AppCompatActivity implements 
 
     }
 
-    @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        Util.onValidationFailed(this, errors);
-    }
+//    @Override
+//    public void onValidationFailed(List<ValidationError> errors) {
+//        Util.onValidationFailed(this, errors);
+//    }
 
 
 }

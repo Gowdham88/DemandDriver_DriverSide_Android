@@ -26,7 +26,7 @@ public class PreferencesHelper {
     public static final String PREFERENCE_TAGS ="tags";
     public static final String PREFERENCE_TAG_IDS ="tag_ids";
     public static final String PREFERENCE_FIRST_TIME ="first_time";
-    public static final String PREFERENCE_LOGGED_IN ="logged in";
+    public static final String PREFERENCE_LOGGED_IN ="logged_in";
     public static final String PREFERENCE_DASHBOARD ="dashboard";
 
 
@@ -48,6 +48,7 @@ public class PreferencesHelper {
         editor.remove(PREFERENCE_FIREBASE_UUID);
         editor.remove(PREFERENCE_PROFILE_PIC);
         editor.remove(PREFERENCE_LOGGED_IN);
+
         editor.apply();
     }
     public static void setPreference(Context context, String preference_name, String details) {

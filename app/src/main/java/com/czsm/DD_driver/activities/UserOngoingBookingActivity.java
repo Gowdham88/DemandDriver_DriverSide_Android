@@ -30,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class UserOngoingBookingActivity extends AppCompatActivity implements RESTClient.ServiceResponseInterface {
+public class UserOngoingBookingActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -120,7 +120,7 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
             @Override
             public void onClick(View v) {
 
-                showConformDialog("Completed","Are you sure you want complete this appointment.");
+//                showConformDialog("Completed","Are you sure you want complete this appointment.");
 
             }
         });
@@ -129,7 +129,7 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
             @Override
             public void onClick(View v) {
 
-                showConformDialog("Cancelled","Are you sure you want cancel this appointment.");
+//                showConformDialog("Cancelled","Are you sure you want cancel this appointment.");
 
             }
         });
@@ -138,141 +138,141 @@ public class UserOngoingBookingActivity extends AppCompatActivity implements RES
 
     }
 
-    private void showConformDialog(final String type,final String message) {
-        new android.support.v7.app.AlertDialog.Builder(this)
-                //set message, title, and icon
-                .setTitle("Complete")
-                .setMessage(message)
-                .setIcon(R.drawable.ic_launcher)
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                        ValueEventListener maplistner = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-
-                                    child.getRef().child("status").setValue(type);
-
-                                    AppointmentList appointmentList = child.getValue(AppointmentList.class);
-
-                                    if(appointmentList.getStatus().equals(type)) {
-
-                                        Toast.makeText(getApplicationContext(), "Your appointment has been" + type, Toast.LENGTH_SHORT).show();
-
-                                    }
-
-                                    if(appointmentList.getStatus().equals("Completed")){
-
-                                        showRatingDialog(child);
-                                    }
-
-                                }
-
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                            }
-                        };
-
-                        db.child("AppointmentList").orderByKey().equalTo(appointmentid).addListenerForSingleValueEvent(maplistner);
-
-                        ValueEventListener listner = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                                    ServiceproviderList data = child.getValue(ServiceproviderList.class);
-
-                                    if(data.getStatus().equals("onduty"))
-
-                                        child.getRef().child("status").setValue("free");
-
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                            }
-                        };
-
-                        db.child("ServiceproviderList").orderByKey().equalTo(id).addValueEventListener(listner);
-
-
-
-
-
-
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                }).show();
-    }
-
-    public void showRatingDialog(final DataSnapshot child) {
-        final View dialogView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_review_booking, null);
-
-        new AlertDialog.Builder(this).setIcon(android.R.drawable.btn_star_big_on).setTitle("Review")
-                .setView(dialogView)
-                .setMessage("Appreciate giving feedback about this Appointment")
-                .setCancelable(false)
-                .setPositiveButton("Rate",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.dialog_review_booking_ratingbar);
-                                String review = ratingBar.getProgress() + "";
-                                child.getRef().child("userreview").setValue(review);
-                                dialog.dismiss();
-                                finish();
-                            }
-                        })
-
-                        // Button Cancel
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                child.getRef().child("userreview").setValue("0");
-                                finish();
-                                dialog.cancel();
-                            }
-                        }).setCancelable(false).show();
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        } else
-            return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void sendServiceResult(String serviceResult) {
-
-    }
-
-    @Override
-    public void requestFailed() {
-        Util.requestFailed(this);
-    }
+//    private void showConformDialog(final String type,final String message) {
+//        new android.support.v7.app.AlertDialog.Builder(this)
+//                //set message, title, and icon
+//                .setTitle("Complete")
+//                .setMessage(message)
+//                .setIcon(R.drawable.ic_launcher)
+//                .setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//
+//                        ValueEventListener maplistner = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//
+//                                    child.getRef().child("status").setValue(type);
+//
+//                                    AppointmentList appointmentList = child.getValue(AppointmentList.class);
+//
+//                                    if(appointmentList.getStatus().equals(type)) {
+//
+//                                        Toast.makeText(getApplicationContext(), "Your appointment has been" + type, Toast.LENGTH_SHORT).show();
+//
+//                                    }
+//
+//                                    if(appointmentList.getStatus().equals("Completed")){
+//
+//                                        showRatingDialog(child);
+//                                    }
+//
+//                                }
+//
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                            }
+//                        };
+//
+//                        db.child("AppointmentList").orderByKey().equalTo(appointmentid).addListenerForSingleValueEvent(maplistner);
+//
+//                        ValueEventListener listner = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                                    ServiceproviderList data = child.getValue(ServiceproviderList.class);
+//
+//                                    if(data.getStatus().equals("onduty"))
+//
+//                                        child.getRef().child("status").setValue("free");
+//
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                            }
+//                        };
+//
+//                        db.child("ServiceproviderList").orderByKey().equalTo(id).addValueEventListener(listner);
+//
+//
+//
+//
+//
+//
+//                    }
+//                })
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        dialog.dismiss();
+//
+//                    }
+//                }).show();
+//    }
+//
+//    public void showRatingDialog(final DataSnapshot child) {
+//        final View dialogView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_review_booking, null);
+//
+//        new AlertDialog.Builder(this).setIcon(android.R.drawable.btn_star_big_on).setTitle("Review")
+//                .setView(dialogView)
+//                .setMessage("Appreciate giving feedback about this Appointment")
+//                .setCancelable(false)
+//                .setPositiveButton("Rate",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.dialog_review_booking_ratingbar);
+//                                String review = ratingBar.getProgress() + "";
+//                                child.getRef().child("userreview").setValue(review);
+//                                dialog.dismiss();
+//                                finish();
+//                            }
+//                        })
+//
+//                        // Button Cancel
+//                .setNegativeButton("Cancel",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//
+//                                child.getRef().child("userreview").setValue("0");
+//                                finish();
+//                                dialog.cancel();
+//                            }
+//                        }).setCancelable(false).show();
+//    }
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            finish();
+//            return true;
+//        } else
+//            return super.onOptionsItemSelected(item);
+//    }
+//
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//
+//    }
+//
+//    @Override
+//    public void requestFailed() {
+//        Util.requestFailed(this);
+//    }
 }

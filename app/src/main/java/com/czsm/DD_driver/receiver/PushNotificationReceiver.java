@@ -49,7 +49,7 @@ public class PushNotificationReceiver extends BroadcastReceiver {
                     SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
                     RESTClient.ID = sharedPreferences.getString("userId", "");
                     if (!RESTClient.ID.equalsIgnoreCase("")) {
-                        Intent resultIntent = new Intent(context, com.czsm.DD_driver.activities.DashBoardActivity.class);
+                        Intent resultIntent = new Intent(context, com.czsm.DD_driver.activities.MapActivity.class);
                         resultIntent.putExtra("FROM_PUSH", "1");
                         resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         Pushbots.sharedInstance().startActivity(resultIntent);
@@ -65,7 +65,7 @@ public class PushNotificationReceiver extends BroadcastReceiver {
                     Pushbots.sharedInstance().startActivity(resultIntent);
                 } else if (PushdataOpen.get("mode").toString().equalsIgnoreCase("REJECT_APPOINTMENT")) {
 //                    Toast.makeText(context, "Notification" + PushdataOpen.get("message"), Toast.LENGTH_LONG).show();
-                    Intent resultIntent = new Intent(context, com.czsm.DD_driver.activities.DashBoardActivity.class);
+                    Intent resultIntent = new Intent(context, com.czsm.DD_driver.activities.MapActivity.class);
                     Bundle bundle = new Bundle();
 //                    bundle.putString("user_message", PushdataOpen.get("message").toString());
                     bundle.putString("FROM_PUSH", "2");

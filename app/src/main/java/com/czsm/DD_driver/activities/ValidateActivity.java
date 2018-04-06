@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class ValidateActivity extends AppCompatActivity {
     boolean string;
     String uid,uidvalue;
     private android.support.v7.app.AlertDialog dialog;
+    String referdr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,6 +208,11 @@ public class ValidateActivity extends AppCompatActivity {
                             String Phno=user.getPhoneNumber();
                             PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID,uid);
                             uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
+//                            DatabaseReference refe= FirebaseDatabase.getInstance().getReference("driverNotifications");
+//                            refe.child("token").setValue(FirebaseInstanceId.getInstance().getToken());
+//                            referdr=FirebaseInstanceId.getInstance().getToken();
+////                            Toast.makeText(ValidateActivity.this, referdr, Toast.LENGTH_SHORT).show();
+//                            Log.e("Tokdr",referdr);
 //                            Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 
                             AddDatabase(phonrnum,uid);
@@ -226,19 +233,38 @@ public class ValidateActivity extends AppCompatActivity {
 
     private void AddDatabase(String phoneNumber, final String uid){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        referdr=FirebaseInstanceId.getInstance().getToken();
         Map<String, Object> data = new HashMap<>();
-        data.put("phoneNumber",phoneNumber);
-        data.put("UID", uid);
+        data.put("driverphoneNumber",phoneNumber);
+        data.put("driverUID", uid);
+        data.put("driverToken", referdr);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Users").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("DriverDetails").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+                Intent intent=new Intent(ValidateActivity.this,CurrentReqActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Error", "Error adding document", e);
+                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+        db.collection("DriverInActive").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e("uid",uid);
+                Intent intent=new Intent(ValidateActivity.this,CurrentReqActivity.class);
                 startActivity(intent);
                 finish();
             }

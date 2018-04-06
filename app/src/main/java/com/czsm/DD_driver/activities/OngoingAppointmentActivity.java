@@ -105,7 +105,7 @@ public class OngoingAppointmentActivity extends AppCompatActivity implements RES
             @Override
             public void onRefresh() {
 
-                Appointment();
+//                Appointment();
 
             }
         });
@@ -114,7 +114,7 @@ public class OngoingAppointmentActivity extends AppCompatActivity implements RES
         ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
         listView.setEmptyView(emptyView);
 
-        Appointment();
+//        Appointment();
 
     }
 
@@ -148,55 +148,55 @@ public class OngoingAppointmentActivity extends AppCompatActivity implements RES
         super.onDestroy();
     }
 
-
-    public void Appointment(){
-
-        ValueEventListener appointmentlistner = new ValueEventListener() {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                    appointment  = child.getValue(AppointmentList.class);
-                    Bookinglist.clear();
-                    primaryidlist.clear();
-
-                    if(appointment.getStatus().equals("pending") || appointment.getStatus().equals("Confirmed")) {
-
-                        Bookinglist.add(appointment);
-                        primaryidlist.add(child.getKey());
-
-                    }
-
-                    if (adapter == null) {
-
-                        adapter = new OngoingListAdapter(getApplicationContext(), R.layout.list_item_ongoing_bookings);
-                        listView.setAdapter(adapter);
-
-                    } else {
-
-                        adapter.notifyDataSetChanged();
-                        swipeContainer.setRefreshing(false);
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-            }
-        };
-
-        db.child("AppointmentList").orderByChild("userid").equalTo(userid).addValueEventListener(appointmentlistner);
-
-
-
-    }
+//
+//    public void Appointment(){
+//
+//        ValueEventListener appointmentlistner = new ValueEventListener() {
+//            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                    appointment  = child.getValue(AppointmentList.class);
+//                    Bookinglist.clear();
+//                    primaryidlist.clear();
+//
+//                    if(appointment.getStatus().equals("pending") || appointment.getStatus().equals("Confirmed")) {
+//
+//                        Bookinglist.add(appointment);
+//                        primaryidlist.add(child.getKey());
+//
+//                    }
+//
+//                    if (adapter == null) {
+//
+//                        adapter = new OngoingListAdapter(getApplicationContext(), R.layout.list_item_ongoing_bookings);
+//                        listView.setAdapter(adapter);
+//
+//                    } else {
+//
+//                        adapter.notifyDataSetChanged();
+//                        swipeContainer.setRefreshing(false);
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//            }
+//        };
+//
+//        db.child("AppointmentList").orderByChild("userid").equalTo(userid).addValueEventListener(appointmentlistner);
+//
+//
+//
+//    }
 
 
 

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Created by macbook on 02/08/16.
  */
-public class UserHistoryActivity extends AppCompatActivity implements RESTClient.ServiceResponseInterface {
+public class UserHistoryActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeContainer;
     private AllinAllController allinAllController;
@@ -52,7 +52,7 @@ public class UserHistoryActivity extends AppCompatActivity implements RESTClient
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_user_history);
-        allinAllController = new AllinAllController(UserHistoryActivity.this, this);
+//        allinAllController = new AllinAllController(UserHistoryActivity.this, this);
 
         db                = FirebaseDatabase.getInstance().getReference();
 
@@ -94,21 +94,21 @@ public class UserHistoryActivity extends AppCompatActivity implements RESTClient
             }
         });
 
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                Appointment();
-
-            }
-        });
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+////                Appointment();
+//
+//            }
+//        });
 
 
         TextView emptyView = Util.getEmptyView(R.string.no_history, getApplicationContext());
         ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
         listView.setEmptyView(emptyView);
 
-            Appointment();
+//            Appointment();
     }
 
 
@@ -120,67 +120,67 @@ public class UserHistoryActivity extends AppCompatActivity implements RESTClient
             adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void sendServiceResult(String serviceResult) {
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//
+//
+//    }
+
+//    public void Appointment(){
+//
+//        ValueEventListener appointmentlistner = new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                    AppointmentList appointment  = child.getValue(AppointmentList.class);
+//
+//                    if(appointment.getStatus().equals("Completed")) {
+//
+//                        Bookinglist.clear();
+//                        primaryidlist.clear();
+//                        Bookinglist.add(appointment);
+//                        primaryidlist.add(child.getKey());
+//
+//                        if (adapter == null) {
+//
+//                            adapter = new UserHistoryListAdapter(getApplicationContext(), R.layout.list_item_user_history);
+//                            listView.setAdapter(adapter);
+//
+//                        } else {
+//
+//                            adapter.notifyDataSetChanged();
+//                            swipeContainer.setRefreshing(false);
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//                Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//            }
+//        };
+
+//        db.child("AppointmentList").orderByChild("userid").equalTo(id).addValueEventListener(appointmentlistner);
+//
+//
+//
+//    }
 
 
-    }
-
-    public void Appointment(){
-
-        ValueEventListener appointmentlistner = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                    AppointmentList appointment  = child.getValue(AppointmentList.class);
-
-                    if(appointment.getStatus().equals("Completed")) {
-
-                        Bookinglist.clear();
-                        primaryidlist.clear();
-                        Bookinglist.add(appointment);
-                        primaryidlist.add(child.getKey());
-
-                        if (adapter == null) {
-
-                            adapter = new UserHistoryListAdapter(getApplicationContext(), R.layout.list_item_user_history);
-                            listView.setAdapter(adapter);
-
-                        } else {
-
-                            adapter.notifyDataSetChanged();
-                            swipeContainer.setRefreshing(false);
-                        }
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Log.e("loadPost:onCancelled", databaseError.toException().toString());
-            }
-        };
-
-        db.child("AppointmentList").orderByChild("userid").equalTo(id).addValueEventListener(appointmentlistner);
 
 
-
-    }
-
-
-
-
-    @Override
-    public void requestFailed() {
-        Util.requestFailed(getApplicationContext());
-    }
+//    @Override
+//    public void requestFailed() {
+//        Util.requestFailed(getApplicationContext());
+//    }
 
     private class UserHistoryListAdapter extends ArrayAdapter<AppointmentList> {
         public View mView;

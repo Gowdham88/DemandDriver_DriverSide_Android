@@ -15,12 +15,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.czsm.DD_driver.PreferencesHelper;
 import com.czsm.DD_driver.R;
 import com.czsm.DD_driver.Service.CapPhoto;
 import com.czsm.DD_driver.activities.LoginActivity;
+import com.czsm.DD_driver.activities.LoginScreenActivity;
 import com.czsm.DD_driver.controller.AllinAllController;
 import com.czsm.DD_driver.helper.RESTClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +38,7 @@ public class ProviderWalletFragment extends Fragment {
     private Button signOutButton;
     private SharedPreferences SharedPref;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FirebaseAuth mAuth;
 
     public ProviderWalletFragment() {
 
@@ -42,7 +48,7 @@ public class ProviderWalletFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        SharedPref = getActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        SharedPref = getActivity().getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
 
     }
 
@@ -56,7 +62,7 @@ public class ProviderWalletFragment extends Fragment {
         signOutButton      = (Button) view.findViewById(R.id.fragment_provider_signout_button);
         balanceTextview    = (TextView) view.findViewById(R.id.fragment_wallet_balance_textview);
         schemeTextview     = (TextView) view.findViewById(R.id.fragment_wallet_scheme_textview);
-
+        mAuth = FirebaseAuth.getInstance();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -77,21 +83,16 @@ public class ProviderWalletFragment extends Fragment {
                 //set message, title, and icon
                 .setTitle("Sign out")
                 .setMessage("Do you want to sign out?")
-                .setIcon(R.drawable.ic_launcher)
+                .setIcon(R.drawable.logo01)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
-                        SharedPreferences.Editor editor = SharedPref.edit();
-                        editor.putBoolean("firstLaunch", true);
-                        editor.remove("providerId");
-                        editor.apply();
-                        Intent service = new Intent(getActivity(), CapPhoto.class);
-                        getActivity().stopService(service);
-                        FirebaseAuth.getInstance().signOut();
-                        RESTClient.ID = null;
-                        Intent loginIntent = new Intent(getContext(), LoginActivity.class);
-                        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(loginIntent);
+                        Intent intent = new Intent(getContext(), LoginScreenActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
+                        startActivity(intent);
+                        PreferencesHelper.signOut(getContext());
+                        mAuth.signOut();
+//
                         getActivity().finish();
 
                     }

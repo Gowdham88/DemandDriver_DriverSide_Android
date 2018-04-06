@@ -633,46 +633,46 @@ public class BookServiceMapActivity extends AppCompatActivity implements RESTCli
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            userLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (userLocation != null) {
-                mapFragment.getMapAsync(this);
-                ValueEventListener maplistner = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                            ServiceproviderList user = child.getValue(ServiceproviderList.class);
-
-                            if(user.getStatus().equals("free")) {
-
-                                ServiceList serviceitem = new ServiceList();
-                                serviceitem.setLatitude(user.getLatitude());
-                                serviceitem.setLongitude(user.getLongitude());
-                                serviceitem.setAddress(user.getAddress());
-                                serviceitem.setName(user.getName());
-                                serviceitem.setProviderid(child.getKey());
-                                serviceitem.setDriverimage(user.getProfilepic());
-                                serviceproviders.add(serviceitem);
-
-                            }
-
-                        }
-
-                        onMapReady(googleMap);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                        Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                    }
-                };
-
-                db.child("ServiceproviderList").orderByChild("application_usage_count").addListenerForSingleValueEvent(maplistner);
-                stopLocationUpdates();
-            }
+//            userLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+//            if (userLocation != null) {
+//                mapFragment.getMapAsync(this);
+//                ValueEventListener maplistner = new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                            ServiceproviderList user = child.getValue(ServiceproviderList.class);
+//
+//                            if(user.getStatus().equals("free")) {
+//
+//                                ServiceList serviceitem = new ServiceList();
+//                                serviceitem.setLatitude(user.getLatitude());
+//                                serviceitem.setLongitude(user.getLongitude());
+//                                serviceitem.setAddress(user.getAddress());
+//                                serviceitem.setName(user.getName());
+//                                serviceitem.setProviderid(child.getKey());
+//                                serviceitem.setDriverimage(user.getProfilepic());
+//                                serviceproviders.add(serviceitem);
+//
+//                            }
+//
+//                        }
+//
+//                        onMapReady(googleMap);
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                        Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                    }
+//                };
+//
+//                db.child("ServiceproviderList").orderByChild("application_usage_count").addListenerForSingleValueEvent(maplistner);
+//                stopLocationUpdates();
+//            }
         }
     }
 

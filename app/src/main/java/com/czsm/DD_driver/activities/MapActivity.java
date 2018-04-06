@@ -89,6 +89,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     String bookDate, bookTime, bookNow;
     int markerIcon;
     String UIAVALUE;
+    DocumentReference documentReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -274,33 +275,53 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Location mLocation = new Location("");
                     mLocation.setLatitude(laln.latitude);
                     mLocation.setLongitude(laln.longitude);
-                    String Strlat= String.valueOf(laln.latitude);
-                    String Strlong= String.valueOf(laln.longitude);
-                    Log.e("Strlat",Strlat);
-                    Log.e("Strlong",Strlong);
+                    String latvalue= String.valueOf(laln.latitude);
+                    String longitude= String.valueOf(laln.longitude);
+                    Log.e("Strlat",latvalue);
+                    Log.e("Strlong",longitude);
                     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-//                    DocumentReference washingtonRef = db.collection("Users").document(UIAVALUE);
-//                    HashMap<String, Object> city1 = new HashMap<>();
-//                    city1.put("lat", Strlat);
-//                    city1.put("long",Strlong);
+                    documentReference=db.collection("DriverDetails").document(UIAVALUE);
+                    HashMap<String,Object> updates1=new HashMap<>();
+                    updates1.put("lat", latvalue);
+                    updates1.put("long",longitude);
+//                            updates1.put("token",refer);
+//                            updates1.put("radius",text);
+                    documentReference.update(updates1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 //
-//// Set the "isCapital" field of the city 'DC'
-//                    washingtonRef
-//                            .update(city1)
-//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void aVoid) {
-////                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
-//                                }
-//                            })
-//                            .addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-////                                    Log.w(TAG, "Error updating document", e);
-//                                }
-//                            });
+//                                    Log.e("lat",latvalue);
+//                                    Log.e("long",longitude);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+
+                        }
+                    });
+                    documentReference=db.collection("DriverInActive").document(UIAVALUE);
+                    HashMap<String,Object> updates2=new HashMap<>();
+                    updates2.put("lat", latvalue);
+                    updates2.put("long",longitude);
+//                            updates1.put("token",refer);
+//                            updates1.put("radius",text);
+                    documentReference.update(updates2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    Log.e("lat",latvalue);
+//                                    Log.e("long",longitude);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+
+                        }
+                    });
+
 
 
                     List<Address> addresses;
@@ -312,8 +333,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
                     else {
                         if (addresses.size() > 0) {
-                            final String lattitude= String.valueOf(addresses.get(0).getLatitude());
-                            final String longitude= String.valueOf(addresses.get(0).getLongitude());
+                            final String lattitudes= String.valueOf(addresses.get(0).getLatitude());
+                            final String longitudes= String.valueOf(addresses.get(0).getLongitude());
                             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                             String city = addresses.get(0).getLocality();
                             String state = addresses.get(0).getAdminArea();
@@ -323,31 +344,31 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             address1=(address + "," + city + "," + state + "," + country + "," + postalCode);
 
 
-                            DocumentReference documentReference=db.collection("Drivers").document(UIAVALUE);
-                            HashMap<String,Object> updates=new HashMap<>();
-                            updates.put("lat",lattitude);
-                            updates.put("long",longitude);
-                            documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    Log.e("lat",lattitude);
-                                    Log.e("long",longitude);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-
-
-                                }
-                            });
+//                            DocumentReference documentReference=db.collection("Drivers").document(UIAVALUE);
+//                            HashMap<String,Object> updates=new HashMap<>();
+//                            updates.put("lat",lattitude);
+//                            updates.put("long",longitude);
+//                            documentReference.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    Log.e("lat",lattitude);
+//                                    Log.e("long",longitude);
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//
+//
+//                                }
+//                            });
 
 
                             //                         Eaddress.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
                             //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
                         }
                     }
-                    Toast.makeText(MapActivity.this, address1, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MapActivity.this, address1, Toast.LENGTH_SHORT).show();
                     changelocation.setText(address1);
 //                    map_loc = "http://maps.google.com/maps?q=loc:" + laln.latitude + "," + laln.longitude + "1";
                 } catch (Exception e) {

@@ -42,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener, RESTClient.ServiceResponseInterface {
+public class LoginActivity extends AppCompatActivity{
 
     @BindView(R.id.login_number_edittext)
     @NotEmpty
@@ -104,53 +104,53 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
 
 
+//
+//        if (!allinallSharedPreferences.getBoolean("firstLaunch", true)) {
+//            if (!allinallSharedPreferences.getString("userId", "").equalsIgnoreCase("")) {
+//
+//                Intent userIntent = new Intent(this, DashBoardActivity.class);
+//                userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(userIntent);
+//
+//            } else if (!allinallSharedPreferences.getString("providerId", "").equalsIgnoreCase("")) {
+//
+//                Intent providerIntent = new Intent(LoginActivity.this, ServiceProviderActivity.class);
+//                providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(providerIntent);
+//
+//
+//                ValueEventListener listner = new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+//
+//                            ServiceproviderList list = child.getValue(ServiceproviderList.class);
+//
+//                            child.getRef().child("application_usage_count").setValue(list.getApplication_usage_count()+1);
+//
+//
+//
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                        Log.e("loadPost:onCancelled", databaseError.toException().toString());
+//                    }
+//                };
+//
+//                db.child("ServiceproviderList").orderByKey().equalTo(allinallSharedPreferences.getString("providerId", "")).addListenerForSingleValueEvent(listner);
+//
+//            }
+//        }
 
-        if (!allinallSharedPreferences.getBoolean("firstLaunch", true)) {
-            if (!allinallSharedPreferences.getString("userId", "").equalsIgnoreCase("")) {
-
-                Intent userIntent = new Intent(this, DashBoardActivity.class);
-                userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(userIntent);
-
-            } else if (!allinallSharedPreferences.getString("providerId", "").equalsIgnoreCase("")) {
-
-                Intent providerIntent = new Intent(LoginActivity.this, ServiceProviderActivity.class);
-                providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(providerIntent);
-
-
-                ValueEventListener listner = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-
-                            ServiceproviderList list = child.getValue(ServiceproviderList.class);
-
-                            child.getRef().child("application_usage_count").setValue(list.getApplication_usage_count()+1);
-
-
-
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                        Log.e("loadPost:onCancelled", databaseError.toException().toString());
-                    }
-                };
-
-                db.child("ServiceproviderList").orderByKey().equalTo(allinallSharedPreferences.getString("providerId", "")).addListenerForSingleValueEvent(listner);
-
-            }
-        }
-
-        allinAllController = new AllinAllController(this, this);
-        loginValidator     = new Validator(this);
-        loginValidator.setValidationListener(this);
+//        allinAllController = new AllinAllController(this, this);
+//        loginValidator     = new Validator(this);
+//        loginValidator.setValidationListener(this);
 
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,154 +219,154 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
     }
 
-    @Override
-    public void onValidationSucceeded() {
+//    @Override
+//    public void onValidationSucceeded() {
+//
+//        if (isProvider.isChecked()) {
+//
+//            /*******************Service provider login**************************/
+//            auth.signInWithEmailAndPassword(numberEditText.getText().toString()+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                    if(task.isSuccessful()){
+//
+//                        ValueEventListener postListener = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child: dataSnapshot.getChildren()) {
+//
+//                                    if(child.getKey() != null){
+//
+//                                        SharedPreferences.Editor editor = allinallSharedPreferences.edit();
+//                                        editor.putBoolean("firstLaunch", false);
+//                                        editor.putString("providerId", child.getKey());
+//                                        editor.apply();
+//                                        Intent providerIntent = new Intent(LoginActivity.this, ServiceProviderActivity.class);
+//                                        providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                        startActivity(providerIntent);
+//
+//                                    }
+//
+//                                }
+//
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.w("loadPost:onCancelled", databaseError.toException());
+//
+//                            }
+//                        };
+//
+//                        db.child("ServiceproviderList").orderByChild("mobileno").equalTo(numberEditText.getText().toString()).addValueEventListener(postListener);
+//
+//
+//
+//                    } else {
+//
+//                        Toast.makeText(getApplicationContext(),"Login unsuccessfull",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                }
+//            });
+//        }
 
-        if (isProvider.isChecked()) {
+//        else {
+//
+//            /******************* User login **************************/
+//
+//            auth.signInWithEmailAndPassword(numberEditText.getText().toString()+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                    if(task.isSuccessful()){
+//
+//                        ValueEventListener postListener = new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                for (DataSnapshot child: dataSnapshot.getChildren()) {
+//
+//                                    UserList user = child.getValue(UserList.class);
+//                                    Log.e("Dddddd",child.getKey());
+//
+//
+//                                    if(child.getKey() != null){
+//
+//                                        SharedPreferences.Editor editor = allinallSharedPreferences.edit();
+//                                        editor.putBoolean("firstLaunch", false);
+//                                        editor.putString("userId", child.getKey());
+//                                        editor.putString("username", user.getName());
+//                                        editor.putString("usermobile", user.getMobileno());
+//                                        editor.putString("useraddress", user.getAddress());
+//                                        editor.putString("userimage", user.getProfilepic());
+//                                        editor.apply();
+//                                        Intent userIntent = new Intent(LoginActivity.this, DashBoardActivity.class);
+//                                        userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                        startActivity(userIntent);
+//
+//
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                Log.w("loadPost:onCancelled", databaseError.toException());
+//
+//                            }
+//                        };
+//                        db.child("UserList").orderByChild("mobileno").equalTo(numberEditText.getText().toString()).addValueEventListener(postListener);
+//
+//
+//
+//                    } else {
+//
+//                        Toast.makeText(getApplicationContext(),"Login unsuccessfull",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                }
+//            });
+//
+//
+//        }
+//
+//    }
 
-            /*******************Service provider login**************************/
-            auth.signInWithEmailAndPassword(numberEditText.getText().toString()+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    if(task.isSuccessful()){
-
-                        ValueEventListener postListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child: dataSnapshot.getChildren()) {
-
-                                    if(child.getKey() != null){
-
-                                        SharedPreferences.Editor editor = allinallSharedPreferences.edit();
-                                        editor.putBoolean("firstLaunch", false);
-                                        editor.putString("providerId", child.getKey());
-                                        editor.apply();
-                                        Intent providerIntent = new Intent(LoginActivity.this, ServiceProviderActivity.class);
-                                        providerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(providerIntent);
-
-                                    }
-
-                                }
-
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.w("loadPost:onCancelled", databaseError.toException());
-
-                            }
-                        };
-
-                        db.child("ServiceproviderList").orderByChild("mobileno").equalTo(numberEditText.getText().toString()).addValueEventListener(postListener);
-
-
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(),"Login unsuccessfull",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-            });
-        }
-
-        else {
-
-            /******************* User login **************************/
-
-            auth.signInWithEmailAndPassword(numberEditText.getText().toString()+"@demanddriver.com",passwordEditText.getText().toString()).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    if(task.isSuccessful()){
-
-                        ValueEventListener postListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot child: dataSnapshot.getChildren()) {
-
-                                    UserList user = child.getValue(UserList.class);
-                                    Log.e("Dddddd",child.getKey());
-
-
-                                    if(child.getKey() != null){
-
-                                        SharedPreferences.Editor editor = allinallSharedPreferences.edit();
-                                        editor.putBoolean("firstLaunch", false);
-                                        editor.putString("userId", child.getKey());
-                                        editor.putString("username", user.getName());
-                                        editor.putString("usermobile", user.getMobileno());
-                                        editor.putString("useraddress", user.getAddress());
-                                        editor.putString("userimage", user.getProfilepic());
-                                        editor.apply();
-                                        Intent userIntent = new Intent(LoginActivity.this, DashBoardActivity.class);
-                                        userIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(userIntent);
-
-
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                                Log.w("loadPost:onCancelled", databaseError.toException());
-
-                            }
-                        };
-                        db.child("UserList").orderByChild("mobileno").equalTo(numberEditText.getText().toString()).addValueEventListener(postListener);
-
-
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(),"Login unsuccessfull",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-            });
-
-
-        }
-
-    }
-
-    @Override
-    public void onValidationFailed(List<ValidationError> errors) {
-        Util.onValidationFailed(this, errors);
-    }
-
-    @Override
-    public void sendServiceResult(String serviceResult) {
-        if (serviceResult.equalsIgnoreCase(getString(R.string.user_login_success))) {
-
-        } else if (serviceResult.equalsIgnoreCase(getString(R.string.provider_login_success))) {
-
-        } else if (serviceResult.equalsIgnoreCase(getString(R.string.user_get_mail_success))) {
-
-            showResetDialog(phoneToResetPassword);
-        } else {
-            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void requestFailed() {
-
-        Util.requestFailed(this);
-
-    }
+//    @Override
+//    public void onValidationFailed(List<ValidationError> errors) {
+//        Util.onValidationFailed(this, errors);
+//    }
+//
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//        if (serviceResult.equalsIgnoreCase(getString(R.string.user_login_success))) {
+//
+//        } else if (serviceResult.equalsIgnoreCase(getString(R.string.provider_login_success))) {
+//
+//        } else if (serviceResult.equalsIgnoreCase(getString(R.string.user_get_mail_success))) {
+//
+//            showResetDialog(phoneToResetPassword);
+//        } else {
+//            Toast.makeText(this, serviceResult, Toast.LENGTH_LONG).show();
+//        }
+//    }
+//
+//    @Override
+//    public void requestFailed() {
+//
+//        Util.requestFailed(this);
+//
+//    }
 
 
 }

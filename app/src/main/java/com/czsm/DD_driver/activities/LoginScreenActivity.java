@@ -1,6 +1,8 @@
 package com.czsm.DD_driver.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -66,6 +68,10 @@ RelativeLayout parentLayout;
         String getcountrycode=countrycode.getText().toString();
         RelImg=(ImageView)findViewById(R.id.rel_img);
         mAuth = FirebaseAuth.getInstance();
+        SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edt = pref.edit();
+        edt.putBoolean("activity_executed", true);
+        edt.commit();
 //        isProvider=(CheckBox) findViewById(R.id.login_isprovider_checkbox);
         RelImg.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:orientation="horizontal">
         <TextView
             style="@style/FontAvenirBook"
@@ -45,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         android:orientation="horizontal">
         <TextView
             style="@style/FontAvenirBook"
@@ -69,6 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         android:orientation="horizontal"
         >
         <TextView
@@ -89,6 +92,7 @@
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/map_lay"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_below="@+id/add_lay"
@@ -100,12 +104,13 @@
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
+
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="200dp" />
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="200dp">
 
         <TextView
             android:id="@+id/location_txt"
@@ -136,6 +141,7 @@
         android:id="@+id/map_txt"
         style="@style/FontAvenirBook"
         android:textSize="15dp"
+        android:visibility="gone"
         android:textColor="@color/textmain_clr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -144,6 +150,7 @@
         android:layout_marginLeft="285dp"
         android:layout_below="@+id/map_lay"/>
     <View
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/map_txt"

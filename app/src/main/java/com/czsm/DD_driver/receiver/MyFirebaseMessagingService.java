@@ -1,4 +1,4 @@
-//package com.czsm.driverin.receiver;
+// package com.czsm.DD_driver.receiver;
 //
 ///**
 // * Created by macbook on 02/08/16.
@@ -13,8 +13,8 @@
 //import android.support.v4.app.NotificationCompat;
 //import android.util.Log;
 //
-//import com.czsm.driverin.R;
-//import com.czsm.driverin.activities.UserActivity;
+//
+//import com.czsm.DD_driver.activities.UserActivity;
 //import com.google.firebase.messaging.FirebaseMessagingService;
 //import com.google.firebase.messaging.RemoteMessage;
 //

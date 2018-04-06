@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/dialog_background"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+   >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
     android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp">
-
+    android:layout_marginRight="30dp"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
     <!--<ImageView-->
     <!--android:layout_gravity="center_horizontal"-->
     <!--android:layout_width="120dp"-->
@@ -27,21 +32,35 @@
     <TextView
         style="@style/FontAvenirBook"
         android:layout_width="match_parent"
-        android:layout_height="31dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/reqtxt"
         android:textColor="@color/black"
         android:textSize="14dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <TextView
         style="@style/FontAvenirBook"
-        android:textSize="14dp"
-        android:textColor="@color/black"
-        android:text="Anna University"
-        android:layout_width="match_parent"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content" />
+        android:layout_marginLeft="23dp"
+        android:text="@string/reqtxtmore"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <TextView
+        style="@style/FontAvenirBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anna University"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:textSize="14dp" />
+</LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -54,9 +73,9 @@
    >
 
     <TextView
+        android:id="@+id/accept_button"
         style="@style/FontAvenirBook"
-        android:id="@+id/ok_button"
-        android:layout_width="151dp"
+        android:layout_width="133dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -66,15 +85,16 @@
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/black"/>
+
     <TextView
-        style="@style/FontAvenirBook"
         android:id="@+id/cancel_button"
-        android:layout_width="151dp"
+        style="@style/FontAvenirBook"
+        android:layout_width="135dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="Cancel"
         android:textSize="15dp" />
 </LinearLayout>
-
 </LinearLayout>
+</RelativeLayout>
