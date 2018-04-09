@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.czsm.DD_driver.PreferencesHelper;
 import com.czsm.DD_driver.R;
+import com.czsm.DD_driver.model.Data;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,8 +55,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -94,7 +98,8 @@ public class CurrentReqActivity extends AppCompatActivity implements OnMapReadyC
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
     LocationManager mLocationManager;
     android.location.LocationListener mLocationListener;
-
+    FirebaseFirestore db;
+    List<Data> datalist = new ArrayList<Data>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,11 +121,45 @@ public class CurrentReqActivity extends AppCompatActivity implements OnMapReadyC
                 startActivity(nextscr);
             }
         });
+        db= FirebaseFirestore.getInstance();
 
     mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(CurrentReqActivity.this);
 
+        com.google.firebase.firestore.Query driverfirst = db.collection("UsersBookingRequest");
 
+        driverfirst.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                        if (documentSnapshots.getDocuments().size() < 1) {
+
+                            return;
+
+                        }
+
+                        for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                            Data data = document.toObject(Data.class);
+                            datalist.add(data);
+                            String userlat= String.valueOf(datalist.get(0).getLat());
+                            String userlong= String.valueOf(datalist.get(0).getLongitude());
+                            String userphonenumber= String.valueOf(datalist.get(0).getPhoneNumber());
+//                                                  String latt= String.valueOf(datalist.get(0).getLat());
+                            Toast.makeText(CurrentReqActivity.this, userlat, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CurrentReqActivity.this, userlong, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CurrentReqActivity.this, userphonenumber, Toast.LENGTH_SHORT).show();
+
+//                                                  Log.e("datalist",datalist.get(0).getLat());
+//                                hideProgressDialog();
+
+                        }
+//                            hideProgressDialog();
+
+
+                    }
+                });
 
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        CollectionReference citiesRef = db.collection("cities");

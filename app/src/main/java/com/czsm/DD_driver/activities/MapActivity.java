@@ -38,9 +38,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -126,6 +133,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             carTypeSpinner.setVisibility(View.INVISIBLE);
             driverTypeSpinner.setVisibility(View.INVISIBLE);
         }
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         serviceImageView.setImageResource(R.drawable.services_call_driver);
@@ -396,5 +405,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //        Log.e("newlong", String.valueOf(longitu));
 
     }
+
 
 }
