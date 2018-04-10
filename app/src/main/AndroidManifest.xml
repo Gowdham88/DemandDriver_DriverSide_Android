@@ -21,7 +21,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-feature android:name="android.hardware.location" android:required="true" />
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-
     <!-- This app has permission to register and receive dataf message. -->
     <application
         android:name=".App"
@@ -44,7 +43,8 @@
         </activity>
         <activity
             android:name=".activities.LoginScreenActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.ValidateActivity"
             android:screenOrientation="portrait" />
@@ -193,7 +193,6 @@
         <activity
             android:name=".activities.AlertActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.GPSTrackers"></activity>
     </application>
 
 </manifest>

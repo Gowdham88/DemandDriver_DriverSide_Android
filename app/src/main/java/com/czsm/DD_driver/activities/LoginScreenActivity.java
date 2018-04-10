@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.czsm.DD_driver.PreferencesHelper;
 import com.czsm.DD_driver.R;
 import com.czsm.DD_driver.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -215,6 +216,7 @@ RelativeLayout parentLayout;
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
 //                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
 //
@@ -246,4 +248,5 @@ RelativeLayout parentLayout;
         if(dialog!=null)
             dialog.dismiss();
     }
+
 }

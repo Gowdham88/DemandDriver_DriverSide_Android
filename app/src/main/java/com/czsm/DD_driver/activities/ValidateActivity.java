@@ -207,6 +207,7 @@ public class ValidateActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             String Phno=user.getPhoneNumber();
                             PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID,uid);
+                            PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
                             uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
 //                            DatabaseReference refe= FirebaseDatabase.getInstance().getReference("driverNotifications");
 //                            refe.child("token").setValue(FirebaseInstanceId.getInstance().getToken());

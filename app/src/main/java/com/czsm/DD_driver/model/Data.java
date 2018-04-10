@@ -6,10 +6,46 @@ package com.czsm.DD_driver.model;
 
 public class Data {
 
-    private double lat;
-    private double longitude;
-    private double distance;
+    private String Currentlat;
+    private String Currentlong;
+    private String address;
     private String phoneNumber;
+    private String date;
+    private String time;
+
+
+    public Data() {
+
+
+    }
+
+    public Data(String Currentlat, String Currentlong, String phoneNumber,String address,String date,String time) {
+
+        this.Currentlat=Currentlat;
+        this.Currentlong=Currentlong;
+        this.phoneNumber=phoneNumber;
+        this.address=address;
+        this.date=date;
+        this.time=time;
+    }
+
+
+    public String getCurrentlat() {
+        return Currentlat;
+    }
+
+    public void setCurrentlat(String currentlat) {
+        Currentlat = currentlat;
+    }
+
+    public String getCurrentlong() {
+        return Currentlong;
+    }
+
+    public void setCurrentlong(String currentlong) {
+        Currentlong = currentlong;
+    }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -18,45 +54,29 @@ public class Data {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public Data(double lat, double longitude, double distance) {
-
-        this.lat=lat;
-        this.longitude=longitude;
-        this.distance=distance;
-     }
-
-    public double getLongitude() {
-        return longitude;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Data() {
-
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 
-
-
-
-
-    public double getLat() {
-        return lat;
+    public String getDate() {
+        return date;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
 

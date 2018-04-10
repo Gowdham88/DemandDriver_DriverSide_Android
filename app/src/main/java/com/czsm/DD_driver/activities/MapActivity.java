@@ -137,6 +137,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
+
         serviceImageView.setImageResource(R.drawable.services_call_driver);
         serviceTextView.setText(serviceName);
 

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,9 +56,11 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
     private AllinAllController allinAllController;
     int bookingIndex;
-    String username,usermobile,useraddress,date,userid,id = "";
+    String username,usermobile,useraddress,date,userid,id = "",UserLat,UserLong;
     SharedPreferences sharedPreferences;
     DatabaseReference db;
+    ImageView forwardImg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         setTitle(R.string.appointment);
 
         db = FirebaseDatabase.getInstance().getReference();
+        forwardImg=(ImageView)findViewById(R.id.add_arrow);
 
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         id                = sharedPreferences.getString("providerId","");
@@ -76,11 +80,13 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            username    = extras.getString("username","");
-            usermobile  = extras.getString("usermobile","");
-            useraddress = extras.getString("useraddress","");
-            date        = extras.getString("date","");
-            userid      = extras.getString("userid","");
+            username    = extras.getString("lat","");
+            usermobile  = extras.getString("phonenumber","");
+            useraddress = extras.getString("address","");
+            date        = extras.getString("datatime","");
+            UserLat        = extras.getString("userlats","");
+            UserLong        = extras.getString("userlongs","");
+//            userid      = extras.getString("userid","");
 
         }
 
@@ -96,7 +102,15 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
             e.printStackTrace();
         }
-
+        forwardImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addintent=new Intent(ProviderBookingActivity.this, MapScreenActivity.class);
+                addintent.putExtra("userlat",UserLat);
+                addintent.putExtra("userlong",UserLong);
+                startActivity(addintent);
+            }
+        });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

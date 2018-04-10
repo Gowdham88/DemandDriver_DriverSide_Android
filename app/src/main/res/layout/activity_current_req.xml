@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal">
         <TextView
             style="@style/FontAvenirBook"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal">
         <TextView
             style="@style/FontAvenirBook"
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal"
         >
         <TextView
@@ -92,9 +92,9 @@
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/map_lay"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:layout_below="@+id/add_lay"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
@@ -141,7 +141,7 @@
         android:id="@+id/map_txt"
         style="@style/FontAvenirBook"
         android:textSize="15dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textColor="@color/textmain_clr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
         android:layout_marginLeft="285dp"
         android:layout_below="@+id/map_lay"/>
     <View
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/map_txt"
