@@ -49,9 +49,9 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
     public void onBindViewHolder(ProviderBookingAdapter.ViewHolder holder, final int position) {
 
         holder.userphonenumber.setText(dataList.get(position).getPhoneNumber());
-        final String DateTime=dataList.get(position).getDate()+","+dataList.get(position).getTime();
+        final String DateTime=dataList.get(position).getDate()+" "+dataList.get(position).getTime();
         holder.datetime.setText(DateTime);
-        holder.lat.setText(dataList.get(position).getCurrentlat());
+        holder.lat.setText(dataList.get(position).getName());
         String address=dataList.get(position).getAddress();
 
         holder.ProviderLinLay.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +59,13 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
             public void onClick(View view) {
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
                 intent.putExtra("phonenumber",dataList.get(position).getPhoneNumber());
-                intent.putExtra("lat",dataList.get(position).getCurrentlat());
+                intent.putExtra("lat",dataList.get(position).getName());
                 intent.putExtra("datatime",DateTime);
                 intent.putExtra("address",dataList.get(position).getAddress());
                 intent.putExtra("userlats",dataList.get(position).getCurrentlat());
                 intent.putExtra("userlongs",dataList.get(position).getCurrentlong());
+                intent.putExtra("userdate",dataList.get(position).getDate());
+                intent.putExtra("usertime",dataList.get(position).getTime());
 
                 context.startActivity(intent);
             }
@@ -79,9 +81,9 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
         LinearLayout ProviderLinLay;
         public ViewHolder(View itemView) {
             super(itemView);
-            userphonenumber=(TextView)itemView.findViewById(R.id.list_item_booking_user_name_textview);
-            datetime=(TextView)itemView.findViewById(R.id.list_item_booking_service_textview);
-            lat=(TextView)itemView.findViewById(R.id.list_item_booking_datetime_textview);
+            userphonenumber=(TextView)itemView.findViewById(R.id.list_item_booking_service_textview);
+            datetime=(TextView)itemView.findViewById(R.id.list_item_booking_datetime_textview);
+            lat=(TextView)itemView.findViewById(R.id.list_item_booking_user_name_textview);
                     ProviderLinLay=(LinearLayout)itemView.findViewById(R.id.providerlinear_lay);
 
         }

@@ -262,37 +262,73 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:weightSum="2"
-        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/provider_book_cancel_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginRight="1dp"
-        android:background="#ffca00"
-        android:text="@string/cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
+
+    <!--<Button-->
+        <!--android:id="@+id/provider_book_cancel_button"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_marginRight="1dp"-->
+        <!--android:background="#ffca00"-->
+        <!--android:text="@string/cancel"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@color/black" />-->
 
 
         <Button
-            android:id="@+id/provider_book_complete_button"
+            android:id="@+id/provider_book_complete_buttonstart"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:background="#ffca00"
+            android:text="Start"
+            android:layout_alignParentBottom="true"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+        <Button
+            android:id="@+id/provider_book_complete_buttoncomplete"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffca00"
+            android:visibility="gone"
             android:layout_marginLeft="1dp"
             android:text="Complete"
+            android:layout_alignParentBottom="true"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:weightSum="2"-->
+        <!--android:visibility="gone"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--&lt;!&ndash;<Button&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/provider_book_cancel_button"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginRight="1dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="#ffca00"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:text="@string/cancel"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textAllCaps="false"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textColor="@color/black" />&ndash;&gt;-->
+
+
+        <!--<Button-->
+            <!--android:id="@+id/provider_book_complete_buttoncomplete"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#ffca00"-->
+            <!--android:layout_marginLeft="1dp"-->
+            <!--android:text="Complete"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/black" />-->
+
+    <!--</LinearLayout>-->
 
 
 </RelativeLayout>

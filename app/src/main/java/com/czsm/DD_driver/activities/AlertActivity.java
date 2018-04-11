@@ -15,21 +15,21 @@ TextView AcceptTxt,CancelTxt;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userreqalert);
-        AcceptTxt=(TextView)findViewById(R.id.accept_button);
-        CancelTxt=(TextView)findViewById(R.id.cancel_button);
-        AcceptTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent next=new Intent(AlertActivity.this,CurrentReqActivity.class);
-               startActivity(next);
-            }
-        });
-        CancelTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(AlertActivity.this, "cancel", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        AcceptTxt=(TextView)findViewById(R.id.accept_button);
+//        CancelTxt=(TextView)findViewById(R.id.cancel_button);
+//        AcceptTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               Intent next=new Intent(AlertActivity.this,CurrentReqActivity.class);
+//               startActivity(next);
+//            }
+//        });
+//        CancelTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(AlertActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
 

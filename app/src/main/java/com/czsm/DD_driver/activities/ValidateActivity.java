@@ -248,7 +248,7 @@ public class ValidateActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,CurrentReqActivity.class);
+                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -265,7 +265,7 @@ public class ValidateActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,CurrentReqActivity.class);
+                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
                 startActivity(intent);
                 finish();
             }

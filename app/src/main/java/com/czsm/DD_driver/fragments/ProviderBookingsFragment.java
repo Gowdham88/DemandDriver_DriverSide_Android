@@ -43,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -93,10 +94,11 @@ ProviderBookingAdapter  providerAdapter ;
 //        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
 //        userid            = sharedPreferences.getString("providerId","");
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        com.google.firebase.firestore.Query driverfirst = db.collection("UsersCurrentBooking");
+        Query first = db.collection("UsersCurrentBooking");
 
-        driverfirst.get()
+        first.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
@@ -107,23 +109,17 @@ ProviderBookingAdapter  providerAdapter ;
 
                         }
 
-                        for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
+                        for(DocumentSnapshot document : documentSnapshots.getDocuments()) {
 
                             Data data = document.toObject(Data.class);
                             datalist.add(data);
-//                            Log.e("lattitude", String.valueOf(Userlat));
-//                            Log.e("longtude", String.valueOf(UserLong));
-//                            Toast.makeText(CurrentReqActivity.this, (CharSequence) AddressTxt, Toast.LENGTH_SHORT).show();
-
-//                                                  Log.e("datalist",datalist.get(0).getLat());
-//                                hideProgressDialog();
 
                         }
-//                            hideProgressDialog();
-
-
                     }
+
                 });
+//hideProgressDialog();
+
         providerAdapter =new ProviderBookingAdapter(getActivity(),datalist);
         recyclerview.setAdapter(providerAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

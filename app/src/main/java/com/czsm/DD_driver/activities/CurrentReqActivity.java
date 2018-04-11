@@ -235,7 +235,7 @@ public class CurrentReqActivity extends AppCompatActivity implements LocationLis
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setView(deleteDialogView);
         TextView Acce = (TextView) deleteDialogView.findViewById(R.id.accept_button);
-        TextView cancel = (TextView) deleteDialogView.findViewById(R.id.cancel_button);
+//        TextView cancel = (TextView) deleteDialogView.findViewById(R.id.cancel_button);
 
         final AlertDialog alertDialog1 = alertDialog.create();
         Acce.setOnClickListener(new View.OnClickListener() {
@@ -252,14 +252,14 @@ public class CurrentReqActivity extends AppCompatActivity implements LocationLis
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText(CurrentReqActivity.this, "can", Toast.LENGTH_SHORT).show();
-//
-                alertDialog1.dismiss();
-            }
-        });
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Toast.makeText(CurrentReqActivity.this, "can", Toast.LENGTH_SHORT).show();
+////
+//                alertDialog1.dismiss();
+//            }
+//        });
 
 
         alertDialog1.setCanceledOnTouchOutside(false);

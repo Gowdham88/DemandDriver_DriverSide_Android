@@ -12,6 +12,7 @@ public class Data {
     private String phoneNumber;
     private String date;
     private String time;
+    private String Name;
 
 
     public Data() {
@@ -19,7 +20,7 @@ public class Data {
 
     }
 
-    public Data(String Currentlat, String Currentlong, String phoneNumber,String address,String date,String time) {
+    public Data(String Currentlat, String Currentlong, String phoneNumber,String address,String date,String time,String Name) {
 
         this.Currentlat=Currentlat;
         this.Currentlong=Currentlong;
@@ -27,6 +28,7 @@ public class Data {
         this.address=address;
         this.date=date;
         this.time=time;
+        this.Name=Name;
     }
 
 
@@ -79,6 +81,13 @@ public class Data {
         this.time = time;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
 
 
