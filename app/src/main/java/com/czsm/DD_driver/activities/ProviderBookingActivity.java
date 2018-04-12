@@ -83,10 +83,10 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
     SharedPreferences sharedPreferences;
 //    DatabaseReference db;
     ImageView forwardImg;
-    String name,datetime,contact,add,uidvalue,driverhours,drivermin,driversecs,UserDate,UserTime;
+    String name,datetime,contact,add,uidvalue,driverhours,drivermin,driversecs,UserDate,UserTime,UserUid;
     FirebaseFirestore db;
-    String formattedDatedriver;
-    String dateuser;
+    String formattedDatedriver,formattedstrDatedriver;
+    String dateuser,Useruid,amt;
            long currentamt,amount;
 
     @Override
@@ -96,23 +96,33 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent mapintent= new Intent(ProviderBookingActivity.this,ServiceProviderActivity.class);
+                startActivity(mapintent);
+            }
+        });
         setTitle(R.string.appointment);
           db= FirebaseFirestore.getInstance();
         uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
         forwardImg = (ImageView) findViewById(R.id.add_arrow);
         sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         id = sharedPreferences.getString("providerId", "");
-
+        amt=PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PRICE);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
 
-            username = extras.getString("lat", "");
+            username = extras.getString("name", "");
             usermobile = extras.getString("phonenumber", "");
             useraddress = extras.getString("address", "");
             date = extras.getString("datatime", "");
             UserLat = extras.getString("userlats", "");
             UserLong = extras.getString("userlongs", "");
-//            userid      = extras.getString("userid","");
+            UserUid  = extras.getString("useruid","");
             UserDate=extras.getString("userdate", "");
             UserTime=extras.getString("usertime", "");
 
@@ -132,6 +142,52 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             e.printStackTrace();
         }
 
+
+        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_USERUID,UserUid);
+        Useruid=  PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_USERUID);
+//        Toast.makeText(ProviderBookingActivity.this, Useruid, Toast.LENGTH_SHORT).show();
+
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("USERUID",Useruid);
+//        data.put("usertimedate",formattedstrDatedriver);
+//
+//        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+//        Users users1 = new Users(phoneNumber,uid);
+
+
+        db.collection("DriverCurrentBookings").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Error", "Error adding document", e);
+                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+//        db.collection("Userdetails").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.e("uid",uid);
+//
+//                Intent intent=new Intent(ValidateActivity.this,DashBoardActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("Error", "Error adding document", e);
+//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
 
         contact=contactTextView.getText().toString();
         forwardImg.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +224,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             @Override
             public void onClick(View v) {
                 validation();
-                Toast.makeText(ProviderBookingActivity.this, "click", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ProviderBookingActivity.this, "click", Toast.LENGTH_SHORT).show();
 
 //                StartButton.setVisibility(View.GONE);
 
@@ -199,13 +255,17 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
        }
         else
         {
+
+            Date currentTime = Calendar.getInstance().getTime();
+            SimpleDateFormat dfs = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+            formattedstrDatedriver = dfs.format(currentTime);
             completeButton.setVisibility(View.VISIBLE);
        }
 
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProviderBookingActivity.this, "ok", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ProviderBookingActivity.this, "ok", Toast.LENGTH_SHORT).show();
                 showConfirmDialog();
 
                 Date currentTime = Calendar.getInstance().getTime();
@@ -216,7 +276,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
 
                 try {
-                    Date date1 = simpleDateFormat.parse(date);
+                    Date date1 = simpleDateFormat.parse(formattedstrDatedriver);
                     Date date2 = simpleDateFormat.parse(formattedDatedriver);
 
                     printDifference(date1, date2);
@@ -228,7 +288,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //                String formattedDateuser = df.format(datetime);
                 Map<String, Object> data = new HashMap<>();
                 data.put("currenttimedate",formattedDatedriver);
-                data.put("usertimedate",date);
+                data.put("usertimedate",formattedstrDatedriver);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
@@ -237,7 +297,32 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 db.collection("DriverDetails").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Error", "Error adding document", e);
+                        Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+
+                Map<String, Object> datausercomplete = new HashMap<>();
+                datausercomplete.put("Driveruid",Useruid);
+                datausercomplete.put("Price",amt);
+                datausercomplete.put("DateTime",date);
+//
+//        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+//        Users users1 = new Users(phoneNumber,uid);
+
+
+                db.collection("UserDetailsCompleted").document(uidvalue).set(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -309,6 +394,26 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         Log.e("elapsedSeconds", String.valueOf(elapsedSeconds));
 //        Log.e("elapsedMinutes", String.valueOf(elapsedMinutes));
 
+
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("USERUID",Useruid);
+        data.put("TimeDuration",TtlMins);
+
+        db.collection("DriverBookingsCompleted").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Error", "Error adding document", e);
+                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
         System.out.printf(
                 "%d days, %d hours, %d minutes, %d seconds%n",
                 elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds);
@@ -321,7 +426,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         else if(TtlMins<=60){
             amount=99;
         }
-
+        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PRICE, String.valueOf(amount));
     }
 
 
@@ -363,7 +468,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             @Override
             public void onClick(View view) {
                 completeButton.setVisibility(View.GONE);
-                StartButton.setVisibility(View.VISIBLE);
+                StartButton.setVisibility(View.GONE);
                 alertDialog1.dismiss();
             }
         });

@@ -160,6 +160,7 @@ RelativeLayout parentLayout;
                 mResendToken = token;
                 final FirebaseUser user = mAuth.getCurrentUser();
                 Intent intent = new Intent(LoginScreenActivity.this, ValidateActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                    intent.putExtra("value", "dashboard");
 //                    intent.putExtra("string", true);
                 intent.putExtra("phonenumber", PhoneEdt.getText().toString());
@@ -216,7 +217,6 @@ RelativeLayout parentLayout;
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
 //                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
 //

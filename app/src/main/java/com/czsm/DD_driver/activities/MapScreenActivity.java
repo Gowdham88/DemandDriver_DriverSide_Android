@@ -53,61 +53,26 @@ public class MapScreenActivity extends AppCompatActivity implements OnMapReadyCa
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.user_service_details_toolbar);
         toolbar.setTitle("MapView");
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent mapintent= new Intent(MapScreenActivity.this,ProviderBookingActivity.class);
-//                startActivity(mapintent);
-//            }
-//        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent mapintent= new Intent(MapScreenActivity.this,ProviderBookingActivity.class);
+                startActivity(mapintent);
+            }
+        });
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(MapScreenActivity.this);
         Intent intent = getIntent();
-        if(intent!=null){
+        if (intent != null) {
             Userlat = intent.getStringExtra("userlat").trim();
             Userlong = intent.getStringExtra("userlong").trim();
-            USERlat= Double.valueOf(Userlat);
-            USERlong= Double.valueOf(Userlong);
+            USERlat = Double.valueOf(Userlat);
+            USERlong = Double.valueOf(Userlong);
         }
-
-//        LogoutTxt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showConfirmDialog();
-//            }
-//        });
-//        Log.e("lattitude", String.valueOf(USERlat));
-//        Log.e("longtude", String.valueOf(USERlong));
-
     }
-//    private void showConfirmDialog() {
-//        new android.support.v7.app.AlertDialog.Builder(MapScreenActivity.this)
-//                //set message, title, and icon
-//                .setTitle("Sign out")
-//                .setMessage("Do you want to sign out?")
-//                .setIcon(R.drawable.logo01)
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        Intent intent = new Intent(MapScreenActivity.this, LoginScreenActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        intent.putExtra("EXIT", false);
-//                        startActivity(intent);
-//                        PreferencesHelper.signOut(MapScreenActivity.this);
-//                        mAuth.signOut();
-//                        finish();
-//                    }
-//                })
-//
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                }).show();
-//
-//    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -143,4 +108,5 @@ public class MapScreenActivity extends AppCompatActivity implements OnMapReadyCa
         // map.animateCamera(CameraUpdateFactory.zoomIn());
         Mmap.animateCamera(CameraUpdateFactory.zoomTo(12.5f), 2000, null);
     }
+
 }

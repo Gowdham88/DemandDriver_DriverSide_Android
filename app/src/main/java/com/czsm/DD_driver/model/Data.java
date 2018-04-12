@@ -12,6 +12,7 @@ public class Data {
     private String phoneNumber;
     private String date;
     private String time;
+    private String UsersUID;
     private String Name;
 
 
@@ -20,7 +21,7 @@ public class Data {
 
     }
 
-    public Data(String Currentlat, String Currentlong, String phoneNumber,String address,String date,String time,String Name) {
+    public Data(String Currentlat, String Currentlong, String phoneNumber,String address,String date,String time,String Name,String UsersUID) {
 
         this.Currentlat=Currentlat;
         this.Currentlong=Currentlong;
@@ -29,6 +30,7 @@ public class Data {
         this.date=date;
         this.time=time;
         this.Name=Name;
+        this.UsersUID=UsersUID;
     }
 
 
@@ -89,6 +91,14 @@ public class Data {
         Name = name;
     }
 
+
+    public String getUsersUID() {
+        return UsersUID;
+    }
+
+    public void setUsersUID(String usersUID) {
+        UsersUID = usersUID;
+    }
 
 
 }

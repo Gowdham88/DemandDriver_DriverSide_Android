@@ -86,13 +86,12 @@ public class ProviderWalletFragment extends Fragment {
                 .setIcon(R.drawable.logo01)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Intent intent = new Intent(getContext(), LoginScreenActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("EXIT", true);
-                        startActivity(intent);
                         PreferencesHelper.signOut(getContext());
                         mAuth.signOut();
-//
+                        Intent intent = new Intent(getContext(), LoginScreenActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.putExtra("EXIT", true);
+                        startActivity(intent);
                         getActivity().finish();
 
                     }

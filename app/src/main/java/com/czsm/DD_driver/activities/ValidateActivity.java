@@ -209,6 +209,7 @@ public class ValidateActivity extends AppCompatActivity {
                             PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID,uid);
                             PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
                             uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
+                            PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
 //                            DatabaseReference refe= FirebaseDatabase.getInstance().getReference("driverNotifications");
 //                            refe.child("token").setValue(FirebaseInstanceId.getInstance().getToken());
 //                            referdr=FirebaseInstanceId.getInstance().getToken();
@@ -249,6 +250,7 @@ public class ValidateActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
                 Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -266,6 +268,7 @@ public class ValidateActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
                 Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

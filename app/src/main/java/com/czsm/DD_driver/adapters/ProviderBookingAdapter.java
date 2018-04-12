@@ -51,6 +51,7 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
         holder.userphonenumber.setText(dataList.get(position).getPhoneNumber());
         final String DateTime=dataList.get(position).getDate()+" "+dataList.get(position).getTime();
         holder.datetime.setText(DateTime);
+        String useuuid=dataList.get(position).getUsersUID();
         holder.lat.setText(dataList.get(position).getName());
         String address=dataList.get(position).getAddress();
 
@@ -59,13 +60,14 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
             public void onClick(View view) {
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
                 intent.putExtra("phonenumber",dataList.get(position).getPhoneNumber());
-                intent.putExtra("lat",dataList.get(position).getName());
+                intent.putExtra("name",dataList.get(position).getName());
                 intent.putExtra("datatime",DateTime);
                 intent.putExtra("address",dataList.get(position).getAddress());
                 intent.putExtra("userlats",dataList.get(position).getCurrentlat());
                 intent.putExtra("userlongs",dataList.get(position).getCurrentlong());
                 intent.putExtra("userdate",dataList.get(position).getDate());
                 intent.putExtra("usertime",dataList.get(position).getTime());
+                intent.putExtra("useruid",dataList.get(position).getUsersUID());
 
                 context.startActivity(intent);
             }

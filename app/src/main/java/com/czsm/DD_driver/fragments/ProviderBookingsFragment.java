@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -35,22 +36,33 @@ import com.czsm.DD_driver.adapters.ProviderBookingAdapter;
 import com.czsm.DD_driver.helper.Util;
 import com.czsm.DD_driver.model.Data;
 import com.czsm.DD_driver.receiver.NotificationBroadcastReceiver;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.DocumentReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.firebase.firestore.QuerySnapshot;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,8 +81,9 @@ ProviderBookingAdapter  providerAdapter ;
     AppointmentList appointment;
     ArrayList<AppointmentList> Bookinglist = new ArrayList<AppointmentList>();
     ArrayList<String> primaryidlist        = new ArrayList<String>();
-    FirebaseFirestore db;
+    public FirebaseFirestore db;
     List<Data> datalist = new ArrayList<Data>();
+    int i;
     public ProviderBookingsFragment() {
         // Required empty public constructor
     }
@@ -91,12 +104,41 @@ ProviderBookingAdapter  providerAdapter ;
 
         db = FirebaseFirestore.getInstance();
 
-//        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-//        userid            = sharedPreferences.getString("providerId","");
+
+        dataload() ;
+
+//hideProgressDialog();
+
+        providerAdapter =new ProviderBookingAdapter(getActivity(),datalist);
+        recyclerview.setAdapter(providerAdapter);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                Appointment();
+
+            }
+        });
+
+
+
+//        TextView emptyView = Util.getEmptyView(R.string.no_bookings, getContext());
+//        ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
+//        listView.setEmptyView(emptyView);
+
+//        Appointment();
+
+        return view;
+    }
+
+    private void dataload() {
+        datalist.clear();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query first = db.collection("UsersCurrentBooking");
+        Query first = db.collection("UsersCurrentBooking").limit(6);
 
         first.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -114,57 +156,28 @@ ProviderBookingAdapter  providerAdapter ;
                             Data data = document.toObject(Data.class);
                             datalist.add(data);
 
+
+                            String USEruid=  datalist.get(i).getUsersUID();
+
+//                            Toast.makeText(getContext(), USEruid, Toast.LENGTH_SHORT).show();
+
+
+
                         }
+                        providerAdapter.notifyDataSetChanged();
                     }
 
+
+
                 });
-//hideProgressDialog();
-
-        providerAdapter =new ProviderBookingAdapter(getActivity(),datalist);
-        recyclerview.setAdapter(providerAdapter);
-        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//
-//                Intent bookingIntent = new Intent(getContext(), ProviderBookingActivity.class);
-//                Bundle bookingBundle = new Bundle();
-//                bookingBundle.putString("username", datalist.get(position).getCurrentlat());
-//                bookingBundle.putString("usermobile", datalist.get(position).getPhoneNumber());
-//                bookingBundle.putString("useraddress", datalist.get(position).getAddress());
-//                bookingBundle.putString("date",     datalist.get(position).getDate()+" "+Bookinglist.get(position).getTime());
-////                bookingBundle.putString("userid", primaryidlist.get(position));
-//                bookingIntent.putExtras(bookingBundle);
-//                startActivity(bookingIntent);
-//            }
-//        });
-
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                Appointment();
-
-            }
-        });
-
-
-//        TextView emptyView = Util.getEmptyView(R.string.no_bookings, getContext());
-//        ((ViewGroup) listView.getParent().getParent()).addView(emptyView);
-//        listView.setEmptyView(emptyView);
-
-//        Appointment();
-
-        return view;
     }
 
     private void Appointment() {
-        providerAdapter =new ProviderBookingAdapter(getActivity(),datalist);
-        recyclerview.setAdapter(providerAdapter);
-        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        dataload();
+
         swipeContainer.setRefreshing(false);
     }
+
 
 //    private void showPendingBookingDialog(String message,final DataSnapshot child) {
 //
@@ -233,12 +246,12 @@ ProviderBookingAdapter  providerAdapter ;
 
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        if (providerAdapter != null)
-//            ProviderBookingAdapter.notifyDataSetChanged();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        if (providerAdapter != null)
+////            ProviderBookingAdapter.notifyDataSetChanged();
+//    }
 
     @Override
     public void onDestroy() {

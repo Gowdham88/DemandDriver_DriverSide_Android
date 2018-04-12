@@ -39,14 +39,14 @@ public class SplashActivity extends AppCompatActivity {
                 boolean isLoggedIn = PreferencesHelper.getPreferenceBoolean(SplashActivity.this, PreferencesHelper.PREFERENCE_LOGGED_IN);
                 if(isLoggedIn )
                 {
-                        Intent indashboard=new Intent(SplashActivity.this,LoginScreenActivity.class);
+                        Intent indashboard=new Intent(SplashActivity.this,ServiceProviderActivity.class);
                         indashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(indashboard);
                         finish();
 
                 }
                 else {
-                    Intent in=new Intent(SplashActivity.this,ServiceProviderActivity.class);
+                    Intent in=new Intent(SplashActivity.this,LoginScreenActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
                     finish();
