@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.czsm.DD_driver.R;
 import com.czsm.DD_driver.activities.ProviderBookingActivity;
 import com.czsm.DD_driver.model.Data;
+import com.czsm.DD_driver.model.Driver_current_Details;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +25,15 @@ import java.util.List;
 public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBookingAdapter.ViewHolder> {
 
     Context context;
-    List<Data> dataList = new ArrayList<>();
+    List<Driver_current_Details> dataList = new ArrayList<>();
 
 
-    public ProviderBookingAdapter(Context context, List<Data> dataList) {
+    public ProviderBookingAdapter(Context context, List<Driver_current_Details> dataList) {
         this.context  = context;
         this.dataList = dataList;
 //        this.cellSize = Utils.getScreenWidth(context)/3;
     }
-    public  void addData(List<Data> stringArrayList){
+    public  void addData(List<Driver_current_Details> stringArrayList){
         dataList.addAll(stringArrayList);
     }
     @Override
@@ -48,26 +49,26 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
     @Override
     public void onBindViewHolder(ProviderBookingAdapter.ViewHolder holder, final int position) {
 
-        holder.userphonenumber.setText(dataList.get(position).getPhoneNumber());
-        final String DateTime=dataList.get(position).getDate()+" "+dataList.get(position).getTime();
+        holder.userphonenumber.setText(dataList.get(position).getUser_Phone_number());
+        final String DateTime=dataList.get(position).getDate()+" "+dataList.get(position).getUser_Booking_Time();
         holder.datetime.setText(DateTime);
-        String useuuid=dataList.get(position).getUsersUID();
-        holder.lat.setText(dataList.get(position).getName());
+        String useuuid=dataList.get(position).getUser_ID();
+        holder.lat.setText(dataList.get(position).getUser_name());
         String address=dataList.get(position).getAddress();
 
         holder.ProviderLinLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
-                intent.putExtra("phonenumber",dataList.get(position).getPhoneNumber());
-                intent.putExtra("name",dataList.get(position).getName());
+                intent.putExtra("phonenumber",dataList.get(position).getUser_Phone_number());
+                intent.putExtra("name",dataList.get(position).getUser_name());
                 intent.putExtra("datatime",DateTime);
                 intent.putExtra("address",dataList.get(position).getAddress());
-                intent.putExtra("userlats",dataList.get(position).getCurrentlat());
-                intent.putExtra("userlongs",dataList.get(position).getCurrentlong());
+                intent.putExtra("userlats",dataList.get(position).getStart_Lat());
+                intent.putExtra("userlongs",dataList.get(position).getStart_Long());
                 intent.putExtra("userdate",dataList.get(position).getDate());
-                intent.putExtra("usertime",dataList.get(position).getTime());
-                intent.putExtra("useruid",dataList.get(position).getUsersUID());
+                intent.putExtra("usertime",dataList.get(position).getUser_Booking_Time());
+                intent.putExtra("useruid",dataList.get(position).getUser_ID());
 
                 context.startActivity(intent);
             }

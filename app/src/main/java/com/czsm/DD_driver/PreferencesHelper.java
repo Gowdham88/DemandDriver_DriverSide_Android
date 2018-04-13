@@ -30,6 +30,7 @@ public class PreferencesHelper {
     public static final String PREFERENCE_DASHBOARD ="dashboard";
     public static final String PREFERENCE_USERUID ="useruid";
     public static final String PREFERENCE_PRICE ="price";
+    public static final String PREFERENCE_DRIVERPHONENUMBER ="driverphonenumber";
 
 
 

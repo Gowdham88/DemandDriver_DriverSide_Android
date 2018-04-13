@@ -237,15 +237,16 @@ public class ValidateActivity extends AppCompatActivity {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         referdr=FirebaseInstanceId.getInstance().getToken();
         Map<String, Object> data = new HashMap<>();
-        data.put("driverphoneNumber",phoneNumber);
-        data.put("driverUID", uid);
-        data.put("driverToken", referdr);
+        data.put("Driver_ID", uid);
+        data.put("Phone_Number",phoneNumber);
+        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
+//        data.put("driverToken", referdr);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("DriverDetails").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Driver_details").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);
@@ -263,24 +264,24 @@ public class ValidateActivity extends AppCompatActivity {
             }
 
         });
-        db.collection("DriverInActive").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.e("uid",uid);
-                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Error", "Error adding document", e);
-                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+//        db.collection("DriverInActive").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.e("uid",uid);
+//                Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+//                finish();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("Error", "Error adding document", e);
+//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
 
 
     }

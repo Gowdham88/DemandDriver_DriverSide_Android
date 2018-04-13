@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +34,16 @@ import com.czsm.DD_driver.Service.CapPhoto;
 import com.czsm.DD_driver.controller.AllinAllController;
 import com.czsm.DD_driver.helper.RESTClient;
 import com.czsm.DD_driver.helper.Util;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -85,9 +89,10 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
     ImageView forwardImg;
     String name,datetime,contact,add,uidvalue,driverhours,drivermin,driversecs,UserDate,UserTime,UserUid;
     FirebaseFirestore db;
-    String formattedDatedriver,formattedstrDatedriver;
-    String dateuser,Useruid,amt;
+    String formattendDatedriver,formattedstrDatedriver;
+    String dateuser,Useruid,amt,Driverno;
            long currentamt,amount;
+    DocumentReference documentReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +103,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Driverno = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,14 +155,15 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 
         Map<String, Object> data = new HashMap<>();
-        data.put("USERUID",Useruid);
+        data.put("Driver_ID",Useruid);
+        data.put("Driver_Phone_number",Driverno);
 //        data.put("usertimedate",formattedstrDatedriver);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("DriverCurrentBookings").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Current_booking").document(uidvalue).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 //                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -170,24 +177,25 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             }
 
         });
-//        db.collection("Userdetails").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Log.e("uid",uid);
-//
-//                Intent intent=new Intent(ValidateActivity.this,DashBoardActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.w("Error", "Error adding document", e);
-//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        });
+
+        Map<String, Object> dataval = new HashMap<>();
+        dataval.put("Driver_ID",Useruid);
+        dataval.put("Driver_Phone_number",Driverno);
+
+        db.collection("Completed_booking").document(uidvalue).update(dataval).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Error", "Error adding document", e);
+                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
 
         contact=contactTextView.getText().toString();
         forwardImg.setOnClickListener(new View.OnClickListener() {
@@ -270,14 +278,14 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                 Date currentTime = Calendar.getInstance().getTime();
                 SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
-                 formattedDatedriver = df.format(currentTime);
+                 formattendDatedriver = df.format(currentTime);
 //
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
 
                 try {
                     Date date1 = simpleDateFormat.parse(formattedstrDatedriver);
-                    Date date2 = simpleDateFormat.parse(formattedDatedriver);
+                    Date date2 = simpleDateFormat.parse(formattendDatedriver);
 
                     printDifference(date1, date2);
 
@@ -287,14 +295,15 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 //                String formattedDateuser = df.format(datetime);
                 Map<String, Object> data = new HashMap<>();
-                data.put("currenttimedate",formattedDatedriver);
-                data.put("usertimedate",formattedstrDatedriver);
+                data.put("End_time",formattendDatedriver);
+                data.put("Start_time",formattedstrDatedriver);
+                data.put("Cost",amt);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-                db.collection("DriverDetails").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("Current_booking").document(uidvalue).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 //                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -311,15 +320,15 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 
                 Map<String, Object> datausercomplete = new HashMap<>();
-                datausercomplete.put("Driveruid",Useruid);
-                datausercomplete.put("Price",amt);
-                datausercomplete.put("DateTime",date);
+                datausercomplete.put("End_time",formattendDatedriver);
+                datausercomplete.put("Start_time",formattedstrDatedriver);
+                datausercomplete.put("Cost",amt);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-                db.collection("UserDetailsCompleted").document(uidvalue).set(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("Completed_booking").document(uidvalue).update(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 //                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -396,24 +405,24 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("USERUID",Useruid);
-        data.put("TimeDuration",TtlMins);
-
-        db.collection("DriverBookingsCompleted").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Error", "Error adding document", e);
-                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("USERUID",Useruid);
+//        data.put("TimeDuration",TtlMins);
+//
+//        db.collection("DriverBookingsCompleted").document(uidvalue).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+////                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("Error", "Error adding document", e);
+//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
         System.out.printf(
                 "%d days, %d hours, %d minutes, %d seconds%n",
                 elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds);
@@ -467,8 +476,10 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         Acce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                completeButton.setVisibility(View.GONE);
-                StartButton.setVisibility(View.GONE);
+
+                showRatingDialog();
+
+
                 alertDialog1.dismiss();
             }
         });
@@ -488,6 +499,79 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         lp.gravity = Gravity.CENTER;
 //        lp.windowAnimations = R.style.DialogAnimation;
         alertDialog1.getWindow().setAttributes(lp);
+    }
+    public void showRatingDialog() {
+        final View dialogView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_review_booking, null);
+
+        new android.app.AlertDialog.Builder(this).setIcon(android.R.drawable.btn_star_big_on).setTitle("Review")
+                .setView(dialogView)
+                .setMessage("Appreciate giving feedback about this Appointment")
+                .setCancelable(false)
+                .setPositiveButton("Rate",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.dialog_review_booking_ratingbar);
+                                String review = ratingBar.getProgress() + "";
+                                Toast.makeText(ProviderBookingActivity.this, review, Toast.LENGTH_SHORT).show();
+//                                PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_USERRATING,review);
+//                                reviewTextView.setText(review);
+
+                                DocumentReference documentReference = db.collection("Current_booking").document(uidvalue);
+                                HashMap<String,Object> updatesvalues=new HashMap<>();
+                                updatesvalues.put("Driver_review",review);
+
+                                documentReference.update(updatesvalues)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+
+                                    }
+                                });
+
+                                documentReference = db.collection("Completed_booking").document(uidvalue);
+                                HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
+                                updatesvaluescomplete.put("Driver_review",review);
+
+                                documentReference.update(updatesvaluescomplete)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+
+                                    }
+                                });
+                                completeButton.setVisibility(View.GONE);
+                                StartButton.setVisibility(View.GONE);
+//                                child.getRef().child("userreview").setValue(review);
+                                dialog.dismiss();
+//                                finish();
+                            }
+                        })
+
+                // Button Cancel
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+//                                child.getRef().child("userreview").setValue("0");
+//                                finish();
+                                dialog.cancel();
+                            }
+                        }).setCancelable(false).show();
     }
 
 }

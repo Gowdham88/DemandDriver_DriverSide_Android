@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,7 +40,8 @@ public class ProviderWalletFragment extends Fragment {
     private SharedPreferences SharedPref;
     private SwipeRefreshLayout swipeRefreshLayout;
     private FirebaseAuth mAuth;
-
+    TextView PhoneTxt,EmailTxt;
+    String contact="+919941123110",RideCost;
     public ProviderWalletFragment() {
 
     }
@@ -62,7 +64,11 @@ public class ProviderWalletFragment extends Fragment {
         signOutButton      = (Button) view.findViewById(R.id.fragment_provider_signout_button);
         balanceTextview    = (TextView) view.findViewById(R.id.fragment_wallet_balance_textview);
         schemeTextview     = (TextView) view.findViewById(R.id.fragment_wallet_scheme_textview);
+        PhoneTxt=(TextView)view.findViewById(R.id.phonetxt);
+        EmailTxt=(TextView)view.findViewById(R.id.emaitxt);
         mAuth = FirebaseAuth.getInstance();
+        RideCost = PreferencesHelper.getPreference(getActivity(), PreferencesHelper.PREFERENCE_PRICE);
+        balanceTextview.setText("Rs."+RideCost);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -72,6 +78,23 @@ public class ProviderWalletFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showConfirmDialog();
+            }
+        });
+
+        PhoneTxt.setOnClickListener(new View.OnClickListener() {
+            Intent call = new Intent(Intent.ACTION_DIAL);
+            @Override
+            public void onClick(View v){
+                call.setData(Uri.parse("tel:"+ contact));
+                startActivity(call);
+            }
+        });
+        EmailTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","gowdhaman@czsm.co.in", null));
+                startActivity(Intent.createChooser(intent, "Choose an Email client :"));
             }
         });
         return view;

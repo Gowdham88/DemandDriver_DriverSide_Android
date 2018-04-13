@@ -35,6 +35,7 @@ import com.czsm.DD_driver.activities.ProviderBookingActivity;
 import com.czsm.DD_driver.adapters.ProviderBookingAdapter;
 import com.czsm.DD_driver.helper.Util;
 import com.czsm.DD_driver.model.Data;
+import com.czsm.DD_driver.model.Driver_current_Details;
 import com.czsm.DD_driver.receiver.NotificationBroadcastReceiver;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -82,7 +83,7 @@ ProviderBookingAdapter  providerAdapter ;
     ArrayList<AppointmentList> Bookinglist = new ArrayList<AppointmentList>();
     ArrayList<String> primaryidlist        = new ArrayList<String>();
     public FirebaseFirestore db;
-    List<Data> datalist = new ArrayList<Data>();
+    List<Driver_current_Details> datalist = new ArrayList<Driver_current_Details>();
     int i;
     public ProviderBookingsFragment() {
         // Required empty public constructor
@@ -138,7 +139,7 @@ ProviderBookingAdapter  providerAdapter ;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query first = db.collection("UsersCurrentBooking").limit(6);
+        Query first = db.collection("Current_booking");
 
         first.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -153,11 +154,11 @@ ProviderBookingAdapter  providerAdapter ;
 
                         for(DocumentSnapshot document : documentSnapshots.getDocuments()) {
 
-                            Data data = document.toObject(Data.class);
+                            Driver_current_Details data = document.toObject(Driver_current_Details.class);
                             datalist.add(data);
 
 
-                            String USEruid=  datalist.get(i).getUsersUID();
+                            String USEruid=  datalist.get(i).getUser_ID();
 
 //                            Toast.makeText(getContext(), USEruid, Toast.LENGTH_SHORT).show();
 
