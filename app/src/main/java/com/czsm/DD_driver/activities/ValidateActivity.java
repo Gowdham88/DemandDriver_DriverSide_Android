@@ -238,7 +238,7 @@ public class ValidateActivity extends AppCompatActivity {
         referdr=FirebaseInstanceId.getInstance().getToken();
         Map<String, Object> data = new HashMap<>();
         data.put("Driver_ID", uid);
-        data.put("Phone_Number",phoneNumber);
+        data.put("Driver_Phone_number",phoneNumber);
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
 //        data.put("driverToken", referdr);
 //
@@ -246,7 +246,7 @@ public class ValidateActivity extends AppCompatActivity {
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Driver_details").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Driver_details").document("Chennai").collection("Sholinganallur").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);

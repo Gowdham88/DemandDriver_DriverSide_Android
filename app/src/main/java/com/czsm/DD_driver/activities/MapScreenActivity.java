@@ -59,8 +59,7 @@ public class MapScreenActivity extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onClick(View v) {
 
-                Intent mapintent= new Intent(MapScreenActivity.this,ProviderBookingActivity.class);
-                startActivity(mapintent);
+              onBackPressed();
             }
         });
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
