@@ -118,8 +118,8 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
           db= FirebaseFirestore.getInstance();
         uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
         forwardImg = (ImageView) findViewById(R.id.add_arrow);
-        sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        id = sharedPreferences.getString("providerId", "");
+//        sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+//        id = sharedPreferences.getString("providerId", "");
         amt=PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PRICE);
         String uuid = UUID.randomUUID().toString();
         Rndmuid= uuid;
@@ -137,7 +137,6 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             UserTime=extras.getString("usertime", "");
             CarType=extras.getString("Car_type", "");
             UserBooking_ID=extras.getString("Booking_ID", "");
-            Toast.makeText(ProviderBookingActivity.this, UserBooking_ID, Toast.LENGTH_SHORT).show();
 
 
 
@@ -192,13 +191,14 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         Map<String, Object> data = new HashMap<>();
         data.put("Driver_ID",uidvalue);
         data.put("Driver_Phone_number",Driverno);
+        data.put("Driver_Booking_ID",Rndmuid);
 //        data.put("usertimedate",formattedstrDatedriver);
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Current_booking").document(uidvalue).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Current_booking").document(UserBooking_ID).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 //                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -213,11 +213,15 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
         });
 
+
+
+
         Map<String, Object> dataval = new HashMap<>();
         dataval.put("Driver_ID",uidvalue);
         dataval.put("Driver_Phone_number",Driverno);
+        dataval.put("Driver_Booking_ID",Rndmuid);
 
-        db.collection("Completed_booking").document(uidvalue).update(dataval).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Completed_booking").document(UserBooking_ID).update(dataval).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 //                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -303,7 +307,27 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             SimpleDateFormat dfs = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
             formattedstrDatedriver = dfs.format(currentTime);
             completeButton.setVisibility(View.VISIBLE);
-       }
+            documentReference=db.collection("Driver_current_booking").document(uidvalue);
+            HashMap<String,Object> usercurrentbookingid=new HashMap<>();
+//
+            usercurrentbookingid.put("Driver_Booking_ID",Rndmuid);
+//
+            documentReference.set(usercurrentbookingid)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+//                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+
+                }
+            });
+
+        }
 
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,7 +351,40 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                Map<String, Object> datasatus = new HashMap<>();
+                datasatus.put("Status","Completed");
+                db.collection("Current_booking").document(UserBooking_ID).update(datasatus).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Error", "Error adding document", e);
+//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
 
+                    }
+
+                });
+
+
+                Map<String, Object> datasatuscm = new HashMap<>();
+                datasatuscm.put("Status","Completed");
+                db.collection("Completed_booking").document(UserBooking_ID).update(datasatuscm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Error", "Error adding document", e);
+//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
 //                String formattedDateuser = df.format(datetime);
                 Map<String, Object> data = new HashMap<>();
                 data.put("End_time",formattendDatedriver);
@@ -338,7 +395,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-                db.collection("Current_booking").document(uidvalue).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("Current_booking").document(UserBooking_ID).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 //                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -363,7 +420,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-                db.collection("Completed_booking").document(uidvalue).update(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("Completed_booking").document(UserBooking_ID).update(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 //                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -382,13 +439,13 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 documentReference=db.collection("User_completed_booking").document(uidvalue);
                 HashMap<String,Object> usercurrentbookingid=new HashMap<>();
 //
-                usercurrentbookingid.put("Booking_ID",Rndmuid);
+                usercurrentbookingid.put("User_Booking_ID",UserBooking_ID);
 //
                 documentReference.set(usercurrentbookingid)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -402,13 +459,13 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 documentReference=db.collection("Driver_completed_booking").document(uidvalue);
                 HashMap<String,Object> usercurrentbookingcmp=new HashMap<>();
 //
-                usercurrentbookingcmp.put("DriverBooking_ID",Rndmuid);
+                usercurrentbookingcmp.put("Driver_Booking_ID",Rndmuid);
 //
                 documentReference.set(usercurrentbookingcmp)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -418,7 +475,6 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                     }
                 });
-
 
 
             }
@@ -433,6 +489,20 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         popup();
+                        db.collection("Current_booking").document(UserBooking_ID)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+//                                        Toast.makeText(ProviderBookingActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
 
                     }
                 })
@@ -592,11 +662,11 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                                 RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.dialog_review_booking_ratingbar);
                                 String review = ratingBar.getProgress() + "";
-                                Toast.makeText(ProviderBookingActivity.this, review, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ProviderBookingActivity.this, review, Toast.LENGTH_SHORT).show();
 //                                PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_USERRATING,review);
 //                                reviewTextView.setText(review);
 
-                                DocumentReference documentReference = db.collection("Current_booking").document(uidvalue);
+                                DocumentReference documentReference = db.collection("Current_booking").document(UserBooking_ID);
                                 HashMap<String,Object> updatesvalues=new HashMap<>();
                                 updatesvalues.put("Driver_review",review);
 
@@ -604,7 +674,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -624,7 +694,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -637,7 +707,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 
 
-                                documentReference = db.collection("Completed_booking").document(uidvalue);
+                                documentReference = db.collection("Completed_booking").document(UserBooking_ID);
                                 HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
                                 updatesvaluescomplete.put("Driver_review",review);
 
@@ -645,7 +715,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {

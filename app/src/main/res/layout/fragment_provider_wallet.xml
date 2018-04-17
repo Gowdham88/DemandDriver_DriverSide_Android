@@ -29,7 +29,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/medium_margin"
                     android:layout_weight="0.8"
-                    android:orientation="vertical">`
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="45dp"
@@ -105,6 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
+                        android:text="Payment"
                         android:layout_margin="@dimen/small_margin" />
 
                     <TextView

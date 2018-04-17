@@ -15,17 +15,21 @@ public class Driver_current_Details {
     private String User_name;
     private String End_time;
 
-
     private String Cost;
     private String Driver_review;
     private String User_review;
     private String User_Booking_Time;
+
     private String User_ID;
     private String Car_type;
-    private String Booking_ID;
+    private String User_Booking_ID;
+    private String User_Book_Date_Time;
 
 
-    public Driver_current_Details(String Start_Lat, String Start_Long, String User_Address, String User_Phone_number, String Date, String Start_time, String User_name, String End_time, String Cost, String Driver_review, String User_review, String User_Booking_Time, String User_ID, String Car_type, String Booking_ID) {
+
+    public Driver_current_Details(String Start_Lat, String Start_Long, String User_Address, String User_Phone_number, String Date,
+                                  String Start_time, String User_name, String End_time, String Cost, String Driver_review, String User_review,
+                                  String User_Booking_Time, String User_ID, String Car_type, String User_Booking_ID,String User_Book_Date_Time) {
 
         this.Start_Lat=Start_Lat;
         this.Start_Long=Start_Long;
@@ -41,7 +45,8 @@ public class Driver_current_Details {
         this.User_Booking_Time=User_Booking_Time;
         this.User_ID=User_ID;
         this.Car_type=Car_type;
-        this.Booking_ID=Booking_ID;
+        this.User_Booking_ID=User_Booking_ID;
+        this.User_Book_Date_Time=User_Book_Date_Time;
     }
 
     public Driver_current_Details() {
@@ -160,12 +165,21 @@ public class Driver_current_Details {
     public void setCar_type(String car_type) {
         Car_type = car_type;
     }
-    public String getBooking_ID() {
-        return Booking_ID;
+
+    public String getUser_Booking_ID() {
+        return User_Booking_ID;
     }
 
-    public void setBooking_ID(String booking_ID) {
-        Booking_ID = booking_ID;
+    public void setUser_Booking_ID(String user_Booking_ID) {
+        User_Booking_ID = user_Booking_ID;
+    }
+
+    public String getUser_Book_Date_Time() {
+        return User_Book_Date_Time;
+    }
+
+    public void setUser_Book_Date_Time(String user_Book_Date_Time) {
+        User_Book_Date_Time = user_Book_Date_Time;
     }
 
 

@@ -62,7 +62,7 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
                 intent.putExtra("phonenumber",dataList.get(position).getUser_Phone_number());
                 intent.putExtra("name",dataList.get(position).getUser_name());
-                intent.putExtra("datatime",DateTime);
+                intent.putExtra("datatime",dataList.get(position).getUser_Book_Date_Time());
                 intent.putExtra("address",dataList.get(position).getUser_Address());
                 intent.putExtra("userlats",dataList.get(position).getStart_Lat());
                 intent.putExtra("userlongs",dataList.get(position).getStart_Long());
@@ -70,7 +70,7 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
                 intent.putExtra("usertime",dataList.get(position).getUser_Booking_Time());
                 intent.putExtra("useruid",dataList.get(position).getUser_ID());
                 intent.putExtra("Car_type",dataList.get(position).getCar_type());
-                intent.putExtra("Booking_ID",dataList.get(position).getBooking_ID());
+                intent.putExtra("Booking_ID",dataList.get(position).getUser_Booking_ID());
 
                 context.startActivity(intent);
             }
