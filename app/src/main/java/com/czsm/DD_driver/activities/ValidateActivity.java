@@ -246,7 +246,7 @@ public class ValidateActivity extends AppCompatActivity {
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Driver_details").document("Chennai").collection("Sholinganallur").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Driver_details").document(uid).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("uid",uid);

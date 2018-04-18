@@ -163,8 +163,8 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //        Toast.makeText(ProviderBookingActivity.this, Useruid, Toast.LENGTH_SHORT).show();
         Map<String, Object> datadriver = new HashMap<>();
         datadriver.put("Car_type",CarType);
-        datadriver.put("Driver_Lat",12.9010);
-        datadriver.put("Driver_Long",80.2279);
+        datadriver.put("Driver_Lat","12.9010");
+        datadriver.put("Driver_Long","80.2279");
 
 //        data.put("usertimedate",formattedstrDatedriver);
 //
@@ -172,7 +172,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //        Users users1 = new Users(phoneNumber,uid);
 
 
-        db.collection("Driver_details").document("Chennai").collection("Sholinganallur").document(uidvalue).update(datadriver).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Driver_details").document(uidvalue).update(datadriver).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 //                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
@@ -685,7 +685,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                     }
                                 });
 
-                                documentReference = db.collection("Driver_details").document("Chennai").collection("Sholinganallur").document(uidvalue);
+                                documentReference = db.collection("Driver_details").document(uidvalue);
                                 HashMap<String,Object> updatesdriver=new HashMap<>();
                                 updatesdriver.put("Driver_review",review);
 
