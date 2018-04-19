@@ -8,27 +8,43 @@ public class Driver_complete_details {
 
     private String Start_Lat;
     private String Start_Long;
-    private String Address;
+    private String User_Address;
     private String User_Phone_number;
     private String Date;
     private String Start_time;
+
+
+
     private String User_name;
     private String End_time;
     private String Cost;
 
     private String Driver_review;
     private String User_review;
+
+
     private String Time;
+
+
     private String User_ID;
     private String User_Booking_ID;
 
 
-    public Driver_complete_details(String Start_Lat, String Start_Long, String Address,String User_Phone_number,String Date,String Start_time,String User_name,String End_time,String Cost,String Driver_review,String User_review,String Time,String User_ID,String User_Booking_ID) {
+
+    private String Car_type;
+    private String City;
+    private String Status;
+    private String User_Booking_Time;
+
+
+    public Driver_complete_details(String Start_Lat, String Start_Long, String User_Address,String User_Phone_number,
+                                   String Date,String Start_time,String User_name,String End_time,String Cost,String Driver_review,
+                                   String User_review,String Time,String User_ID,String User_Booking_ID,String City,String Car_type,String Status,String User_Booking_Time) {
 
         this.Start_Lat=Start_Lat;
         this.Start_Long=Start_Long;
         this.User_Phone_number=User_Phone_number;
-        this.Address=Address;
+        this.User_Address=User_Address;
         this.Date=Date;
         this.User_name=User_name;
         this.Start_time=Start_time;
@@ -39,6 +55,10 @@ public class Driver_complete_details {
         this.Time=Time;
         this.User_ID=User_ID;
         this.User_Booking_ID=User_Booking_ID;
+        this.City=City;
+        this.Car_type=Car_type;
+        this.Status=Status;
+        this.User_Booking_Time=User_Booking_Time;
     }
 
     public Driver_complete_details() {
@@ -62,13 +82,6 @@ public class Driver_complete_details {
         Start_Long = start_Long;
     }
 
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
-        Address = address;
-    }
 
     public String getDate() {
         return Date;
@@ -158,7 +171,42 @@ public class Driver_complete_details {
     public void setUser_Booking_ID(String user_Booking_ID) {
         User_Booking_ID = user_Booking_ID;
     }
+    public String getCity() {
+        return City;
+    }
 
+    public void setCity(String city) {
+        City = city;
+    }
 
+    public String getCar_type() {
+        return Car_type;
+    }
 
+    public void setCar_type(String car_type) {
+        Car_type = car_type;
+    }
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getUser_Booking_Time() {
+        return User_Booking_Time;
+    }
+
+    public void setUser_Booking_Time(String user_Booking_Time) {
+        User_Booking_Time = user_Booking_Time;
+    }
+
+    public String getUser_Address() {
+        return User_Address;
+    }
+
+    public void setUser_Address(String user_Address) {
+        User_Address = user_Address;
+    }
 }

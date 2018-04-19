@@ -34,6 +34,9 @@ import com.czsm.DD_driver.Service.CapPhoto;
 import com.czsm.DD_driver.controller.AllinAllController;
 import com.czsm.DD_driver.helper.RESTClient;
 import com.czsm.DD_driver.helper.Util;
+import com.czsm.DD_driver.model.Data;
+import com.czsm.DD_driver.model.Driver_complete_details;
+import com.czsm.DD_driver.model.ProviderBooking;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,14 +47,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -95,6 +102,9 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
            long currentamt,amount;
     DocumentReference documentReference;
     String Rndmuid,UserBooking_ID;
+    List<Driver_complete_details> datalist = new ArrayList<Driver_complete_details>();
+    String Usrphonenumber,Cartype,latval,longittudeval,address,cityval,usrbkid,Date,UsrUid,usrname,status,UsrReview,UsrBkTime;
+    String Statusval="Completed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,25 +226,25 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
 
 
-        Map<String, Object> dataval = new HashMap<>();
-        dataval.put("Driver_ID",uidvalue);
-        dataval.put("Driver_Phone_number",Driverno);
-        dataval.put("Driver_Booking_ID",Rndmuid);
-
-        db.collection("Completed_booking").document(UserBooking_ID).update(dataval).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Error", "Error adding document", e);
-//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+//        Map<String, Object> dataval = new HashMap<>();
+//        dataval.put("Driver_ID",uidvalue);
+//        dataval.put("Driver_Phone_number",Driverno);
+//        dataval.put("Driver_Booking_ID",Rndmuid);
+//
+//        db.collection("Completed_booking").document(UserBooking_ID).update(dataval).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+////                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("Error", "Error adding document", e);
+////                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
 
         contact=contactTextView.getText().toString();
         forwardImg.setOnClickListener(new View.OnClickListener() {
@@ -326,6 +336,29 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                 }
             });
+            Map<String, Object> data = new HashMap<>();
+//            data.put("End_time",formattendDatedriver);
+            data.put("Start_time",formattedstrDatedriver);
+//            data.put("Cost",amt);
+//
+//        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+//        Users users1 = new Users(phoneNumber,uid);
+
+
+            db.collection("Current_booking").document(UserBooking_ID).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+//                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("Error", "Error adding document", e);
+//                        Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+
+                }
+
+            });
 
         }
 
@@ -369,22 +402,22 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 });
 
 
-                Map<String, Object> datasatuscm = new HashMap<>();
-                datasatuscm.put("Status","Completed");
-                db.collection("Completed_booking").document(UserBooking_ID).update(datasatuscm).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Error", "Error adding document", e);
-//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                });
+//                Map<String, Object> datasatuscm = new HashMap<>();
+//                datasatuscm.put("Status","Completed");
+//                db.collection("Completed_booking").document(UserBooking_ID).update(datasatuscm).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+////                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("Error", "Error adding document", e);
+////                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                });
 //                String formattedDateuser = df.format(datetime);
                 Map<String, Object> data = new HashMap<>();
                 data.put("End_time",formattendDatedriver);
@@ -410,30 +443,30 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                 });
 
-
-                Map<String, Object> datausercomplete = new HashMap<>();
-                datausercomplete.put("End_time",formattendDatedriver);
-                datausercomplete.put("Start_time",formattedstrDatedriver);
-                datausercomplete.put("Cost",amt);
 //
-//        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
-//        Users users1 = new Users(phoneNumber,uid);
-
-
-                db.collection("Completed_booking").document(UserBooking_ID).update(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Error", "Error adding document", e);
-//                        Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-                    }
-
-                });
+//                Map<String, Object> datausercomplete = new HashMap<>();
+//                datausercomplete.put("End_time",formattendDatedriver);
+//                datausercomplete.put("Start_time",formattedstrDatedriver);
+//                datausercomplete.put("Cost",amt);
+////
+////        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+////        Users users1 = new Users(phoneNumber,uid);
+//
+//
+//                db.collection("Completed_booking").document(UserBooking_ID).update(datausercomplete).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+////                        Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("Error", "Error adding document", e);
+////                        Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                });
 
 
                 documentReference=db.collection("User_completed_booking").document(uidvalue);
@@ -476,6 +509,63 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                     }
                 });
 
+                com.google.firebase.firestore.Query driverfirst = db.collection("Current_booking");
+
+        driverfirst.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                          @Override
+                                          public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                                              if (documentSnapshots.getDocuments().size() < 1) {
+
+                                                  return;
+
+                                              }
+
+                                              for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                                                  Driver_complete_details data = document.toObject(Driver_complete_details.class);
+                                                  datalist.add(data);
+                                                   Usrphonenumber= String.valueOf(datalist.get(0).getUser_Phone_number());
+                                                 Cartype= String.valueOf(datalist.get(0).getCar_type());
+                                              latval= String.valueOf(datalist.get(0).getStart_Lat());
+                                                 longittudeval= String.valueOf(datalist.get(0).getStart_Long());
+                                                 address= String.valueOf(datalist.get(0).getUser_Address());
+                                                  cityval= String.valueOf(datalist.get(0).getCity());
+                                                  usrbkid= String.valueOf(datalist.get(0).getUser_Booking_ID());
+                                                 Date= String.valueOf(datalist.get(0).getDate());
+                                                 UsrUid= String.valueOf(datalist.get(0).getUser_ID());
+                                                    usrname= String.valueOf(datalist.get(0).getUser_name());
+                                                  status= String.valueOf(datalist.get(0).getStatus());
+                                                  UsrReview= String.valueOf(datalist.get(0).getUser_review());
+                                                  UsrBkTime= String.valueOf(datalist.get(0).getUser_Booking_Time());
+
+
+
+
+
+
+
+//                                                  String latt= String.valueOf(datalist.get(0).getLat());
+//                                                  Toast.makeText(MapActivity.this, latt, Toast.LENGTH_SHORT).show();
+
+//                                                  Log.e("datalist",datalist.get(0).getLat());
+//                                hideProgressDialog();
+
+                                              }
+//                            hideProgressDialog();
+
+
+                                          }
+                                      });
+
+        if(Statusval.equals(status)){
+
+
+
+        }
+
+
 
             }
         });
@@ -489,20 +579,62 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         popup();
-                        db.collection("Current_booking").document(UserBooking_ID)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        documentReference=db.collection("Completed_booking").document(UserBooking_ID);
+                        HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
+//                        updatesvalues.put("Driver_name",);
+//                        updatesvalues.put("Driver_ID",);
+                        updatesvaluescomplete.put("User_name","Poojitha");
+                        updatesvaluescomplete.put("User_ID",UsrUid);
+//                        updatesvalues.put("Driver_Phone_number",);
+                        updatesvaluescomplete.put("User_Phone_number",Usrphonenumber);
+                        updatesvaluescomplete.put("Car_type",Cartype);
+                        updatesvaluescomplete.put("Start_Lat",latval);
+                        updatesvaluescomplete.put("Start_Long",longittudeval);
+                        updatesvaluescomplete.put("User_Address",address);
+                        updatesvaluescomplete.put("City",cityval);
+                        updatesvaluescomplete.put("User_Booking_ID",usrbkid);
+                        updatesvaluescomplete.put("Status","Completed");
+                        updatesvaluescomplete.put("Date",Date);
+                        updatesvaluescomplete.put("End_time",formattendDatedriver);
+                        updatesvaluescomplete.put("Start_time",formattedstrDatedriver);
+                        updatesvaluescomplete.put("Cost",amt);
+                        updatesvaluescomplete.put("User_review",UsrReview);
+                        updatesvaluescomplete.put("Driver_ID",uidvalue);
+                        updatesvaluescomplete.put("Driver_Phone_number",Driverno);
+                        updatesvaluescomplete.put("Driver_Booking_ID",Rndmuid);
+                        updatesvaluescomplete.put("User_Booking_Time",UsrBkTime);
+//                        updatesvaluescomplete.put("User_Token",TokenVal);
+
+                        documentReference.set(updatesvaluescomplete)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
-                                    public void onSuccess(Void aVoid) {
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        db.collection("Current_booking").document(UserBooking_ID).delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
 //                                        Toast.makeText(ProviderBookingActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
 
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                    }
+                                                });
+
+                                        Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
+//
                                     }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                    }
-                                });
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+
+                            }
+                        });
 
                     }
                 })
@@ -514,6 +646,10 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                 }).show();
 
     }
+
+
+
+
     public void printDifference(Date startDate, Date endDate) {
         //milliseconds
         long different = endDate.getTime() - startDate.getTime();
@@ -705,26 +841,28 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                     }
                                 });
 
+//                                if(status.equals("Completed")){
+                                    documentReference = db.collection("Completed_booking").document(UserBooking_ID);
+                                    HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
+                                    updatesvaluescomplete.put("Driver_review",review);
 
-
-                                documentReference = db.collection("Completed_booking").document(UserBooking_ID);
-                                HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
-                                updatesvaluescomplete.put("Driver_review",review);
-
-                                documentReference.update(updatesvaluescomplete)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
+                                    documentReference.update(updatesvaluescomplete)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
 //                                                Toast.makeText(ProviderBookingActivity.this, "successfull", Toast.LENGTH_SHORT).show();
 //
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
 
 
-                                    }
-                                });
+                                        }
+                                    });
+//                                }
+
+
                                 completeButton.setVisibility(View.GONE);
                                 StartButton.setVisibility(View.GONE);
 //                                child.getRef().child("userreview").setValue(review);

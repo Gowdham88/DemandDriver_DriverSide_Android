@@ -239,8 +239,9 @@ public class ValidateActivity extends AppCompatActivity {
         Map<String, Object> data = new HashMap<>();
         data.put("Driver_ID", uid);
         data.put("Driver_Phone_number",phoneNumber);
+        data.put("driverToken", referdr);
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
-//        data.put("driverToken", referdr);
+//
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
 //        Users users1 = new Users(phoneNumber,uid);
