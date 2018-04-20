@@ -173,8 +173,8 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 //        Toast.makeText(ProviderBookingActivity.this, Useruid, Toast.LENGTH_SHORT).show();
         Map<String, Object> datadriver = new HashMap<>();
         datadriver.put("Car_type",CarType);
-        datadriver.put("Driver_Lat","12.9010");
-        datadriver.put("Driver_Long","80.2279");
+//        datadriver.put("Driver_Lat","12.9010");
+//        datadriver.put("Driver_Long","80.2279");
 
 //        data.put("usertimedate",formattedstrDatedriver);
 //
@@ -198,30 +198,30 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         });
 
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("Driver_ID",uidvalue);
-        data.put("Driver_Phone_number",Driverno);
-        data.put("Driver_Booking_ID",Rndmuid);
-//        data.put("usertimedate",formattedstrDatedriver);
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("Driver_ID",uidvalue);
+//        data.put("Driver_Phone_number",Driverno);
+//        data.put("Driver_Booking_ID",Rndmuid);
+////        data.put("usertimedate",formattedstrDatedriver);
+////
+////        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
+////        Users users1 = new Users(phoneNumber,uid);
 //
-//        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
-//        Users users1 = new Users(phoneNumber,uid);
-
-
-        db.collection("Current_booking").document(UserBooking_ID).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-//                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Error", "Error adding document", e);
-//                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+//
+//        db.collection("Current_booking").document(UserBooking_ID).update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+////                Toast.makeText(ProviderBookingActivity.this, "", Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("Error", "Error adding document", e);
+////                Toast.makeText(getApplicationContext(),"Post Failed",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
 
 
 

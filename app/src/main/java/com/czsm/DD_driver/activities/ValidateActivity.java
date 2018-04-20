@@ -64,7 +64,6 @@ public class ValidateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_validate);
         mOtpEdt = (EditText) findViewById(R.id.otp_edt);
         mPhonenumbetEdt = (TextView) findViewById(R.id.phone_edt);
-        mResendotpTxt = (TextView) findViewById(R.id.resend_txt);
         FrdRelLay = (ImageView) findViewById(R.id.rel_lay);
         RelImg = (ImageView) findViewById(R.id.rel_img);
         mResendtxt=(TextView)findViewById(R.id.resend_txt);
@@ -240,6 +239,8 @@ public class ValidateActivity extends AppCompatActivity {
         data.put("Driver_ID", uid);
         data.put("Driver_Phone_number",phoneNumber);
         data.put("driverToken", referdr);
+        data.put("Driver_Lat","12.9010");
+        data.put("Driver_Long","80.2279");
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
 //
 //
