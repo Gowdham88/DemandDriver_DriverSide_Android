@@ -43,7 +43,7 @@ public class ValidateActivity extends AppCompatActivity {
     EditText mOtpEdt;
     TextView mResendotpTxt,mPhonenumbetEdt,mResendtxt;
     Bundle bundle;
-    String phonrnum;
+    String phonrnum,UsrName;
     ImageView FrdRelLay;
     ImageView RelImg;
     String otpNumber;
@@ -82,6 +82,7 @@ public class ValidateActivity extends AppCompatActivity {
         if (bundle != null) {
             phonrnum = bundle.getString("phonenumber");
             mVerificationId=bundle.getString("vericode");
+            UsrName = bundle.getString("username");
 //            mResendToken= (PhoneAuthProvider.ForceResendingToken) bundle.get("mtoken");
 //            Toast.makeText(this, mVerificationId, Toast.LENGTH_SHORT).show();
 //         }
@@ -208,7 +209,7 @@ public class ValidateActivity extends AppCompatActivity {
                             PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID,uid);
                             PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
                             uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
-                            PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
+
 //                            DatabaseReference refe= FirebaseDatabase.getInstance().getReference("driverNotifications");
 //                            refe.child("token").setValue(FirebaseInstanceId.getInstance().getToken());
 //                            referdr=FirebaseInstanceId.getInstance().getToken();
@@ -235,13 +236,18 @@ public class ValidateActivity extends AppCompatActivity {
     private void AddDatabase(String phoneNumber, final String uid){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         referdr=FirebaseInstanceId.getInstance().getToken();
+       String cartype = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_CARTYPE);
+
         Map<String, Object> data = new HashMap<>();
         data.put("Driver_ID", uid);
         data.put("Driver_Phone_number",phoneNumber);
         data.put("driverToken", referdr);
         data.put("Driver_Lat","12.9010");
         data.put("Driver_Long","80.2279");
+        data.put("Driver_name",UsrName);
+        data.put("Car_type",cartype);
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
+        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERNAME,UsrName);
 //
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();

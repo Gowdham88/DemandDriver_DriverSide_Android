@@ -32,6 +32,7 @@ public class PreferencesHelper {
     public static final String PREFERENCE_PRICE ="price";
     public static final String PREFERENCE_DRIVERPHONENUMBER ="driverphonenumber";
     public static final String PREFERENCE_CARTYPE="cartype";
+    public static final String PREFERENCE_DRIVERNAME="drivername";
 
 
 
@@ -47,7 +48,7 @@ public class PreferencesHelper {
     public static void signOut(Context context) {
         SharedPreferences.Editor editor = getEditor(context);
         editor.remove(USER_PREFERENCES);
-        editor.remove(PREFERENCE_USER_NAME);
+        editor.remove(PREFERENCE_DRIVERNAME);
         editor.remove(PREFERENCE_EMAIL);
         editor.remove(PREFERENCE_FIREBASE_UUID);
         editor.remove(PREFERENCE_PROFILE_PIC);

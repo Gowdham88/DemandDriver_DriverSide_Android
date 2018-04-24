@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.czsm.DD_driver.PreferencesHelper;
 import com.czsm.DD_driver.R;
 import com.czsm.DD_driver.activities.ProviderBookingActivity;
 import com.czsm.DD_driver.model.Data;
@@ -55,13 +56,13 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
         String useuuid=dataList.get(position).getUser_ID();
         holder.lat.setText(dataList.get(position).getUser_name());
         String address=dataList.get(position).getUser_Address();
-
+        final String Drivername= PreferencesHelper.getPreference(context, PreferencesHelper.PREFERENCE_DRIVERNAME);
         holder.ProviderLinLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
                 intent.putExtra("phonenumber",dataList.get(position).getUser_Phone_number());
-                intent.putExtra("name",dataList.get(position).getUser_name());
+                intent.putExtra("name",Drivername);
                 intent.putExtra("datatime",dataList.get(position).getUser_Book_Date_Time());
                 intent.putExtra("address",dataList.get(position).getUser_Address());
                 intent.putExtra("userlats",dataList.get(position).getStart_Lat());

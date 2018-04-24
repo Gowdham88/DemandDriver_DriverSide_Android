@@ -138,7 +138,7 @@ ProviderBookingAdapter  providerAdapter ;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query first = db.collection("Current_booking").orderBy("User_Book_Date_Time", Query.Direction.DESCENDING);
+        Query first = db.collection("Current_booking").orderBy("User_Book_Date_Time", Query.Direction.ASCENDING);
 
         first.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
