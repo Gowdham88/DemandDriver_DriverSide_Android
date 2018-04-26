@@ -62,7 +62,7 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
             public void onClick(View view) {
                 Intent intent= new Intent(context, ProviderBookingActivity.class);
                 intent.putExtra("phonenumber",dataList.get(position).getUser_Phone_number());
-                intent.putExtra("name",Drivername);
+                intent.putExtra("name",dataList.get(position).getUser_name());
                 intent.putExtra("datatime",dataList.get(position).getUser_Book_Date_Time());
                 intent.putExtra("address",dataList.get(position).getUser_Address());
                 intent.putExtra("userlats",dataList.get(position).getStart_Lat());

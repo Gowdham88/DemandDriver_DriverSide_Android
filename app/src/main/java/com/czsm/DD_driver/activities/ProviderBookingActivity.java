@@ -103,8 +103,9 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
     DocumentReference documentReference;
     String Rndmuid,UserBooking_ID;
     List<Driver_complete_details> datalist = new ArrayList<Driver_complete_details>();
-    String Usrphonenumber,Cartype,latval,longittudeval,address,cityval,usrbkid,Date,UsrUid,usrname,status,UsrReview,UsrBkTime;
-    String Statusval="Completed";
+    List<Driver_complete_details> datalist1 = new ArrayList<Driver_complete_details>();
+    String Usrphonenumber,Cartype,latval,longittudeval,address,cityval,usrbkid,Date,UsrUid,usrname,status,UsrReview,UsrBkTime,UserName;
+    String Statusval="Completed",UsrReviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             UserTime=extras.getString("usertime", "");
             CarType=extras.getString("Car_type", "");
             UserBooking_ID=extras.getString("Booking_ID", "");
-
+Log.e("username",username);
 
 
         }
@@ -535,12 +536,11 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                                                   usrbkid= String.valueOf(datalist.get(0).getUser_Booking_ID());
                                                  Date= String.valueOf(datalist.get(0).getDate());
                                                  UsrUid= String.valueOf(datalist.get(0).getUser_ID());
-                                                    usrname= String.valueOf(datalist.get(0).getUser_name());
+                                                  UserName= String.valueOf(datalist.get(0).getUser_name());
                                                   status= String.valueOf(datalist.get(0).getStatus());
                                                   UsrReview= String.valueOf(datalist.get(0).getUser_review());
                                                   UsrBkTime= String.valueOf(datalist.get(0).getUser_Booking_Time());
-
-
+                                                  Toast.makeText(ProviderBookingActivity.this, UserName, Toast.LENGTH_SHORT).show();
 
 
 
@@ -558,6 +558,45 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
 
                                           }
                                       });
+//                com.google.firebase.firestore.Query driverfirst1 = db.collection("User_details");
+//
+//                driverfirst1.get()
+//                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onSuccess(QuerySnapshot documentSnapshots) {
+//
+//                                if (documentSnapshots.getDocuments().size() < 1) {
+//
+//                                    return;
+//
+//                                }
+//
+//                                for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
+//
+//                                    Driver_complete_details data1 = document.toObject(Driver_complete_details.class);
+//                                    datalist1.add(data1);
+//                                    UsrReviews= String.valueOf(datalist1.get(0).getUser_review());
+//                                    Toast.makeText(ProviderBookingActivity.this, UsrReviews, Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//
+//
+//
+//
+////                                                  String latt= String.valueOf(datalist.get(0).getLat());
+////                                                  Toast.makeText(MapActivity.this, latt, Toast.LENGTH_SHORT).show();
+//
+////                                                  Log.e("datalist",datalist.get(0).getLat());
+////                                hideProgressDialog();
+//
+//                                }
+////                            hideProgressDialog();
+//
+//
+//                            }
+//                        });
 
         if(Statusval.equals(status)){
 
@@ -584,7 +623,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
                         HashMap<String,Object> updatesvaluescomplete=new HashMap<>();
 //                        updatesvalues.put("Driver_name",);
 //                        updatesvalues.put("Driver_ID",);
-                        updatesvaluescomplete.put("User_name","Poojitha");
+                        updatesvaluescomplete.put("User_name",username);
                         updatesvaluescomplete.put("User_ID",UsrUid);
 //                        updatesvalues.put("Driver_Phone_number",);
                         updatesvaluescomplete.put("User_Phone_number",Usrphonenumber);
