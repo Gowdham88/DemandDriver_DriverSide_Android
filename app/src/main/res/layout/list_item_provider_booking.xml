@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:layout_margin="@dimen/small_margin"
     android:background="@drawable/list_cell"
     android:orientation="horizontal">
@@ -33,32 +32,34 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/FontAvenirLight"
             android:id="@+id/list_item_booking_user_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:textColor="#0490db"
-            android:textSize="18dp"
-            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
+            style="@style/FontAvenirLight"
             android:id="@+id/list_item_booking_service_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:textColor="#0490db"
-            android:textSize="18dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
+            style="@style/FontAvenirLight"
             android:id="@+id/list_item_booking_datetime_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:textColor="#0490db"
-            android:textSize="18dp"
-            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="normal"
             android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>
 </LinearLayout>

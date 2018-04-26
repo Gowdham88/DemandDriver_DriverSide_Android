@@ -27,7 +27,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/logo01copy"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AllinAllMaterialTheme">
@@ -62,7 +62,6 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.ServiceProviderActivity"
-            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.UserActivity"
@@ -72,7 +71,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ProviderBookingActivity"
-            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.UserBookingHistoryActivity"

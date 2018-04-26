@@ -61,6 +61,8 @@ public class ProviderWalletFragment extends Fragment {
         // Inflate the layout for this fragment
         View view          = inflater.inflate(R.layout.fragment_provider_wallet, container, false);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.colorPrimary);
         signOutButton      = (Button) view.findViewById(R.id.fragment_provider_signout_button);
         balanceTextview    = (TextView) view.findViewById(R.id.fragment_wallet_balance_textview);
         schemeTextview     = (TextView) view.findViewById(R.id.fragment_wallet_scheme_textview);
@@ -72,6 +74,8 @@ public class ProviderWalletFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         signOutButton.setOnClickListener(new View.OnClickListener() {

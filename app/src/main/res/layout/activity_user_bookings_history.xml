@@ -150,7 +150,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/provider_name" />
+                android:src="@drawable/providername" />
 
         </LinearLayout>
 
@@ -208,7 +208,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/address" />
+                android:src="@drawable/addresss" />
 
         </LinearLayout>
 

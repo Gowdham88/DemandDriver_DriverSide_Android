@@ -56,7 +56,7 @@ RelativeLayout parentLayout;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screenlogin);
         PhoneEdt=(EditText)findViewById(R.id.phone_edt);
-        Username=(EditText)findViewById(R.id.username_edt);
+//        Username=(EditText)findViewById(R.id.username_edt);
    FrdRelLay=(ImageView) findViewById(R.id.rel_lay);
         parentLayout=(RelativeLayout)findViewById(R.id.parentlay);
         parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -80,10 +80,11 @@ RelativeLayout parentLayout;
             public void onClick(View v) {
                 Utils.hideKeyboard(LoginScreenActivity.this);
 
-                if(Username.getText().toString().isEmpty()||Username.getText().toString().equals(null)){
-                    Toast.makeText(getApplicationContext(), "Please enter the Name", Toast.LENGTH_SHORT).show();
-                }
-                else if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
+//                if(Username.getText().toString().isEmpty()||Username.getText().toString().equals(null)){
+//                    Toast.makeText(getApplicationContext(), "Please enter the Name", Toast.LENGTH_SHORT).show();
+//                }
+//                else
+                    if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
                     Toast.makeText(getApplicationContext(), "Please enter the phone number", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -110,10 +111,11 @@ RelativeLayout parentLayout;
             public void onClick(View v) {
                 Utils.hideKeyboard(LoginScreenActivity.this);
 
-                if(Username.getText().toString().isEmpty()||Username.getText().toString().equals(null)){
-                    Toast.makeText(getApplicationContext(), "Please enter the Name", Toast.LENGTH_SHORT).show();
-                }
-                else if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
+//                if(Username.getText().toString().isEmpty()||Username.getText().toString().equals(null)){
+//                    Toast.makeText(getApplicationContext(), "Please enter the Name", Toast.LENGTH_SHORT).show();
+//                }
+//                else
+                    if(PhoneEdt.getText().toString().isEmpty()||PhoneEdt.getText().toString().equals(null)){
                     Toast.makeText(getApplicationContext(), "Please enter the phone number", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -174,7 +176,7 @@ RelativeLayout parentLayout;
 //                    intent.putExtra("string", true);
                 intent.putExtra("phonenumber", PhoneEdt.getText().toString());
                 intent.putExtra("vericode", mVerificationId.toString());
-                intent.putExtra("username", Username.getText().toString());
+//                intent.putExtra("username", Username.getText().toString());
 
 //                    intent.putExtra("mtoken",mResendToken);
                 startActivity(intent);

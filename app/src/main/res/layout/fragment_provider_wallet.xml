@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0066ff"
+    android:background="#06ffffff"
     android:paddingBottom="@dimen/normal_margin"
     android:paddingRight="@dimen/normal_margin"
     android:paddingTop="@dimen/normal_margin">
@@ -43,28 +43,31 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:orientation="vertical">
-
                     <TextView
-                        android:id="@+id/fragment_wallet_balance_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/small_margin"
-                        android:textColor="@color/white"
-                        android:text="RS. " />
-
-                    <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
                         android:text="@string/subscription"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/abc_text_size_headline_material" />
+                        android:textColor="@color/colorPrimary" />
+                    <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
+                        android:id="@+id/fragment_wallet_balance_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_margin"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Rs. " />
+
+
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/white" />
+                        android:background="@color/colorPrimary" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -100,27 +103,33 @@
                     android:layout_weight="2"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/fragment_wallet_scheme_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="Payment"
-                        android:layout_margin="@dimen/small_margin" />
 
                     <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
                         android:text="@string/scheme"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/abc_text_size_headline_material" />
+                        android:textColor="@color/colorPrimary"
+                        />
+                    <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
+                        android:id="@+id/fragment_wallet_scheme_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Payment"
+                        android:layout_margin="@dimen/small_margin" />
+
+
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/white" />
+                        android:background="@color/colorPrimary" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -156,38 +165,45 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_margin"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/contact_us" />
+                    <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
                         android:id="@+id/phonetxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorPrimary"
                         android:text="T: +919941123110" />
 
                     <TextView
+                        android:textSize="12dp"
+                        style="@style/FontAvenirLight"
                         android:id="@+id/emaitxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/small_margin"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/email_address" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/small_margin"
-                        android:textColor="@color/white"
-                        android:text="@string/contact_us"
-                        android:textSize="@dimen/abc_text_size_headline_material" />
+
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/medium_margin"
-                        android:background="@android:color/white" />
+                        android:background="@color/colorPrimary" />
                 </LinearLayout>
             </LinearLayout>
 
             <Button
+                style="@style/FontAvenirLight"
                 android:id="@+id/fragment_provider_signout_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,7 +211,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:text="@string/sign_out"
-                android:background="#ffca00"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
+                android:background="@color/colorPrimary"
                 android:textAllCaps="false" />
 
         </RelativeLayout>

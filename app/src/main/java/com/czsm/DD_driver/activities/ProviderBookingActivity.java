@@ -66,7 +66,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ProviderBookingActivity extends AppCompatActivity implements RESTClient.ServiceResponseInterface {
+public class ProviderBookingActivity extends AppCompatActivity {
 
     @BindView(R.id.provider_book_name_textview)
     TextView nameTextView;
@@ -106,6 +106,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
     List<Driver_complete_details> datalist1 = new ArrayList<Driver_complete_details>();
     String Usrphonenumber,Cartype,latval,longittudeval,address,cityval,usrbkid,Date,UsrUid,usrname,status,UsrReview,UsrBkTime,UserName;
     String Statusval="Completed",UsrReviews;
+    TextView toolbartext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
         setContentView(R.layout.activity_provider_book);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         Driverno = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER);
@@ -121,10 +122,14 @@ public class ProviderBookingActivity extends AppCompatActivity implements RESTCl
             @Override
             public void onClick(View v) {
 
-                Intent mapintent= new Intent(ProviderBookingActivity.this,ServiceProviderActivity.class);
-                startActivity(mapintent);
+                onBackPressed();
+
+//                Intent mapintent= new Intent(ProviderBookingActivity.this,ServiceProviderActivity.class);
+//                startActivity(mapintent);
             }
         });
+        toolbartext=(TextView)findViewById(R.id.toolbar_one);
+//        toolbartext.setText("Appointment");
         setTitle(R.string.appointment);
           db= FirebaseFirestore.getInstance();
         uidvalue = PreferencesHelper.getPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID);
@@ -540,7 +545,7 @@ Log.e("username",username);
                                                   status= String.valueOf(datalist.get(0).getStatus());
                                                   UsrReview= String.valueOf(datalist.get(0).getUser_review());
                                                   UsrBkTime= String.valueOf(datalist.get(0).getUser_Booking_Time());
-                                                  Toast.makeText(ProviderBookingActivity.this, UserName, Toast.LENGTH_SHORT).show();
+//                                                  Toast.makeText(ProviderBookingActivity.this, UserName, Toast.LENGTH_SHORT).show();
 
 
 
@@ -763,26 +768,26 @@ Log.e("username",username);
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-
-            finish();
-            return true;
-
-        } else
-            return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void sendServiceResult(String serviceResult) {
-
-    }
-
-    @Override
-    public void requestFailed() {
-        Util.requestFailed(this);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//
+//            finish();
+//            return true;
+//
+//        } else
+//            return super.onOptionsItemSelected(item);
+//    }
+//
+//    @Override
+//    public void sendServiceResult(String serviceResult) {
+//
+//    }
+//
+//    @Override
+//    public void requestFailed() {
+//        Util.requestFailed(this);
+//    }
 
     private void popup() {
 
@@ -922,4 +927,8 @@ Log.e("username",username);
                         }).setCancelable(false).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

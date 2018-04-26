@@ -100,6 +100,8 @@ ProviderBookingAdapter  providerAdapter ;
         // Inflate the layout for this fragment
         View view      = inflater.inflate(R.layout.fragment_provider_bookings, container, false);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(
+                R.color.colorPrimary);
         recyclerview       = (RecyclerView) view.findViewById(R.id.fragment_provider_book_listview);
 
         db = FirebaseFirestore.getInstance();

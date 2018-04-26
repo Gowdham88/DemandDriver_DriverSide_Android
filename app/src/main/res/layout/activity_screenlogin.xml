@@ -27,64 +27,64 @@
         android:gravity="center"/>
 </FrameLayout>
 
-    <RelativeLayout
-        android:layout_below="@id/frm_lay"
-        android:id="@+id/username_rel"
-        android:layout_width="270dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="55dp"
-        android:forceHasOverlappingRendering="true"
-        android:background="@drawable/baground">
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/user"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_below="@id/frm_lay"-->
+        <!--android:id="@+id/username_rel"-->
+        <!--android:layout_width="270dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginTop="55dp"-->
+        <!--android:forceHasOverlappingRendering="true"-->
+        <!--android:background="@drawable/baground">-->
+        <!--<ImageView-->
+            <!--android:layout_width="15dp"-->
+            <!--android:layout_height="15dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:background="@drawable/user"/>-->
 
-        <EditText
-            style="@style/FontAvenirBook"
-            android:id="@+id/username_edt"
-            android:layout_width="270dp"
-            android:layout_height="45dp"
-            android:inputType="text"
-            android:textSize="12dp"
-            android:imeOptions="actionNext"
-            android:layout_marginLeft="40dp"
-            android:hint="UserName"
-            android:textColorHint="@color/country_clr"
-            android:textColor="@color/phonenum_clr"
-            android:background="@null"
+        <!--<EditText-->
+            <!--style="@style/FontAvenirBook"-->
+            <!--android:id="@+id/username_edt"-->
+            <!--android:layout_width="270dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:inputType="text"-->
+            <!--android:textSize="12dp"-->
+            <!--android:imeOptions="actionNext"-->
+            <!--android:layout_marginLeft="40dp"-->
+            <!--android:hint="UserName"-->
+            <!--android:textColorHint="@color/country_clr"-->
+            <!--android:textColor="@color/phonenum_clr"-->
+            <!--android:background="@null"-->
 
-            />
-    </RelativeLayout>
+            <!--/>-->
+    <!--</RelativeLayout>-->
     <RelativeLayout
         android:id="@+id/reledit"
         android:layout_width="270dp"
         android:layout_height="60dp"
-        android:layout_below="@id/username_rel"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/frm_lay"
+        android:layout_marginTop="55dp"
         android:background="@drawable/baground">
         <TextView
-            style="@style/FontAvenirBook"
+            style="@style/FontAvenirLight"
             android:id="@+id/country_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Country"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:textColor="@color/country_clr"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:gravity="center"/>
     <TextView
-        style="@style/FontAvenirBook"
+        style="@style/FontAvenirLight"
         android:id="@+id/code_txt"
         android:layout_width="270dp"
         android:layout_below="@+id/country_txt"
         android:layout_height="60dp"
         android:inputType="phone"
         android:text=""
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:textColor="@color/phonenum_clr"
         android:gravity="center_vertical"
         android:layout_marginLeft="20dp"
@@ -115,7 +115,7 @@
         android:layout_width="270dp"
         android:layout_height="45dp"
         android:inputType="phone"
-        android:textSize="12dp"
+        android:textSize="14dp"
         android:imeOptions="actionDone"
         android:layout_marginLeft="40dp"
         android:hint="Mobile Number"

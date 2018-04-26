@@ -82,7 +82,7 @@ public class ValidateActivity extends AppCompatActivity {
         if (bundle != null) {
             phonrnum = bundle.getString("phonenumber");
             mVerificationId=bundle.getString("vericode");
-            UsrName = bundle.getString("username");
+//            UsrName = bundle.getString("username");
 //            mResendToken= (PhoneAuthProvider.ForceResendingToken) bundle.get("mtoken");
 //            Toast.makeText(this, mVerificationId, Toast.LENGTH_SHORT).show();
 //         }
@@ -244,10 +244,10 @@ public class ValidateActivity extends AppCompatActivity {
         data.put("driverToken", referdr);
         data.put("Driver_Lat","12.9010");
         data.put("Driver_Long","80.2279");
-        data.put("Driver_name",UsrName);
+//        data.put("Driver_name",UsrName);
         data.put("Car_type",cartype);
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);
-        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERNAME,UsrName);
+//        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERNAME,UsrName);
 //
 //
 //        Toast.makeText(ValidateActivity.this, uid, Toast.LENGTH_SHORT).show();
@@ -261,7 +261,6 @@ public class ValidateActivity extends AppCompatActivity {
                 Intent intent=new Intent(ValidateActivity.this,ServiceProviderActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
