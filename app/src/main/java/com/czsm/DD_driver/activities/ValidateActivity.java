@@ -242,8 +242,8 @@ public class ValidateActivity extends AppCompatActivity {
         data.put("Driver_ID", uid);
         data.put("Driver_Phone_number",phoneNumber);
         data.put("driverToken", referdr);
-        data.put("Driver_Lat","12.9010");
-        data.put("Driver_Long","80.2279");
+//        data.put("Driver_Lat","12.9010");
+//        data.put("Driver_Long","80.2279");
 //        data.put("Driver_name",UsrName);
         data.put("Car_type",cartype);
         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_DRIVERPHONENUMBER,phoneNumber);

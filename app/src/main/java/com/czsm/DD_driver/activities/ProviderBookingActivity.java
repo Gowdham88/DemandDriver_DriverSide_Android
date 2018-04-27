@@ -123,6 +123,7 @@ public class ProviderBookingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 onBackPressed();
+            overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_righ);
 
 //                Intent mapintent= new Intent(ProviderBookingActivity.this,ServiceProviderActivity.class);
 //                startActivity(mapintent);
@@ -534,7 +535,7 @@ Log.e("username",username);
                                                   datalist.add(data);
                                                    Usrphonenumber= String.valueOf(datalist.get(0).getUser_Phone_number());
                                                  Cartype= String.valueOf(datalist.get(0).getCar_type());
-                                              latval= String.valueOf(datalist.get(0).getStart_Lat());
+                                                  latval= String.valueOf(datalist.get(0).getStart_Lat());
                                                  longittudeval= String.valueOf(datalist.get(0).getStart_Long());
                                                  address= String.valueOf(datalist.get(0).getUser_Address());
                                                   cityval= String.valueOf(datalist.get(0).getCity());
@@ -543,9 +544,9 @@ Log.e("username",username);
                                                  UsrUid= String.valueOf(datalist.get(0).getUser_ID());
                                                   UserName= String.valueOf(datalist.get(0).getUser_name());
                                                   status= String.valueOf(datalist.get(0).getStatus());
-                                                  UsrReview= String.valueOf(datalist.get(0).getUser_review());
+//                                                  UsrReview= String.valueOf(datalist.get(0).getUser_review());
                                                   UsrBkTime= String.valueOf(datalist.get(0).getUser_Booking_Time());
-//                                                  Toast.makeText(ProviderBookingActivity.this, UserName, Toast.LENGTH_SHORT).show();
+//                                                  Toast.makeText(ProviderBookingActivity.this, UsrReview, Toast.LENGTH_SHORT).show();
 
 
 
@@ -580,8 +581,8 @@ Log.e("username",username);
 //
 //                                    Driver_complete_details data1 = document.toObject(Driver_complete_details.class);
 //                                    datalist1.add(data1);
-//                                    UsrReviews= String.valueOf(datalist1.get(0).getUser_review());
-//                                    Toast.makeText(ProviderBookingActivity.this, UsrReviews, Toast.LENGTH_SHORT).show();
+//                                    UsrReviews= String.valueOf(datalist1.get(0).getReview());
+////                                    Toast.makeText(ProviderBookingActivity.this, UsrReviews, Toast.LENGTH_SHORT).show();
 //
 //
 //
@@ -643,7 +644,7 @@ Log.e("username",username);
                         updatesvaluescomplete.put("End_time",formattendDatedriver);
                         updatesvaluescomplete.put("Start_time",formattedstrDatedriver);
                         updatesvaluescomplete.put("Cost",amt);
-                        updatesvaluescomplete.put("User_review",UsrReview);
+//                        updatesvaluescomplete.put("User_review",UsrReviews);
                         updatesvaluescomplete.put("Driver_ID",uidvalue);
                         updatesvaluescomplete.put("Driver_Phone_number",Driverno);
                         updatesvaluescomplete.put("Driver_Booking_ID",Rndmuid);
@@ -930,5 +931,6 @@ Log.e("username",username);
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_righ);
     }
 }

@@ -1,5 +1,6 @@
 package com.czsm.DD_driver.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
@@ -72,8 +73,9 @@ public class ProviderBookingAdapter extends RecyclerView.Adapter<ProviderBooking
                 intent.putExtra("useruid",dataList.get(position).getUser_ID());
                 intent.putExtra("Car_type",dataList.get(position).getCar_type());
                 intent.putExtra("Booking_ID",dataList.get(position).getUser_Booking_ID());
-
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+
             }
         });
 

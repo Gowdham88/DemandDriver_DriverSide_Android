@@ -10,6 +10,7 @@
 
 
     <android.support.v7.widget.Toolbar
+        style="@style/FontAvenirLightfont"
         android:id="@+id/provider_book_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -51,8 +52,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/provider_name" />
             </LinearLayout>
@@ -111,8 +112,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/calendar"
                    />
@@ -169,8 +170,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/contact" />
 
@@ -228,8 +229,8 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/address" />
 

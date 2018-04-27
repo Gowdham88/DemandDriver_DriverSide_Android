@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AllinAllMaterialTheme">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".activities.ServiceProviderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AllinAllMaterialTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -60,9 +60,9 @@
             android:name=".activities.ServiceProviderSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".activities.ServiceProviderActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".activities.ServiceProviderActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".activities.UserActivity"
             android:screenOrientation="portrait" />

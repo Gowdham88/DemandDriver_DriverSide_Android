@@ -44,7 +44,7 @@
                     android:layout_weight="2"
                     android:orientation="vertical">
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                         android:text="@string/subscription"
                         android:textColor="@color/colorPrimary" />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:id="@+id/fragment_wallet_balance_textview"
                         android:layout_width="match_parent"
@@ -105,7 +105,7 @@
 
 
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                         android:textColor="@color/colorPrimary"
                         />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:id="@+id/fragment_wallet_scheme_textview"
                         android:layout_width="match_parent"
@@ -165,7 +165,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                         android:textColor="@color/colorPrimary"
                         android:text="@string/contact_us" />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:id="@+id/phonetxt"
                         android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                         android:text="T: +919941123110" />
 
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         style="@style/FontAvenirLight"
                         android:id="@+id/emaitxt"
                         android:layout_width="match_parent"

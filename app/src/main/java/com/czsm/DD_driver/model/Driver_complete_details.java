@@ -21,6 +21,7 @@ public class Driver_complete_details {
 
     private String Driver_review;
     private String User_review;
+    private String Review;
 
 
     private String Time;
@@ -28,8 +29,6 @@ public class Driver_complete_details {
 
     private String User_ID;
     private String User_Booking_ID;
-
-
 
     private String Car_type;
     private String City;
@@ -39,7 +38,7 @@ public class Driver_complete_details {
 
     public Driver_complete_details(String Start_Lat, String Start_Long, String User_Address,String User_Phone_number,
                                    String Date,String Start_time,String User_name,String End_time,String Cost,String Driver_review,
-                                   String User_review,String Time,String User_ID,String User_Booking_ID,String City,String Car_type,String Status,String User_Booking_Time) {
+                                   String User_review,String Time,String User_ID,String User_Booking_ID,String City,String Car_type,String Status,String User_Booking_Time,String Review) {
 
         this.Start_Lat=Start_Lat;
         this.Start_Long=Start_Long;
@@ -59,6 +58,7 @@ public class Driver_complete_details {
         this.Car_type=Car_type;
         this.Status=Status;
         this.User_Booking_Time=User_Booking_Time;
+        this.Review=Review;
     }
 
     public Driver_complete_details() {
@@ -209,4 +209,14 @@ public class Driver_complete_details {
     public void setUser_Address(String user_Address) {
         User_Address = user_Address;
     }
+
+
+    public String getReview() {
+        return Review;
+    }
+
+    public void setReview(String review) {
+        Review = review;
+    }
+
 }

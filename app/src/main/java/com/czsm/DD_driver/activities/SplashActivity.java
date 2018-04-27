@@ -42,13 +42,14 @@ public class SplashActivity extends AppCompatActivity {
                         Intent indashboard=new Intent(SplashActivity.this,ServiceProviderActivity.class);
                         indashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(indashboard);
+                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                         finish();
-
                 }
                 else {
                     Intent in=new Intent(SplashActivity.this,LoginScreenActivity.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
+                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                     finish();
                 }
 //                Toast.makeText(SplashActivity.this, "haii", Toast.LENGTH_SHORT).show();

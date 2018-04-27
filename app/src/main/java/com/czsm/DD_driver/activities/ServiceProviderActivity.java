@@ -386,9 +386,9 @@ public class ServiceProviderActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        this.finish();
-//    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_righ);
+    }
 }
