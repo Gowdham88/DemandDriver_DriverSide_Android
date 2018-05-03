@@ -17,4 +17,6 @@
     <color name="textmaininside_clr">#2700bdff</color>
     <color name="country_clr">#9b9b9b</color>
     <color name="phonenum_clr">#01384B</color>
+    <color name="colorred">#f13a30</color>
+    <color name="Edittxt_lineclr">#E5E5E5</color>
 </resources>

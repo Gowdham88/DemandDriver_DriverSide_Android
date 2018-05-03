@@ -356,6 +356,49 @@
         <item>ZEN MARUTI</item>
 
     </string-array>
+    <string name="about">About Us</string>
+    <string name="terms">Terms and Conditions</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="refund">Refund</string>
+
+    <string name="about_txt">DD_Driver to provide the professional chauffeurs to drive for you at 24 hours,
+        in the luxury of your own car. DD_Driver allows you to sit back and enjoy your ride,
+        at the same time ensuring your safety and convenience. We provide the drivers any time and anywhere.
+        Our drivers are well trained so that you may receive the best travelling experience.</string>
+    <string name="terms_txt">These Terms of Use may be modified from time to time in our sole discretion.
+        It is your responsibility to review these Terms and Conditions from time to time.
+        If you continue to use the Service after notice of change has been intimated or published on our Application,
+        you thereby provide your consent to the changed practices on the same terms hereof. For this reason,
+        we encourage you to review these Terms of Use each time you access and use the Application.
+        Most content and some of the features on the Application are made available to Users free of charge.
+        However, DD_Driver reserves the right to terminate access to certain areas or features of the Application at any time for any reason, with or without notice.</string>
+    <string name="privacy_txt">•	This privacy policy sets out how DD_Driver uses and protects any information that you give DD_Driver when you use this Application.
+•	DD_Driver is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this Application,
+        and then you can be assured that it will only be used in accordance with this privacy statement.
+•	DD_Driver may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes.
+
+\n\n
+        I.	INFORMATION THAT IS OR MAY BE COLLECTED FROM YOU
+
+
+We may collect the following information:
+•	Name and job title;
+•	Contact information including email address;
+•	Demographic information such as postcode, preferences and interests;
+•	Information relevant to customer surveys and/or offers;
+•	Geo-location;
+\n\n
+        II.	WHAT WE DO WITH THE INFORMATION WE GATHER
+
+We require this information to understand your needs and provide you with a better service, and in particular for the following reasons:
+•	Internal record keeping;
+•	We may use the information to improve our Services;
+•	We may periodically send promotional emails, SMSs or push notifications about new products,
+        special offers or other information which we think you may find interesting using the email address which you have provided;
+</string>
+    <string name="refund_txt">In the event that you desire a refund on any amount that has been debited from Your DD_Driver Wallet,
+        please email gowdhaman@czsm.co.in and make a refund request clearly explaining the circumstances of your refund request.</string>
+
 
 
 </resources>

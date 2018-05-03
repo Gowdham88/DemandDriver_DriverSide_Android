@@ -19,9 +19,15 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-feature android:name="android.hardware.location" android:required="true" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
     <!-- This app has permission to register and receive dataf message. -->
     <application
         android:name=".App"
@@ -32,7 +38,7 @@
         android:supportsRtl="true"
         android:theme="@style/AllinAllMaterialTheme">
         <activity
-            android:name=".activities.ServiceProviderActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AllinAllMaterialTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -44,8 +50,8 @@
         </activity>
         <activity
             android:name=".activities.LoginScreenActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true"/>
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ValidateActivity"
             android:screenOrientation="portrait" />
@@ -60,9 +66,9 @@
             android:name=".activities.ServiceProviderSignupActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <!--<activity-->
-            <!--android:name=".activities.ServiceProviderActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+         <activity
+         android:name=".activities.ServiceProviderActivity"
+         android:screenOrientation="portrait" />
         <activity
             android:name=".activities.UserActivity"
             android:screenOrientation="portrait" />
@@ -194,6 +200,10 @@
         <activity
             android:name=".activities.AlertActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.TermsandConditionsActivity" />
+        <activity android:name=".activities.PrivacyActivity" />
+        <activity android:name=".activities.RefundActivity"></activity>
     </application>
 
 </manifest>

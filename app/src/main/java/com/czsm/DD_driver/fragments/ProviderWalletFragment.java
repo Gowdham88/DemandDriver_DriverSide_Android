@@ -7,20 +7,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.czsm.DD_driver.PreferencesHelper;
 import com.czsm.DD_driver.R;
 import com.czsm.DD_driver.Service.CapPhoto;
+import com.czsm.DD_driver.activities.AboutActivity;
 import com.czsm.DD_driver.activities.LoginActivity;
 import com.czsm.DD_driver.activities.LoginScreenActivity;
+import com.czsm.DD_driver.activities.PrivacyActivity;
+import com.czsm.DD_driver.activities.RefundActivity;
+import com.czsm.DD_driver.activities.TermsandConditionsActivity;
 import com.czsm.DD_driver.controller.AllinAllController;
 import com.czsm.DD_driver.helper.RESTClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +43,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class ProviderWalletFragment extends Fragment {
 
     private AllinAllController allinAllController;
-    private TextView balanceTextview;
+    private TextView balanceTextview,AbtTxt;
     private TextView schemeTextview;
     private Button signOutButton;
+    ImageView AbtImgView;
     private SharedPreferences SharedPref;
     private SwipeRefreshLayout swipeRefreshLayout;
     private FirebaseAuth mAuth;
@@ -50,7 +60,7 @@ public class ProviderWalletFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        SharedPref = getActivity().getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+//        SharedPref = getActivity().getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
 
     }
 
@@ -63,6 +73,8 @@ public class ProviderWalletFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.colorPrimary);
+        AbtImgView=(ImageView)view.findViewById(R.id.about_imgeview);
+        AbtTxt=(TextView)view.findViewById(R.id.abt_txt);
         signOutButton      = (Button) view.findViewById(R.id.fragment_provider_signout_button);
         balanceTextview    = (TextView) view.findViewById(R.id.fragment_wallet_balance_textview);
         schemeTextview     = (TextView) view.findViewById(R.id.fragment_wallet_scheme_textview);
@@ -101,6 +113,20 @@ public class ProviderWalletFragment extends Fragment {
                 startActivity(Intent.createChooser(intent, "Choose an Email client :"));
             }
         });
+
+        AbtImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheet();
+            }
+        });
+
+        AbtTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheet();
+            }
+        });
         return view;
 
     }
@@ -131,6 +157,77 @@ public class ProviderWalletFragment extends Fragment {
                 }).show();
 
     }
+    private void showBottomSheet() {
 
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        View bottomSheetView = factory.inflate(R.layout.buttom_sheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
+
+       TextView about = (TextView) bottomSheetView.findViewById(R.id.aboutus_title);
+        TextView terms = (TextView) bottomSheetView.findViewById(R.id.Tandc_title);
+        TextView privacy = (TextView)bottomSheetView.findViewById(R.id.Privacy);
+        TextView refund = (TextView)bottomSheetView.findViewById(R.id.refund_title);
+        TextView cancel = (TextView)bottomSheetView.findViewById(R.id.cancel_txt);
+        LinearLayout cancelLay = (LinearLayout) bottomSheetView.findViewById(R.id.cance_lay);
+
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+
+                bottomSheetDialog.dismiss();
+
+
+            }
+        });
+
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1=new Intent(getActivity(), TermsandConditionsActivity.class);
+                startActivity(intent1);
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2=new Intent(getActivity(), PrivacyActivity.class);
+                startActivity(intent2);
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        refund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3=new Intent(getActivity(), RefundActivity.class);
+                startActivity(intent3);
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        cancelLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+    }
 
 }

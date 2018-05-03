@@ -34,9 +34,14 @@ import com.czsm.DD_driver.Service.CapPhoto;
 import com.czsm.DD_driver.controller.AllinAllController;
 import com.czsm.DD_driver.helper.RESTClient;
 import com.czsm.DD_driver.helper.Util;
+import com.czsm.DD_driver.model.Api;
+import com.czsm.DD_driver.model.Checksum;
+import com.czsm.DD_driver.model.Constants;
 import com.czsm.DD_driver.model.Data;
 import com.czsm.DD_driver.model.Driver_complete_details;
+import com.czsm.DD_driver.model.Paytm;
 import com.czsm.DD_driver.model.ProviderBooking;
+import com.czsm.DD_driver.model.Service;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,6 +55,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.paytm.pgsdk.PaytmClientCertificate;
+import com.paytm.pgsdk.PaytmOrder;
+import com.paytm.pgsdk.PaytmPGService;
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -64,9 +73,14 @@ import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ProviderBookingActivity extends AppCompatActivity {
+public class ProviderBookingActivity extends AppCompatActivity implements PaytmPaymentTransactionCallback {
 
     @BindView(R.id.provider_book_name_textview)
     TextView nameTextView;
@@ -129,7 +143,7 @@ public class ProviderBookingActivity extends AppCompatActivity {
 //                startActivity(mapintent);
             }
         });
-        toolbartext=(TextView)findViewById(R.id.toolbar_one);
+//        toolbartext=(TextView)findViewById(R.id.toolbar_one);
 //        toolbartext.setText("Appointment");
         setTitle(R.string.appointment);
           db= FirebaseFirestore.getInstance();
@@ -807,8 +821,24 @@ Log.e("username",username);
             @Override
             public void onClick(View view) {
 
-                showRatingDialog();
+//                showRatingDialog();
 
+//                generateCheckSum();
+                Map<String, String> paramMap = new HashMap<>();
+                paramMap.put("MID", Constants.M_ID);
+                paramMap.put( "ORDER_ID" , "ORDER0000000001");
+                paramMap.put( "CUST_ID" , "10000988111");
+                paramMap.put("CHANNEL_ID","WAP");
+                paramMap.put("TXN_AMOUNT", "1");
+                paramMap.put("WEBSITE", "PAYTM_WEBSITE");
+                paramMap.put("CALLBACK_URL", "https://securegw.paytm.in/theia/paytmCallback");
+                paramMap.put( "EMAIL" , "gowdhaman@czsm.co.in");
+                paramMap.put( "MOBILE_NO" , "9941123110");
+
+
+                paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmGSt3Ddzw+oTaGCLneJwxFFq5mqTMwJXdQE2EzK4px2xruDqKZjHupz9yXev4=");
+                PaytmOrder order = new PaytmOrder(paramMap);
+                PaytmClientCertificate Certificate = new PaytmClientCertificate ("password" , "filename" );
 
                 alertDialog1.dismiss();
             }
@@ -830,6 +860,8 @@ Log.e("username",username);
 //        lp.windowAnimations = R.style.DialogAnimation;
         alertDialog1.getWindow().setAttributes(lp);
     }
+
+
     public void showRatingDialog() {
         final View dialogView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_review_booking, null);
 
@@ -932,5 +964,125 @@ Log.e("username",username);
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_righ);
+    }
+
+    private void generateCheckSum() {
+
+        //getting the tax amount first.
+        String txnAmount = String.valueOf(amount);
+        Log.e("value",txnAmount);
+        //creating a retrofit object.
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        //creating the retrofit api service
+        Api apiService = retrofit.create(Api.class);
+
+        //creating paytm object
+        //containing all the values required
+        final Paytm paytm = new Paytm(
+                Constants.M_ID,
+                Constants.CHANNEL_ID,
+                txnAmount,
+                Constants.WEBSITE,
+                Constants.CALLBACK_URL,
+                Constants.INDUSTRY_TYPE_ID
+        );
+
+        //creating a call object from the apiService
+        Call<Checksum> call = apiService.getChecksum(
+                paytm.getmId(),
+                paytm.getOrderId(),
+                paytm.getCustId(),
+                paytm.getChannelId(),
+                paytm.getTxnAmount(),
+                paytm.getWebsite(),
+                paytm.getCallBackUrl(),
+                paytm.getIndustryTypeId()
+        );
+
+        //making the call to generate checksum
+        call.enqueue(new Callback<Checksum>() {
+            @Override
+            public void onResponse(Call<Checksum> call, Response<Checksum> response) {
+
+                //once we get the checksum we will initiailize the payment.
+                //the method is taking the checksum we got and the paytm object as the parameter
+//                initializePaytmPayment(response.body().getChecksumHash(), paytm);
+            }
+
+            @Override
+            public void onFailure(Call<Checksum> call, Throwable t) {
+
+            }
+        });
+    }
+//    private void initializePaytmPayment(String checksumHash, Paytm paytm) {
+//
+//        //getting paytm service
+//        PaytmPGService Service = PaytmPGService.getStagingService();
+//
+//        //use this when using for production
+//        //PaytmPGService Service = PaytmPGService.getProductionService();
+//
+//        //creating a hashmap and adding all the values required
+//        Map<String, String> paramMap = new HashMap<>();
+//        paramMap.put("MID", Constants.M_ID);
+//        paramMap.put("ORDER_ID", paytm.getOrderId());
+//        paramMap.put("CUST_ID", paytm.getCustId());
+//        paramMap.put("CHANNEL_ID", paytm.getChannelId());
+//        paramMap.put("TXN_AMOUNT", paytm.getTxnAmount());
+//        paramMap.put("WEBSITE", paytm.getWebsite());
+//        paramMap.put("CALLBACK_URL", paytm.getCallBackUrl());
+//        paramMap.put("CHECKSUMHASH", checksumHash);
+//        paramMap.put("INDUSTRY_TYPE_ID", paytm.getIndustryTypeId());
+//
+//
+//        //creating a paytm order object using the hashmap
+//        PaytmOrder order = new PaytmOrder(paramMap);
+//
+//        //intializing the paytm service
+////        Service.initialize(order, null);
+////
+////        //finally starting the payment transaction
+////        Service.startPaymentTransaction(this, true, true, this);
+//
+//    }
+
+    public void onTransactionResponse(Bundle bundle) {
+
+        Toast.makeText(this, bundle.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void networkNotAvailable() {
+        Toast.makeText(this, "Network error", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void clientAuthenticationFailed(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void someUIErrorOccurred(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onErrorLoadingWebPage(int i, String s, String s1) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onBackPressedCancelTransaction() {
+        Toast.makeText(this, "Back Pressed", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTransactionCancel(String s, Bundle bundle) {
+        Toast.makeText(this, s + bundle.toString(), Toast.LENGTH_LONG).show();
     }
 }
